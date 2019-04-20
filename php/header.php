@@ -71,7 +71,7 @@
 				<!-- User -->
 				<div class="user"><a href="login.php"><div><img src="../images/user.svg"></div></a></div>
 				<!-- Cart -->
-				<div class="cart"><a href="cart.html"><div><img class="svg" src="../images/cart.svg"><div>1</div></div></a></div>
+				<div class="cart"><a href="cart.php"><div><img class="svg" src="../images/cart.svg"><div>1</div></div></a></div>
 				<!-- Phone -->
 				<div class="header_phone d-flex flex-row align-items-center justify-content-start">
 					<div><div><img src="../images/phone.svg"></div></div>
