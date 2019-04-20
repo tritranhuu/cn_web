@@ -69,7 +69,7 @@
 					</form>
 				</div>
 				<!-- User -->
-				<div class="user"><a href="#"><div><img src="../images/user.svg"></div></a></div>
+				<div class="user"><a href="login.php"><div><img src="../images/user.svg"></div></a></div>
 				<!-- Cart -->
 				<div class="cart"><a href="cart.html"><div><img class="svg" src="../images/cart.svg"><div>1</div></div></a></div>
 				<!-- Phone -->

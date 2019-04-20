@@ -1,5 +1,4 @@
 <?php include('../database/dbAccount.php');?>
-
 <?php
 	session_start();
 	$conn = connectDB();

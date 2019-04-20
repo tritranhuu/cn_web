@@ -1,6 +1,12 @@
 <?php include("../database/dbCart.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
+
 <head>
 <title>Cart</title>
 <meta charset="utf-8">
@@ -32,7 +38,6 @@
 				</div>
 			</div>
 		</div>
-<form action="order.php" method="post">
 <div class="cart_section">
 			<div class="container">
 				<div class="row">
@@ -80,40 +85,32 @@
 					<div class="col-lg-6">
 						<div class="cart_extra cart_extra_1">
 						<div class="cart_extra_content cart_extra_coupon">
-								<div class="cart_extra_title">Mã khuyến mãi</div>
-								<div class="coupon_form_container">
-									<form action="#" id="coupon_form" class="coupon_form">
-										<input type="text" class="coupon_input" required="required">
-										<button class="coupon_button">áp dụng</button>
-									</form>
-								</div>
-								<div class="coupon_text">Nhập mã khuyến mãi để nhận được ưu đãi tốt nhất</div>
-								<div class="shipping">
+								<div class="shipping" val="0">
 									<div class="cart_extra_title">Hình Thức Vận Chuyển</div>
 									<ul>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_1" name="shipping_method" class="shipping_radio">
+												<input type="radio" id="radio_1" name="shipping_method" class="shipping_radio" value="30000"> 
 												<span class="radio_mark"></span>
 												<span class="radio_text">Giao hàng 24h</span>
 											</label>
-											<div class="shipping_price ml-auto">30.000đ</div>
+											<div class="shipping_price ml-auto" >30.000</div>
 										</li>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_2" name="shipping_method" class="shipping_radio">
+												<input type="radio" id="radio_2" name="shipping_method" class="shipping_radio" value="10000">
 												<span class="radio_mark"></span>
 												<span class="radio_text">Giao hàng chuẩn</span>
 											</label>
-											<div class="shipping_price ml-auto">10.000đ</div>
+											<div class="shipping_price ml-auto" val="10000">10.000</div>
 										</li>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_3" name="shipping_method" class="shipping_radio" checked>
+												<input type="radio" id="radio_3" name="shipping_method" class="shipping_radio" value="0" checked>
 												<span class="radio_mark"></span>
 												<span class="radio_text">Đến nhận về</span>
 											</label>
-											<div class="shipping_price ml-auto">Miễn phí</div>
+											<div class="shipping_price ml-auto" val="0">Miễn phí</div>
 										</li>
 									</ul>
 								</div>
@@ -127,25 +124,24 @@
 								<ul class="cart_extra_total_list">
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Giá trị sản phẩm</div>
-										<div class="cart_extra_total_value ml-auto" id="totalProduct">$29.90</div>
+										<div class="cart_extra_total_value ml-auto" id="totalProduct">0</div>
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Vận chuyển</div>
-										<div class="cart_extra_total_value ml-auto" id="totalShip">Miễn phí</div>
+										<div class="cart_extra_total_value ml-auto" id="totalShip">0</div>
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Tổng cộng</div>
-										<div class="cart_extra_total_value ml-auto" id="totalCart">$29.90</div>
+										<div class="cart_extra_total_value ml-auto" id="totalCart">0</div>
 									</li>
 								</ul>
-								<button type="submit" name="submit">Thanh Toán</button>
+								<div class="checkout_button trans_200"><a href="checkout.php">Thanh Toán</a></div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-</form>
 <?php
     }
 ?>
@@ -169,7 +165,7 @@
 												<div class="qty_add qty_button trans_200 text-center"><span>+</span></div>
 											</div>
 										</div>
-										<div class="product_total product_text" tol='<?php echo ((int)$item['price']*(int)$item['quantity']);?>'><?php echo ((int)$item['price']*(int)$item['quantity']);?></div>
+										<div class="product_total product_text"><?php echo ((int)$item['price']*(int)$item['quantity']);?></div>
                                         <div class="product_text" id='<?php echo $item['optID']?>'><i class="fa fa-remove" style="font-size:32px;color:red"></i></div>
 <?php
     }
@@ -184,6 +180,23 @@
 ?>
 
 <script>
+var ship = $('.cart_extra_1');
+var total = $('.cart_extra_2');
+var shipTotal = ship.find(".shipping").attr("val");
+var productTotal = parseInt(total.find("#totalProduct").text());
+if($('.product_total').length)
+	{
+		var tol = $('.product_total');
+		tol.each(function()
+		{
+			var sub_tol = parseInt($(this).text());
+			productTotal += sub_tol;
+		});
+	}
+total.find('#totalShip').text(shipTotal);
+total.find("#totalProduct").text(productTotal);
+var cartTotal = parseInt(shipTotal) + parseInt(productTotal);
+total.find('#totalCart').text(cartTotal);
 
 $('.qty_sub').on("click", event =>{
 	var id = $(event.target).closest("div.product_quantity").attr("id");
@@ -198,7 +211,11 @@ $('.qty_sub').on("click", event =>{
 			url: '../controller/modifyCart.php',
 			success:function(data){
 				var newTotal = oldTotal - price;
-				$(event.target).closest('div.product_quantity_container').siblings('div.product_total').text(newTotal)
+				productTotal -=price;
+				total.find("#totalProduct").text(productTotal);
+				$(event.target).closest('div.product_quantity_container').siblings('div.product_total').text(newTotal);
+				cartTotal = parseInt(shipTotal) + parseInt(productTotal);
+				total.find('#totalCart').text(cartTotal);
 			},
 			error:function(data){
 				$(event.target).closest("div.product_quantity").find(".product_text").text(quan);
@@ -220,7 +237,11 @@ $('.qty_add').on("click", event =>{
 		url: '../controller/modifyCart.php',
 		success:function(data){
 			var newTotal = oldTotal + price;
+			productTotal +=price;
+			total.find("#totalProduct").text(productTotal);
 			$(event.target).closest('div.product_quantity_container').siblings('div.product_total').text(newTotal)
+			cartTotal = parseInt(shipTotal) + parseInt(productTotal);
+			total.find('#totalCart').text(cartTotal);
 		},
 		error:function(data){
 			$(event.target).closest("div.product_quantity").find(".product_text").text(quan);
@@ -232,12 +253,16 @@ $('.qty_add').on("click", event =>{
 
 $('.fa-remove').on("click",event => {
 	var data = $(event.target).closest("div.product_text").attr("id");
-	alert(data)
+	var temptotal = parseInt($(event.target).closest("div.product_text").siblings("div.product_total").text());
 	$.ajax({
 		type: 'POST',
 		data: "del="+data,
 		url: '../controller/modifyCart.php',
 		success:function(data){
+			productTotal -=temptotal;
+			total.find("#totalProduct").text(productTotal);
+			cartTotal = parseInt(shipTotal) + parseInt(productTotal);
+			total.find('#totalCart').text(cartTotal);
 			var num = $(event.target).closest('li').find('div.product_number')[0].textContent;
 			var li = $(event.target).closest('li').siblings();
 			$.each(li, function(){
@@ -254,7 +279,23 @@ $('.fa-remove').on("click",event => {
 			alert("Error");
 		}
 	});
-	
 
 })
+
+$('.shipping_radio').on("change",event => {
+	shipTotal = $("input[name='shipping_method']:checked").val();
+	total.find('#totalShip').text(shipTotal);
+	var cartTotal = parseInt(shipTotal) + parseInt(productTotal);
+	total.find('#totalCart').text(cartTotal);
+})
+
+$('.checkout_button').on('click', event=>{
+  	localStorage['cartTotal'] = cartTotal;
+  	localStorage['productTotal'] = productTotal;
+  	localStorage['shipTotal'] = shipTotal;
+})
+
+</script>
+<script>
+
 </script>
