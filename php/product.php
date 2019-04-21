@@ -1,7 +1,9 @@
 <<<<<<< HEAD
 <?php 
+session_start();
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
+
 ?>
 
 <!DOCTYPE html>
@@ -31,59 +33,21 @@ include("../database/dbCart.php");
 						<div class="product_image_slider_container" style="padding-top: 100px">
 							<div id="slider" class="flexslider">
 								<ul class="slides">
-									<li>
-										<img src="../images/product_1.jpg" />
-									</li>
-									<li>
-										<img src="../images/product_2.jpg" />
-									</li>
-									<li>
-										<img src="../images/product_3.jpg" />
-									</li>
-									<li>
-										<img src="../images/product_4.jpg" />
-									</li>
-									<li>
-										<img src="../images/product_5.jpg" />
-									</li>
-									<li>
-										<img src="../images/product_6.jpg" />
-									</li>
-									<li>
-										<img src="../images/product_7.jpg" />
-									</li>
-									<li>
-										<img src="../images/product_8.jpg" />
-									</li>
+										<?php
+										foreach($_SESSION['product_image'] as  $i){
+											echo '<li><img src="../'.$i.'" /></li>';
+										}
+										?>
 								</ul>
 							</div>
 							<div class="carousel_container">
 								<div id="carousel" class="flexslider">
 									<ul class="slides">
-										<li>
-											<div><img src="../images/product_1.jpg" /></div>
-										</li>
-										<li>
-											<div><img src="../images/product_2.jpg" /></div>
-										</li>
-										<li>
-											<div><img src="../images/product_3.jpg" /></div>
-										</li>
-										<li>
-											<div><img src="../images/product_4.jpg" /></div>
-										</li>
-										<li>
-											<div><img src="../images/product_5.jpg" /></div>
-										</li>
-										<li>
-											<div><img src="../images/product_6.jpg" /></div>
-										</li>
-										<li>
-											<div><img src="../images/product_7.jpg" /></div>
-										</li>
-										<li>
-											<div><img src="../images/product_8.jpg" /></div>
-										</li>
+									<?php
+											foreach($_SESSION['product_image'] as  $i){
+											echo '<li><div><img src="../'.$i.'" /></div></li>';
+										}
+										?>
 									</ul>
 								</div>
 								<div class="fs_prev fs_nav disabled"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
@@ -91,18 +55,18 @@ include("../database/dbCart.php");
 							</div>
 						</div>
 					</div>
-
+					
 					<!-- Product Info -->
 					<div class="col-lg-6 product_col">
 						<div class="product_info">
-							<div class="product_name">Cool Clothing with Brown Stripes</div>
+							<div class="product_name"><?php  echo $_SESSION['product']['proName'];?></div>
 							<div class="product_category">In <a href="category.html">Category</a></div>
 							<div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
 								<div class="rating_r rating_r_3 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 								<div class="product_reviews">4.7 out of (3514)</div>
 								<div class="product_reviews_link" style="cursor: pointer" data-toggle="modal" data-target="#rateModal">Reviews</div>
 							</div>
-							<div class="product_price">$3<span>.99</span></div>
+							<div class="product_price"><?php  echo $_SESSION['product']['price'];?></div>
 							<div class="product_size">
 								<div class="product_size_title">Select Size</div>
 								<ul class="d-flex flex-row align-items-start justify-content-start">

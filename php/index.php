@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
 <head>
 <title>Little Closet</title>
 <meta charset="utf-8">
@@ -13,14 +18,17 @@
 <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="../styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
-</head>
-<body>
-    <br/><br/><br/><br/><br/>
+<?php 
+include("../database/connectDB.php");
+include("../database/dbCart.php"); 
+?>
+
 <?php require("header.php");?>
+<?php require("slide.php");?>
 
 <?php
 	require("../database/getProduct.php");
-	require("product.php");
+	require("product_box.php");
     $conn = connectDB();
 	$arr =  getProduct($conn);
 	echo "<div class=\"row products_row\">";
@@ -43,8 +51,6 @@
 	}
 </script>
 
-<?php
-	
-?>
+<?php require("footer.php");?>
 </body>
 </html>

@@ -64,4 +64,5 @@
         $sql = mysqli_query($conn, $query);
         return mysqli_num_rows($sql);
     }
+
 ?>
