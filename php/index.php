@@ -31,8 +31,11 @@ include("../database/dbCart.php");
 	require("product_box.php");
     $conn = connectDB();
 	$arr =  getProduct($conn);
+	echo'<div class="products">
+	<div class="container">
+	';
 	echo "<div class=\"row products_row\">";
-    for ($i = 0 ; $i < 3; $i++){
+    for ($i = 0 ; $i < sizeof($arr); $i++){
         printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
 	}
 	echo "</div>";
