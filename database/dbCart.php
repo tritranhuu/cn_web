@@ -1,13 +1,4 @@
 <?php
-    function connectDB(){
-        $hostname = 'localhost:3306';
-        $username = 'root';
-        $password = 'Tri200698';
-        $dbname = "clothes_shop";                
-        $conn = mysqli_connect($hostname, $username, $password,$dbname);
-        return $conn;
-    }
-
     function getCartByAccId($id, $conn){
         $items= array();
         $query = 'select * from cart where accID ='.$id;
@@ -48,5 +39,29 @@
     function delCartItem($optID, $conn){
         $query="delete from cart where accID='1' and optID=".$optID;
         mysqli_query($conn, $query);
+    }
+
+    function delCart($accID, $conn){
+        $query="delete from cart where accID=".$accID;
+        mysqli_query($conn, $query);
+    }
+
+    function addToCart($accID, $optID, $conn){
+        $check="select from cart where accID=".$accID." and optID=".$optID;
+        $res=mysqli_query($conn, $check);
+
+        if(mysqli_num_rows($res)==0){
+            $query="insert into cart (accID, optID, quantity) values (".$accID.", ".$optID.", 1)";
+            mysqli_query($conn, $query);    
+        }
+        else{
+            incCartItem($optID, $conn);
+        }
+    }
+    function getCartItemNum($accID){
+        $conn = connectDB();
+        $query = "select * from cart where accID=".$accID;
+        $sql = mysqli_query($conn, $query);
+        return mysqli_num_rows($sql);
     }
 ?>

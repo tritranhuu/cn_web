@@ -1,4 +1,7 @@
-<?php include("../database/dbCart.php"); ?>
+<?php 
+include("../database/connectDB.php");
+include("../database/dbCart.php"); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -63,7 +66,7 @@ header("Pragma: no-cache");
 									
 <?php 
 	for($i=0;$i<sizeof($items);$i++){
-		echo '<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-end justify-content-start"><div class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start mr-auto"><div class="pro_num"><div class="product_number">'.($i+1).'</div></div>';
+		echo '<li class="cart_item item_list d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-end justify-content-start" id="itemCartli"><div class="product d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start mr-auto" ><div class="pro_num"><div class="product_number">'.($i+1).'</div></div>';
 		printCartItem($items[$i]);
 		echo '</li>';
 	}
@@ -74,8 +77,8 @@ header("Pragma: no-cache");
 							</div>
 							<div class="cart_buttons d-flex flex-row align-items-start justify-content-start">
 								<div class="cart_buttons_inner ml-sm-auto d-flex flex-row align-items-start justify-content-start flex-wrap">
-									<div class="button button_clear trans_200"><a href="categories.html">xóa giỏ hàng</a></div>
-									<div class="button button_continue trans_200"><a href="categories.html">tiếp tục mua sắm</a></div>
+									<div class="button button_clear trans_200" id="deleteCart"><a style="color: white; cursor: pointer">xóa giỏ hàng</a></div>
+									<div class="button button_continue trans_200"><a style="color: white; cursor: pointer">tiếp tục mua sắm</a></div>
 								</div>
 							</div>
 						</div>
@@ -151,11 +154,11 @@ header("Pragma: no-cache");
 ?>
 											<div><div class="product_image"><img src="../<?php echo $item['url'];?>" alt=""></div></div>
 											<div class="product_name_container">
-												<div class="product_name"><a href="product.html"><?php echo $item['proName'];?></a></div>
+												<div class="product_name"><a href="product.php?proID=<?php echo $item['proID'];?>"><?php echo $item['proName'];?></a></div>
 												<div class="product_text"><?php echo $item['description'];?></div>
 											</div>
 										</div>
-										<div class="product_color product_text"><span>Color: </span><?php echo $item['color'];?></div>
+										<div class="product_color product_text"><span>Color: </span><img src="../images/color/1.png" width="36px" height="36px"></div>
 										<div class="product_size product_text"><span>Size: </span><?php echo $item['size'];?></div>
 										<div class="product_price product_text"><?php echo (int)$item['price'];?></div>
 										<div class="product_quantity_container">
@@ -216,6 +219,7 @@ $('.qty_sub').on("click", event =>{
 				$(event.target).closest('div.product_quantity_container').siblings('div.product_total').text(newTotal);
 				cartTotal = parseInt(shipTotal) + parseInt(productTotal);
 				total.find('#totalCart').text(cartTotal);
+
 			},
 			error:function(data){
 				$(event.target).closest("div.product_quantity").find(".product_text").text(quan);
@@ -242,6 +246,7 @@ $('.qty_add').on("click", event =>{
 			$(event.target).closest('div.product_quantity_container').siblings('div.product_total').text(newTotal)
 			cartTotal = parseInt(shipTotal) + parseInt(productTotal);
 			total.find('#totalCart').text(cartTotal);
+		
 		},
 		error:function(data){
 			$(event.target).closest("div.product_quantity").find(".product_text").text(quan);
@@ -271,9 +276,11 @@ $('.fa-remove').on("click",event => {
 			if(i>num){
 				i = i-1;
 				l.find('div.product_number').text(i);
-			}	
+			}
 		})
 		$(event.target).closest("li").remove();
+		var cartItems = parseInt($(".cart a > div > div").text());
+        $(".cart a > div > div").text(cartItems -1)
 		},
 		error:function(data){
 			alert("Error");
@@ -293,6 +300,30 @@ $('.checkout_button').on('click', event=>{
   	localStorage['cartTotal'] = cartTotal;
   	localStorage['productTotal'] = productTotal;
   	localStorage['shipTotal'] = shipTotal;
+})
+
+$('#deleteCart').on('click', event=>{
+	$.ajax({
+		type: 'POST',
+		data: "drop=1",
+		url: '../controller/modifyCart.php',
+		success:function(data){
+			productTotal =0;
+			total.find("#totalProduct").text(productTotal);
+			cartTotal = parseInt(shipTotal) + parseInt(productTotal);
+			total.find('#totalCart').text(cartTotal);
+			var li = $("li#itemCartli");
+			$.each(li, function(){
+				$(this).remove();
+			})
+			$(".cart a > div > div").text(0)	
+		},
+		error:function(data){
+			alert("Error");
+		}
+	});
+	
+	
 })
 
 </script>

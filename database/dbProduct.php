@@ -1,13 +1,4 @@
-<?php
-    function connectDB(){
-        $hostname = 'localhost:3306';
-        $username = 'root';
-        $password = 'Tri200698';
-        $dbname = "clothes_shop";                
-        $conn = mysqli_connect($hostname, $username, $password,$dbname);
-        return $conn;
-    }
-
+<?php  
     function getProductById($id, $conn){
         $query = 'select * from product where proID ='.$id;
         $sql = mysqli_query($conn, $query);
@@ -20,6 +11,19 @@
             'gender' => $res['gender']
         );
         return $product;
+    }
+
+    function getOptionIdByProIDSizeColor($proID, $size, $color, $conn){
+        $query = "select optID from product_option where proID=".$proID." and size='".$size."' and color='".$color."'";
+        echo $query;
+        $sql = mysqli_query($conn, $query);
+        if(mysqli_num_rows($sql)>0){
+            $res = mysqli_fetch_array($sql);
+            return $res['optID'];
+        }
+        else{
+            return -1;
+        }
     }
 ?>
 

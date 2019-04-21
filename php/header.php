@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="../styles/header.css">
 <body>
 
 <!-- Menu -->
@@ -68,15 +69,34 @@
 						<button class="header_search_button"><img src="../images/search.png" alt=""></button>
 					</form>
 				</div>
-				<!-- User -->
-				<div class="user"><a href="login.php"><div><img src="../images/user.svg"></div></a></div>
+				
+				
 				<!-- Cart -->
-				<div class="cart"><a href="cart.php"><div><img class="svg" src="../images/cart.svg"><div>1</div></div></a></div>
+				<div class="cart"><a href="cart.php"><div><img class="svg" src="../images/cart.svg"><div><?php echo getCartItemNum('1');?></div></div></a></div>
+				<!-- User -->
+				<div class="user dropdown" ><a class="">
+					<div><img src="../images/user.svg"></div>
+					<div class="account-form dropdown-content">
+  					<div class="form-account">
+    					</form>
+    						<form class="">
+      							<p>Đã có tài khoản?</p>
+      							<button>Đăng nhập</button>
+      							<p class="message"><a href="#">Quên mật khẩu?</a></p>
+      							<hr>
+      							<p>Chưa có tài khoản?</p>
+      							<button>Đăng ký</button>
+    					</form>
+  					</div>
+					</div>
+				</a></div>
 				<!-- Phone -->
 				<div class="header_phone d-flex flex-row align-items-center justify-content-start">
 					<div><div><img src="../images/phone.svg"></div></div>
 					<div>(+84)12345678</div>
 				</div>
+				
+				
 			</div>
 		</div>
 	</header>

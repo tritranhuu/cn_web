@@ -539,6 +539,21 @@ section
 	max-width: 100%;
 	height: auto;
 }
+.cart a > div > div
+{
+	position: absolute;
+	top: -12px;
+	right: -4px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #2fce98;
+	text-align: center;
+	line-height: 20px;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: 700;
+}
 .header_phone > div:first-child > div
 {
 	width: 36px;
