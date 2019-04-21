@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
