@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 <?php 
 session_start();
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
-
 ?>
 
 <!DOCTYPE html>

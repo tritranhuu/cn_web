@@ -169,7 +169,7 @@ header("Pragma: no-cache");
 											</div>
 										</div>
 										<div class="product_total product_text"><?php echo ((int)$item['price']*(int)$item['quantity']);?></div>
-                                        <div class="product_text" id='<?php echo $item['optID']?>'><i class="fa fa-remove" style="font-size:32px;color:red"></i></div>
+                                        <div class="product_text" id='<?php echo $item['optID']?>' style="cursor: pointer"><i class="fa fa-remove" style="font-size:32px;color:red"></i></div>
 <?php
     }
 ?>
@@ -292,7 +292,7 @@ $('.fa-remove').on("click",event => {
 $('.shipping_radio').on("change",event => {
 	shipTotal = $("input[name='shipping_method']:checked").val();
 	total.find('#totalShip').text(shipTotal);
-	var cartTotal = parseInt(shipTotal) + parseInt(productTotal);
+	cartTotal = parseInt(shipTotal) + parseInt(productTotal);
 	total.find('#totalCart').text(cartTotal);
 })
 
@@ -330,3 +330,18 @@ $('#deleteCart').on('click', event=>{
 <script>
 
 </script>
+
+</div>
+
+<script src="../styles/bootstrap-4.1.2/popper.js"></script>
+<script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+<script src="../plugins/greensock/TweenMax.min.js"></script>
+<script src="../plugins/greensock/TimelineMax.min.js"></script>
+<script src="../plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="../plugins/greensock/animation.gsap.min.js"></script>
+<script src="../plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="../plugins/easing/easing.js"></script>
+<script src="../plugins/parallax-js-master/parallax.min.js"></script>
+<script src="../js/cart.js"></script>
+</body>
+</html>

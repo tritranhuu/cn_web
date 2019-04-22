@@ -1,3 +1,7 @@
+<?php 
+include("../database/connectDB.php");
+include("../database/dbCart.php"); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,20 +48,20 @@
 								<form action="#" id="checkout_form" class="checkout_form">
 									<div>
 										<!-- Company -->
-										<input type="text" id="checkout_name" placeholder="Tên" class="checkout_input" required="required">
+										<input type="text" id="checkout_name" name="name" placeholder="Tên" class="checkout_input" required="required">
 									</div>
 									<div>
 										<!-- Address -->
-										<input type="text" id="checkout_address" class="checkout_input" placeholder="Địa chỉ" required="required">
+										<input type="text" id="checkout_address" name="address" class="checkout_input" placeholder="Địa chỉ" required="required">
 									</div>
 									
 									<div>
 										<!-- Phone no -->
-										<input type="phone" id="checkout_phone" class="checkout_input" placeholder="Số điện thoại" required="required">
+										<input type="phone" id="checkout_phone" name="phone" class="checkout_input" placeholder="Số điện thoại" required="required">
 									</div>
 									<div>
 										<!-- Email -->
-										<input type="email" id="checkout_email" class="checkout_input" placeholder="Email" required="required">
+										<input type="email" id="checkout_email" name="email" class="checkout_input" placeholder="Email" required="required">
 									</div>
 								</form>
 							</div>
@@ -84,35 +88,35 @@
 									</li>
 								</ul>
 								<div class="payment_options">
-									<div class="checkout_title">Payment</div>
+									<div class="checkout_title">Phương thức thanh toán</div>
 									<ul>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_1" name="payment_radio" class="payment_radio">
+												<input type="radio" id="radio_1" name="payment_radio" class="payment_radio" value="momo">
 												<span class="radio_mark"></span>
-												<span class="radio_text">Paypal</span>
+												<span class="radio_text">Momo</span>
 											</label>
 										</li>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_2" name="payment_radio" class="payment_radio">
+												<input type="radio" id="radio_2" name="payment_radio" class="payment_radio" value="credit">
 												<span class="radio_mark"></span>
-												<span class="radio_text">Cash on Delivery</span>
+												<span class="radio_text">Chuyển khoản</span>
 											</label>
 										</li>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_3" name="payment_radio" class="payment_radio" checked>
+												<input type="radio" id="radio_3" name="payment_radio" class="payment_radio" value="direct" checked>
 												<span class="radio_mark"></span>
-												<span class="radio_text">Credit Card</span>
+												<span class="radio_text">Trả khi nhận hàng</span>
 											</label>
 										</li>
 									</ul>
 								</div>
 								<div class="cart_text">
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</p>
+									<p>Hãy kiểm tra đầy đủ lại thông tin và chỉ thanh toán khi bạn đã chắc chắn với các thông tin đó</p>
 								</div>
-								<div class="checkout_button trans_200"><a href="checkout.html">place order</a></div>
+								<div class="checkout_button trans_200" id="checkOut"><a href="#">Hoàn tất đơn hàng</a></div>
 							</div>
 						</div>
 					</div>
@@ -126,4 +130,45 @@
 	total.find('#totalShip').text(localStorage['shipTotal']);
 	total.find("#totalProduct").text(localStorage['productTotal']);
 	total.find('#totalCart').text(localStorage['cartTotal']);
+	var shipping;
+	switch(localStorage['shipTotal']) {
+  		case "30000":
+    		shipping = "24h"
+    		break;
+  		case "10000":
+    		shipping = "standard"
+    		break;
+  		case "0":
+    		shipping = "taken"
+    		break;
+    	default:
+    		shipping = "taken"
+	}	
+
+	$('#checkOut').on('click', event=>{
+		
+		var data = {
+			'addOrder'	: '1',
+        	'accID' : '1',
+        	'name'  : $("input[name='name']").val(),
+        	'address' : $("input[name='address']").val(),
+        	'phone' : $("input[name='phone']").val(),
+        	'email' : $("input[name='email']").val(),
+        	'shipping' : shipping,
+        	'payment' :  $("input[name='payment_radio']:checked").val(),
+        	'message' : 'hello'
+        };
+        $.ajax({
+            type        : 'POST', 
+            url         : '../controller/modifyOrder.php', 
+            data        : data, 
+        	success:function(){
+        		alert('success')
+        	},
+        	error:function(){
+				alert("Error")
+			}
+
+        })
+	})
 </script>

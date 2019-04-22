@@ -13,10 +13,6 @@
         return $product;
     }
 
-    function getProductImgById($proID, $conn){
-        $query = 'select '
-    }
-
     function getOptionIdByProIDSizeColor($proID, $size, $color, $conn){
         $query = "select optID from product_option where proID=".$proID." and size='".$size."' and color='".$color."'";
         echo $query;

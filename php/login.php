@@ -1,3 +1,7 @@
+<?php 
+include("../database/connectDB.php");
+include("../database/dbCart.php"); 
+?>
 <!DOCTYPE html>
 <html>
 	<head>
