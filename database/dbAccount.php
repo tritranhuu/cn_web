@@ -1,3 +1,4 @@
+
 <?php
     function createNewAccount($username, $password, $name, $email, $gender, $conn){
     	$query = "insert into account (username, password, name,email, gender) values ('".$username."', '".$password."', N'".$name."','".$email."', '".$gender."')";

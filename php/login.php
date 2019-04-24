@@ -40,6 +40,7 @@ include("../database/dbCart.php");
 					<button type="button" class="done">Đăng nhập
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>
+					<div style="padding-top:10px; text-align:center; "><a href="register.php" style="color:#333">Quên mật khẩu?</a></div>
 					<div style="padding-top:10px; text-align:center; "><a href="register.php" style="color:#333">Đăng kí tài khoản mới</a></div>
 				</form>
 				
@@ -75,7 +76,6 @@ $('.done').on("click", event =>{
             type        : 'POST', 
             url         : '../controller/modifyAccount.php', 
             data        : formData, 
-            dataType    : 'application/json', 
         	success:function(data){
         		alert("helo");
         	},

@@ -1,3 +1,7 @@
+<?php 
+include("../database/connectDB.php");
+include("../database/dbCart.php"); 
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -77,7 +81,7 @@ function isEmptyOrSpaces(str){
     return str === null || str.match(/^ *$/) !== null;
 }
 
-$('.alo').on("click", event =>{
+$('.done').on("click", event =>{
 	var name = $('input[name=lname]').val() + ' ' + $('input[name=fname]').val();
 	var username = $('input[name=username]').val();
 	var email = $('input[name=email]').val();
@@ -100,8 +104,7 @@ $('.alo').on("click", event =>{
         	$.ajax({
             	type        : 'POST', 
             	url         : '../controller/modifyAccount.php', 
-            	data        : formData, 
-            	dataType    : 'application/json', 
+            	data        : formData,
             	encode      : true,
         		success 	:function(data){
         			alert("Đăng ký thành công");
