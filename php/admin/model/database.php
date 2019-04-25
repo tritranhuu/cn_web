@@ -21,5 +21,17 @@
     	return mysqli_query($conn, $query);
     }
 
+    function getAllProduct(){
+        $conn = connectDB();
+        $query = "select * from product natural join company";
+        return mysqli_query($conn, $query);
+    }
+
+    function getAllCompany(){
+        $conn = connectDB();
+        $query = "select companyName from company";
+        return mysqli_query($conn, $query);
+    }
+
     
 ?>
