@@ -48,6 +48,7 @@ include("../database/dbCart.php");
 	$arr =  $_SESSION[$_SESSION['type']];
 	echo'<div class="products">
 	<div class="container">
+	<div class="col">
 	';
 	require('filter.php');
 	echo '<div class="row products_row products_container grid">';
@@ -172,6 +173,8 @@ include("../database/dbCart.php");
 <script src="../plugins/easing/easing.js"></script>
 <script src="../plugins/progressbar/progressbar.min.js"></script>
 <script src="../plugins/parallax-js-master/parallax.min.js"></script>
+<script src="../plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="../plugins/Isotope/fitcolumns.js"></script>
 <script src="../js/category.js"></script>
 </body>
 </html>

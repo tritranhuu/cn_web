@@ -19,9 +19,9 @@
 									</ul>
 								</div>
 								<div class="product_view d-flex flex-row align-items-center justify-content-start">
-									<div class="view_item active"><img src="images/view_1.png" alt=""></div>
-									<div class="view_item"><img src="images/view_2.png" alt=""></div>
-									<div class="view_item"><img src="images/view_3.png" alt=""></div>
+									<div class="view_item active"><img src="../images/view_1.png" alt=""></div>
+									<div class="view_item"><img src="../images/view_2.png" alt=""></div>
+									<div class="view_item"><img src="../images/view_3.png" alt=""></div>
 								</div>
 								<div class="products_dropdown text-right product_dropdown_filter">
 									<div class="isotope_filter_text"><span>Filter</span><i class="fa fa-caret-down" aria-hidden="true"></i></div>
@@ -36,3 +36,4 @@
 						</div>
 					</div>
 				</div>
+           </div>

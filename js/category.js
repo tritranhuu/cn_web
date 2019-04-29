@@ -150,7 +150,7 @@ $(document).ready(function() {
                 },
                 getSortData: {
                     price: function(itemElement) {
-                        var priceEle = $(itemElement).find('.product_price').text().replace('$', '');
+                        var priceEle = $(itemElement).find('.product_price').text();
                         return parseFloat(priceEle);
                     },
                     name: '.product_name'
