@@ -21,14 +21,27 @@ include("../database/dbCart.php");
 </head>
 
 <?php include("header.php");?>
-
+<div class="home">
+			<div class="home_container d-flex flex-column align-items-center justify-content-end">
+				<div class="home_content text-center">
+					<div class="home_title">Product Page</div>
+					<div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
+						<ul class="d-flex flex-row align-items-start justify-content-start text-center">
+							<li><a href="./index.php">Home</a></li>
+							<li><a href="category.php"><?php if($_SESSION['type']=='M') echo'Man';elseif($_SESSION['type']=='F') echo 'Woman';else echo 'Kids';?></a></li>
+							<li><?php echo $_SESSION['product']['proName']; ?></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+</div>
 <div class="product" id='<?php echo $_GET['proID'];?>'>
 			<div class="container">
 				<div class="row">
 					
 					<!-- Product Image -->
 					<div class="col-lg-6">
-						<div class="product_image_slider_container" style="padding-top: 100px">
+						<div class="product_image_slider_container">
 							<div id="slider" class="flexslider">
 								<ul class="slides">
 										<?php
@@ -55,68 +68,78 @@ include("../database/dbCart.php");
 					</div>
 					
 					<!-- Product Info -->
-					<div class="col-lg-6 product_col">
+					<div class="col-lg-6 product_col ">
 						<div class="product_info">
 							<div class="product_name"><?php  echo $_SESSION['product']['proName'];?></div>
-							<div class="product_category">In <a href="category.html">Category</a></div>
+							<div class="product_category">In <<?php echo 'a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1"';?>><?php if($_SESSION['type']=='M') echo'Man';elseif($_SESSION['type']=='F') echo 'Woman';else echo 'Kids';?></a></div>
 							<div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
 								<div class="rating_r rating_r_3 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 								<div class="product_reviews">4.7 out of (3514)</div>
 								<div class="product_reviews_link" style="cursor: pointer" data-toggle="modal" data-target="#rateModal">Reviews</div>
 							</div>
-							<div class="product_price"><?php  echo $_SESSION['product']['price'];?></div>
+							<div class="product_price text-danger"><?php  echo $_SESSION['product']['price'];?></div>
+							<div class =" mt-2 border-top border-bottom text-dark"> <h6 class="mt-1"> Miễn phí vận chuyển cho đơn hàng từ 499.000Đ</h6></div>
+							<div class ="border-top border-bottom text-dark"> <h6 class="mt-1"> Đổi trả sản phẩm nguyên giá, giảm giá trong vòng 15 ngày</h6></div>
 							<div class="product_size">
 								<div class="product_size_title">Select Size</div>
 								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li>
-										<input type="radio" id="radio_2" name="size_radio" class="regular_radio radio_2" value="S" checked>
-										<label for="radio_2">S</label>
-									</li>
-									<li>
-										<input type="radio" id="radio_3" name="size_radio" class="regular_radio radio_3" value="M">
-										<label for="radio_3">M</label>
-									</li>
-									<li>
-										<input type="radio" id="radio_4" name="size_radio" class="regular_radio radio_4" value="L">
-										<label for="radio_4">L</label>
-									</li>
-									<li>
-										<input type="radio" id="radio_5" name="size_radio" class="regular_radio radio_5" value="XL">
-										<label for="radio_5">XL</label>
-									</li>
+									
+									<?php
+										$tmp = array();
+										for( $t = 0 ; $t < sizeof( $_SESSION['product_option']) ; $t++){
+											$i =  $_SESSION['product_option'][$t]['size'];
+											if(!in_array($i,$tmp)){
+											array_push($tmp,$i);
+											echo '<li>';
+											echo '<input type="radio" id="radio_'.$i.'"name="size_radio" class="regular_radio" checked value="'.$i.'">';
+											echo '<label for="radio_'.$i.'">'.$i.'</label>';
+											echo '</li>';
+											}
+									}
+									?>
 								</ul>
 							</div>
 							<div class="product_size">
 								<div class="product_size_title">Select Color</div>
 								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li>
-										<input type="radio" id="radio_7" disabled name="color_radio" class="regular_radio radio_7" value="Red">
-										<label for="radio_7"><img src="../images/color/1.png" width="36px" height="36px"></label>
-									</li>
-									<li>
-										<input type="radio" id="radio_8" name="color_radio" class="regular_radio radio_8" checked value="Black">
-										<label for="radio_8"><img src="../images/color/1.png" width="36px" height="36px"></label>
-									</li>
-									<li>
-										<input type="radio" id="radio_9" name="color_radio" class="regular_radio radio_9" value="Red">
-										<label for="radio_9">B</label>
-									</li>
-									<li>
-										<input type="radio" id="radio_10" disabled name="color_radio" class="regular_radio radio_10" value="Red">
-										<label for="radio_10">W</label>
-									</li>
+									<?php
+										$tmp = array();
+										for( $t = 0 ; $t < sizeof( $_SESSION['product_option']) ; $t++){
+											$i =  $_SESSION['product_option'][$t]['color'];
+											if(!in_array($i,$tmp)){
+											array_push($tmp,$i);
+											echo '<li>';
+											echo '<input type="radio" id="radio_'.$i.'"name="color_radio" class="regular_radio" checked value="'.$i.'">';
+											echo '<label for="radio_'.$i.'"><img src="../images/color/'.$i.'.png" width="36px" height="36px"></label>';
+											echo '</li>';
+											}
+									}
+									?>
+									
+								
 								</ul>
 							</div>
-							<div class="product_text">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec consequat lorem. Maecenas elementum at diam consequat bibendum. Mauris iaculis fringilla ex, sit amet semper libero facilisis sit amet. Nunc ut aliquet metus. Praesent pulvinar justo sed velit tempus bibendum. Quisque dictum lorem id mi viverra, in auctor justo laoreet. Nam at massa malesuada, ullamcorper metus vel, consequat risus. Phasellus ultricies velit vel accumsan porta.</p>
-							</div>
-							<div class="product_buttons" id="addCart">
+							<br/>
+				
+							<div class="text-center" id="addCart">
 								<div class="text-right d-flex flex-row align-items-start justify-content-start">
 									<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-										<div><div><img src="../images/cart.svg" class="svg" alt=""><div>+</div></div></div>
+										<div><div><input name="" id="" class="btn btn-primary bg-danger text-center" type="submit" value="Thêm vào giỏ hàng"></div></div>
 									</div>
 								</div>
 							</div>
+							<div class="card mt-4">
+								<div class="card-header">
+									Mô Tả
+								</div>
+								<div class="card-body">
+									<p class="card-text"><h6><?php  echo $_SESSION['product']['description'];?></h6></p>
+									<p class="card-text"><h6><?php  echo $_SESSION['product']['material'];?></h6></p>
+								</div>
+
+								
+							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -189,7 +212,7 @@ include("../database/dbCart.php");
     </div>
   </div>
 </div>
-
+<?php require('./footer.php'); ?>
 <script>
 	$('#addCart').on('click', event =>{
 		var proID = $(".product").attr("id");

@@ -7,10 +7,12 @@ session_start();
     function toDetailProduct($data,$conn){
         $pro =  getInfoProduct($conn,$data['product']);
         $proImgae = getImageProduct($conn,$data['product']);
+        $proOpt = getOptionProduct($conn,$data['product']);
         $proComment = getCommentProduct($conn,$data['product']);
         $_SESSION['product'] = $pro;
         $_SESSION['product_image'] = $proImgae;
         $_SESSION['product_comment'] = $proComment;
+        $_SESSION['product_option'] = $proOpt;
         header('Location:../php/product.php');
     }
     function toCartProduct(){
