@@ -25,39 +25,79 @@ include("../database/dbCart.php");
 
 <?php require("header.php");?>
 <?php require("slide.php");?>
-
 <?php
-	require("../database/getProduct.php");
-	require("popular.php");
-	require("product_box.php");
+
+  require("../database/getProduct.php");
+  require("popular.php");
+  require("product_box.php");
     $conn = connectDB();
-	$arr =  getProduct($conn);
-	echo'<div class="products">
-	<div class="container">
-	';
-	echo "<div class=\"row products_row\">";
-    for ($i = 0 ; $i < 24; $i++){
+  $arr =  getProduct($conn);
+  echo'
+  <div class="products">
+  <div class="container">
+  <div class="text-dark"><h2>Sản phẩm mới cập nhật:</h2></div>';
+  echo "<div class=\"row products_row\">";
+  echo'<div id="owl-demo" class="owl-carousel owl-theme">';
+    for ($i = 0 ; $i < 12; $i++){
         printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
-	}
-	echo "</div>";
+  }
+  echo "</div></div></div>";
 ?>
 
-
-<script>
-	function addToCart(id) {
-		
-		if (localStorage[id]){
-  			localStorage[id] = Number(localStorage[id]) + 1;
-		} else {
-  			localStorage[id] = 1;
-		}
-		
-	}
-</script>
+</div>
 </div>
 <?php require("footer.php");?>
 </div>
+</div>
+</div>
+
 <script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script>
+  function addToCart(id) {
+    
+    if (localStorage[id]){
+        localStorage[id] = Number(localStorage[id]) + 1;
+    } else {
+        localStorage[id] = 1;
+    }
+    
+  }
+  $(document).ready(function() {
+ 
+ $("#owl-demo").owlCarousel({
+
+   navigation : false, // Show next and prev buttons
+   slideSpeed : 300,
+   paginationSpeed : 400,
+   singleItem:true,
+   responsive:{
+        0:{
+            items:1,
+            nav:true
+        },
+        600:{
+            items:1,
+            nav:false
+        },
+        1000:{
+            items:3,
+            loop:false
+        }
+    }
+
+   // "singleItem:true" is a shortcut for:
+   // items : 1, 
+   // itemsDesktop : false,
+   // itemsDesktopSmall : false,
+   // itemsTablet: false,
+   // itemsMobile : false
+
+ });
+
+});
+</script>
+
 <script src="../styles/bootstrap-4.1.2/popper.js"></script>
 <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
 <script src="../plugins/greensock/TweenMax.min.js"></script>
@@ -65,7 +105,7 @@ include("../database/dbCart.php");
 <script src="../plugins/scrollmagic/ScrollMagic.min.js"></script>
 <script src="../plugins/greensock/animation.gsap.min.js"></script>
 <script src="../plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+
 <script src="../plugins/easing/easing.js"></script>
 <script src="../plugins/progressbar/progressbar.min.js"></script>
 <script src="../plugins/parallax-js-master/parallax.min.js"></script>
