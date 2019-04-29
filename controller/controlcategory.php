@@ -6,7 +6,7 @@ session_start();
     $conn = connectDB();
     function toManPage($data,$conn){
         $_SESSION[$_SESSION['type']] = getListProduct($conn,$_SESSION['type']);
-        $_SESSION['max'] = sizeof(getProduct($conn));
+        $_SESSION['max'] = sizeof($_SESSION[$_SESSION['type']] );
         header('Location:../php/category.php');
     }
     function toCartProduct(){

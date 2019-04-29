@@ -18,6 +18,7 @@ header("Pragma: no-cache");
 <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="../styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
+<link rel="stylesheet" type="text/css" href="../styles/style.css">
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
@@ -39,11 +40,11 @@ include("../database/dbCart.php");
   echo "<div class=\"row products_row\">";
   echo'<div id="owl-demo" class="owl-carousel owl-theme">';
     for ($i = 0 ; $i < 12; $i++){
-        printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
+        printproduct2($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
   }
   echo "</div></div></div>";
 ?>
-
+<?php require("feature.php");?>
 </div>
 </div>
 <?php require("footer.php");?>

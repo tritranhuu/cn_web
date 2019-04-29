@@ -28,7 +28,7 @@ include("../database/dbCart.php");
 <div class="home">
 			<div class="home_container d-flex flex-column align-items-center justify-content-end">
 				<div class="home_content text-center">
-					<div class="home_title">Product Page</div>
+					<div class="home_title" id ="home_title">Product Page</div>
 					<div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
 						<ul class="d-flex flex-row align-items-start justify-content-start text-center">
 							<li><a href="./index.php">Home</a></li>
@@ -40,6 +40,7 @@ include("../database/dbCart.php");
 			</div>
 </div>
 <br/><br/><br/><br/>
+
 <?php
 	require("../database/getProduct.php");
 	require("product_box.php");
@@ -48,13 +49,14 @@ include("../database/dbCart.php");
 	echo'<div class="products">
 	<div class="container">
 	';
-	echo "<div class=\"row products_row\">";
-    for ($i = 12*($_SESSION['page']-1),$t=0 ; ; $i++,$t++){
-		if($t==12|| ($i+1) == $_SESSION['max']) break;
+	require('filter.php');
+	echo '<div class="row products_row products_container grid">';
+    for ($i = 12*($_SESSION['page']-1),$t=0 ;$i < $_SESSION['max'] ; $i++,$t++){
+		if($t==12 ) break;
 		printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
 		
 	}
-	echo "</div>";
+	echo "</div></div>";
 ?>
 <?php
 	if($_SESSION['page']==1){
@@ -71,13 +73,13 @@ include("../database/dbCart.php");
 		</div>
 	</div>';
 	}
-	elseif( $_SESSION['page']*12 <= $_SESSION['max']){
+	elseif( ($_SESSION['page'])*12 >= $_SESSION['max']){
 		echo'<div class="row page_nav_row">
 		<div class="col">
 			<div class="page_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-center">';
 				echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($_SESSION['page']-1).'"><</a></li>';
-		for($i = $_SESSION['page'] -1 ; $i<=$_SESSION['page'] && $i<= ceil($_SESSION['max']/12);$i++){
+		for($i = $_SESSION['page'] -1 ; $i<=$_SESSION['page']  && $i<= ceil($_SESSION['max']/12);$i++){
 			if($i!=$_SESSION['page'])
 			echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'">'.$i.'</a></li>';
 			else 
@@ -110,20 +112,54 @@ include("../database/dbCart.php");
 	}
 ?>
 
-<script>
-	function addToCart(id) {
-		
-		if (localStorage[id]){
-  			localStorage[id] = Number(localStorage[id]) + 1;
-		} else {
-  			localStorage[id] = 1;
-		}
-		
-	}
-</script>
 </div>
 <?php require("footer.php");?>
 </div>
+<script >
+	
+	$(document).ready(function() {
+    
+    function initIsotope() {
+        var sortingButtons = $('.item_sorting_btn');
+
+        if ($('.grid').length) {
+            var grid = $('.grid').isotope({
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                masonry: {
+                    horizontalOrder: true
+                },
+                getSortData: {
+                    price: function(itemElement) {
+                        var priceEle = $(itemElement).find('.product_price').text();
+                        return parseFloat(priceEle);
+                    },
+                    name: '.product_name'
+                }
+            });
+
+            sortingButtons.each(function() {
+                $(this).on('click', function() {
+                    var parent = $(this).parent().parent().find('.isotope_sorting_text span');
+                    parent.text($(this).text());
+                    var option = $(this).attr('data-isotope-option');
+                    option = JSON.parse(option);
+                    grid.isotope(option);
+                });
+            });
+
+            // Filtering
+            $('.item_filter_btn').on('click', function() {
+                var parent = $(this).parent().parent().find('.isotope_filter_text span');
+                parent.text($(this).text());
+                var filterValue = $(this).attr('data-filter');
+                grid.isotope({ filter: filterValue });
+            });
+        }
+    }
+
+});
+</script>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../styles/bootstrap-4.1.2/popper.js"></script>
 <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
@@ -136,6 +172,6 @@ include("../database/dbCart.php");
 <script src="../plugins/easing/easing.js"></script>
 <script src="../plugins/progressbar/progressbar.min.js"></script>
 <script src="../plugins/parallax-js-master/parallax.min.js"></script>
-<script src="../js/custom.js"></script>
+<script src="../js/category.js"></script>
 </body>
 </html>

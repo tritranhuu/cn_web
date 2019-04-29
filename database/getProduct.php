@@ -2,7 +2,7 @@
     
     function getProduct($conn){
         $items= array();
-        $query = 'select * from product';
+        $query = 'select * from product order by created ';
         $sql = mysqli_query($conn, $query);
         while($res = mysqli_fetch_array($sql)){
             $urlQuery = 'select url from img where proID='.$res['proID'].' limit 1';

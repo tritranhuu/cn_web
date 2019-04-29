@@ -141,16 +141,16 @@ $(document).ready(function() {
     function initIsotope() {
         var sortingButtons = $('.item_sorting_btn');
 
-        if ($('.products').length) {
-            var grid = $('.products').isotope({
-                itemSelector: '.products_container',
+        if ($('.grid').length) {
+            var grid = $('.grid').isotope({
+                itemSelector: '.grid-item',
                 percentPosition: true,
                 masonry: {
                     horizontalOrder: true
                 },
                 getSortData: {
                     price: function(itemElement) {
-                        var priceEle = $(itemElement).find('.product_price').text().replace('VND', '');
+                        var priceEle = $(itemElement).find('.product_price').text().replace('$', '');
                         return parseFloat(priceEle);
                     },
                     name: '.product_name'
