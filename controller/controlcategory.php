@@ -9,7 +9,8 @@ session_start();
         $_SESSION['max'] = sizeof($_SESSION[$_SESSION['type']] );
         header('Location:../php/category.php');
     }
-    
+    $_SESSION['type']='M';
+    $_SESSION['page']=1;
     if(isset($_REQUEST['type'])){
         $_SESSION['type'] = $_REQUEST['type'];
         $_SESSION['page'] = $_REQUEST['page'];

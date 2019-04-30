@@ -2,6 +2,8 @@
 <html lang="en">
 <?php
 session_start();
+if(!isset($_SESSION['type']))
+header('Location:../controller/controlcategory.php');
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -44,8 +46,10 @@ include("../database/dbCart.php");
 <?php
 	require("../database/getProduct.php");
 	require("product_box.php");
-    $conn = connectDB();
+	$conn = connectDB();
 	$arr =  $_SESSION[$_SESSION['type']];
+	
+	
 	echo'<div class="products">
 	<div class="container">
 	<div class="col">
