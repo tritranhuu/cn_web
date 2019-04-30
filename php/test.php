@@ -2,6 +2,8 @@
 <html lang="en">
 <?php
 session_start();
+if(!isset($_SESSION['type']))
+header('Location:../controller/controlcategory.php');
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -28,7 +30,7 @@ include("../database/dbCart.php");
 <div class="home">
 			<div class="home_container d-flex flex-column align-items-center justify-content-end">
 				<div class="home_content text-center">
-					<div class="home_title">Product Page</div>
+					<div class="home_title" id ="home_title">Product Page</div>
 					<div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
 						<ul class="d-flex flex-row align-items-start justify-content-start text-center">
 							<li><a href="./index.php">Home</a></li>
@@ -40,62 +42,27 @@ include("../database/dbCart.php");
 			</div>
 </div>
 <br/><br/><br/><br/>
-<div class="container">
-				<div class="row products_bar_row">
-					<div class="col">
-						<div class="products_bar d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-start justify-content-center">
-							<div class="products_bar_links">
-								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li><a href="#">All</a></li>
-									<li><a href="#">Hot Products</a></li>
-									<li class="active"><a href="#">New Products</a></li>
-									<li><a href="#">Sale Products</a></li>
-								</ul>
-							</div>
-							<div class="products_bar_side d-flex flex-row align-items-center justify-content-start ml-lg-auto">
-								<div class="products_dropdown product_dropdown_sorting">
-									<div class="isotope_sorting_text"><span>Default Sorting</span><i class="fa fa-caret-down" aria-hidden="true"></i></div>
-									<ul>
-										<li class="item_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'>Default</li>
-										<li class="item_sorting_btn" data-isotope-option='{ "sortBy": "price" }'>Price</li>
-										<li class="item_sorting_btn" data-isotope-option='{ "sortBy": "name" }'>Name</li>
-									</ul>
-								</div>
-								<div class="product_view d-flex flex-row align-items-center justify-content-start">
-									<div class="view_item active"><img src="images/view_1.png" alt=""></div>
-									<div class="view_item"><img src="images/view_2.png" alt=""></div>
-									<div class="view_item"><img src="images/view_3.png" alt=""></div>
-								</div>
-								<div class="products_dropdown text-right product_dropdown_filter">
-									<div class="isotope_filter_text"><span>Filter</span><i class="fa fa-caret-down" aria-hidden="true"></i></div>
-									<ul>
-										<li class="item_filter_btn" data-filter="*">All</li>
-										<li class="item_filter_btn" data-filter=".hot">Hot</li>
-										<li class="item_filter_btn" data-filter=".new">New</li>
-										<li class="item_filter_btn" data-filter=".sale">Sale</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-	</div>
-				
+
 <?php
 	require("../database/getProduct.php");
 	require("product_box.php");
-    $conn = connectDB();
+	$conn = connectDB();
 	$arr =  $_SESSION[$_SESSION['type']];
+	
+	
 	echo'<div class="products">
 	<div class="container">
+	<div class="col">
 	';
-	echo "<div class=\"row products_row products_container \">";
-    for ($i = 12*($_SESSION['page']-1),$t=0 ; ; $i++,$t++){
-		if($t==12|| ($i+1) == $_SESSION['max']) break;
-		printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
+	require('filter.php');
+	echo '<div class="row products_row products_container grid">';
+    for ($i = 12*($_SESSION['page']-1),$t=0 ;$i < $_SESSION['max'] ; $i++,$t++){
+		if($t==12 ) break;
+		$arr2= getCmtandRate($conn,$arr[$i]['proID']);
+		printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName'],$_SESSION['type'],$arr2);
 		
 	}
-	echo "</div></div></div></div></div></div></div>";
+	echo "</div></div>";
 ?>
 <?php
 	if($_SESSION['page']==1){
@@ -103,22 +70,22 @@ include("../database/dbCart.php");
 		<div class="col">
 			<div class="page_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-center">
-						<li class="active"><a href="">01</a></li>
-						<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=2">02</a></li>
-						<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=3">03</a></li>';
+						<li class="active"><a href="">1</a></li>
+						<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=2">2</a></li>
+						<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=3">3</a></li>';
 						echo '<li><a href="../controller/controlcategory.php?type=M&page='.($_SESSION['page']+1).'">></a></li>
 				</ul>
 			</div>
 		</div>
 	</div>';
 	}
-	elseif( $_SESSION['page'] == ceil($_SESSION['max']/12)){
+	elseif( ($_SESSION['page'])*12 >= $_SESSION['max']){
 		echo'<div class="row page_nav_row">
 		<div class="col">
 			<div class="page_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-center">';
 				echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($_SESSION['page']-1).'"><</a></li>';
-		for($i = $_SESSION['page'] -4 ; $i<=$_SESSION['page'] && $i<= ceil($_SESSION['max']/12);$i++){
+		for($i = $_SESSION['page'] -1 ; $i<=$_SESSION['page']  && $i<= ceil($_SESSION['max']/12);$i++){
 			if($i!=$_SESSION['page'])
 			echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'">'.$i.'</a></li>';
 			else 
@@ -150,23 +117,55 @@ include("../database/dbCart.php");
 	</div>';
 	}
 ?>
-<br/> <br/>
-<script>
-	function addToCart(id) {
-		
-		if (localStorage[id]){
-  			localStorage[id] = Number(localStorage[id]) + 1;
-		} else {
-  			localStorage[id] = 1;
-		}
-		
-	}
-</script>
 
 </div>
-
 <?php require("footer.php");?>
 </div>
+<script >
+	
+	$(document).ready(function() {
+    
+    function initIsotope() {
+        var sortingButtons = $('.item_sorting_btn');
+
+        if ($('.grid').length) {
+            var grid = $('.grid').isotope({
+                itemSelector: '.grid-item',
+                percentPosition: true,
+                masonry: {
+                    horizontalOrder: true
+                },
+                getSortData: {
+                    price: function(itemElement) {
+                        var priceEle = $(itemElement).find('.product_price').text();
+                        return parseFloat(priceEle);
+                    },
+                    name: '.product_name'
+                }
+            });
+
+            sortingButtons.each(function() {
+                $(this).on('click', function() {
+                    var parent = $(this).parent().parent().find('.isotope_sorting_text span');
+                    parent.text($(this).text());
+                    var option = $(this).attr('data-isotope-option');
+                    option = JSON.parse(option);
+                    grid.isotope(option);
+                });
+            });
+
+            // Filtering
+            $('.item_filter_btn').on('click', function() {
+                var parent = $(this).parent().parent().find('.isotope_filter_text span');
+                parent.text($(this).text());
+                var filterValue = $(this).attr('data-filter');
+                grid.isotope({ filter: filterValue });
+            });
+        }
+    }
+
+});
+</script>
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../styles/bootstrap-4.1.2/popper.js"></script>
 <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>

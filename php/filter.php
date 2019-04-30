@@ -21,7 +21,7 @@
 									<div class="isotope_filter_text"><span>Filter</span><i class="fa fa-caret-down" aria-hidden="true"></i></div>
 									<ul>
 										<li class="item_filter_btn" data-filter="*">All</li>
-										<li class="item_filter_btn" data-filter=".lon"> >200000</li>
+										<li class="item_filter_btn" data-filter=".lon"> >=200000</li>
 										<li class="item_filter_btn" data-filter=".nho"> <200000 </li>
 										
 									</ul>
