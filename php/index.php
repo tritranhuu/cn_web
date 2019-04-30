@@ -40,7 +40,8 @@ include("../database/dbCart.php");
   <div class="container">';
   echo "<div class=\"row products_row\">";
     for ($i = 0 ; $i < 12; $i++){
-        printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName'],$arr[$i]['gender']);
+        $arr2= getCmtandRate($conn,$arr[$i]['proID']);
+        printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName'],$arr[$i]['gender'],$arr2);
   }
 ?>
 </div>

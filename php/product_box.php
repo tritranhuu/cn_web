@@ -1,20 +1,29 @@
 <?php	
-    function printProduct($proID,$url, $price,$proName,$gender){	
+    function printProduct($proID,$url, $price,$proName,$gender,$arr){
+       
 ?>	
 
     <div class="col-xl-4 col-md-6 grid-item ">	
                             <div class="product">	
-                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><img src=<?php echo "../".$url;?> alt=""></a></div>	
+                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&page=1&product='.$proID.'"'; ?>><img src=<?php echo "../".$url;?> alt=""></a></div>	
                                 <div class="product_content">	
                                     <div class="product_info d-flex flex-row align-items-start justify-content-start">	
                                         <div>	
                                             <div>	
-                                                <div class="product_name"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><?php echo $proName;?></a></div>	
+                                                <div class="product_name"><<?php echo 'a href="../controller/product_controller.php?action=index&page=1&product='.$proID.'"'; ?>><?php echo $proName;?></a></div>	
                                                 <div class="product_category">In <<?php echo 'a href="../controller/controlcategory.php?type='.$gender.'&page=1"';?>><?php if($gender=='M') echo'Man';elseif($gender=='F') echo 'Woman';else echo 'Kids';?></a></div>	
                                             </div>	
                                         </div>	
                                         <div class="ml-auto text-right">	
-                                            <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>	
+                                            <div class="rating_r rating_r_4 home_item_rating text-dark"><?php if(sizeof($arr)==0) echo 5; else{
+									 $sum =0;
+									 $c =0;
+									 foreach ($arr as $k){
+										 $sum += $k['point'];
+										 $c++;
+									 }
+									 echo $sum/$c;
+								}?> &nbsp <i class="fa fa-user-o"></i></div>	
                                             <div class="product_price text-right"><?php echo $price;?></div>	
                                         </div>	
                                     </div>	
@@ -49,7 +58,7 @@
     </form>	
     <div class="col-xl-12 col-sm-12 col-xs-12 col-md-6 grid-item ">	
                             <div class="product ">	
-                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><img src=<?php echo "../".$url;?> alt=""></a></div>	
+                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&page=1&product='.$proID.'"'; ?>><img src=<?php echo "../".$url;?> alt=""></a></div>	
                                 <div class="product_content">	
                                     <div class="product_info d-flex flex-row align-items-start justify-content-start">	
                                         <div>	
@@ -59,7 +68,7 @@
                                             </div>	
                                         </div>	
                                         <div class="ml-auto text-right">	
-                                            <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>	
+                                            <div class="rating_r rating_r_4 home_item_rating"><i class="fa fa-user-o"></i><i class="fa fa-user-o"></i><i class="fa fa-user-o"></i><i class="fa fa-user-o"></i></div>	
                                             <div class="product_price text-right"><?php echo $price;?></div>	
                                         </div>	
                                     </div>	
@@ -96,7 +105,7 @@
     </form> 
     <div class="col-md-3 col-sm-6 col-xs-6 "> 
                             <div class="product ">  
-                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><img src=<?php echo "../".$url;?> alt=""></a></div>  
+                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&page=1&product='.$proID.'"'; ?>><img src=<?php echo "../".$url;?> alt=""></a></div>  
                                 <div class="product_content">   
                                     <div class="product_info d-flex flex-row align-items-start justify-content-start">  
                                         <div>   

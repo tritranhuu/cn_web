@@ -21,10 +21,12 @@ session_start();
     }
     function toHeartProduct(){
     }
+    $_SESSION['pagecmt']= 1;
     if(isset($_REQUEST['action'])){
         $_SESSION['ctr_name'] =$ctr_name;
         $_SESSION['sub_menu'] = $action = $_REQUEST['action'];
         $action = $_REQUEST['action'];
+        $_SESSION['pagecmt']= $_REQUEST['page'];
     }else{
         $action = 'index';
     }
