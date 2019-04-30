@@ -23,7 +23,7 @@
 
     function getAllProduct(){
         $conn = connectDB();
-        $query = "select * from product natural join company";
+        $query = "select * from product join company where product.companyID = company.companyID";
         return mysqli_query($conn, $query);
     }
 

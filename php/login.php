@@ -18,6 +18,7 @@ include("../database/dbCart.php");
 		<link rel="stylesheet" href="../styles/sign_up.css">
 		<link rel="stylesheet" href="../styles/responsive.css">
 		<script src="../js/jquery-3.2.1.min.js"></script>	
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	</head>
 <?php include("header.php");?>
 	<body>
@@ -27,17 +28,17 @@ include("../database/dbCart.php");
 				<div class="image-holder">
 					<img src="../images/sign_up/registration-form-1.jpg" alt="">
 				</div>
-				<form>
+				<form id="login" action="" method="POST" role="form">
 					<h3>sign in</h3>
 					<div class="form-wrapper">
-						<input type="text" placeholder="Tên Đăng Nhập" class="form-control" name="username">
+						<input type="text" placeholder="Tên Đăng Nhập" class="form-control" name="username" required="required">
 						<i class="zmdi zmdi-account"></i>
 					</div>
 					<div class="form-wrapper">
-						<input type="password" placeholder="Mật khẩu" class="form-control" name="password">
+						<input type="password" placeholder="Mật khẩu" class="form-control" name="password" required="required">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
-					<button type="button" class="done">Đăng nhập
+					<button type="submit" class="done">Đăng nhập
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>
 					<div style="padding-top:10px; text-align:center; "><a href="register.php" style="color:#333">Quên mật khẩu?</a></div>
@@ -57,10 +58,10 @@ include("../database/dbCart.php");
 <script type="text/javascript">
 
 function isEmptyOrSpaces(str){
-    return str === null || str.match(/^ *$/) !== null;
+    return 0;
 }
 
-$('.done').on("click", event =>{
+$('#login').on("submit", event =>{
 	var username = $('input[name=username]').val();
 	var pass = $('input[name=password]').val();
 	if(isEmptyOrSpaces(username)|isEmptyOrSpaces(pass)){
@@ -77,10 +78,10 @@ $('.done').on("click", event =>{
             url         : '../controller/modifyAccount.php', 
             data        : formData, 
         	success:function(data){
-        		alert("helo");
+        		swal("helo");
         	},
         	error:function(data){
-				alert("Error")
+				swal("Error")
 			}
 
         })

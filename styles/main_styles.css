@@ -799,6 +799,7 @@ section
 }
 .product
 {
+	display:none;
 	overflow: hidden;
 	border-radius: 3px;
 }

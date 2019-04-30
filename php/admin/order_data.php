@@ -78,9 +78,9 @@ include("./controller/controllerData.php");
         <!-- sidebar menu start-->            <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
             <li>
-                <a href="index.html">
+                <a href="index.php">
                     <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
+                    <span>Thống kê</span>
                 </a>
             </li>
             <li class="sub-menu">
@@ -90,8 +90,8 @@ include("./controller/controllerData.php");
                 </a>
                 <ul class="sub">
                     <li><a href="#">Tài khoản</a></li>
-                    <li><a href="#">Sản phẩm</a></li>
-                    <li class="active"><a href="#">Đơn hàng</a></li>
+                    <li class="active"><a href="product_data.php">Sản phẩm</a></li>
+                    <li><a href="order_data.php">Đơn hàng</a></li>
                 </ul>
             </li>
             <li class="sub-menu">

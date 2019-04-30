@@ -75,7 +75,7 @@ include("./model/database.php");
                     </tfoot>
                     </table>
 
-<div class="modal fade" id="sizeModal" role="dialog" aria-labelledby="sizeGuide" aria-hidden="true">
+<!-- <div class="modal fade" id="sizeModal" role="dialog" aria-labelledby="sizeGuide" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -99,7 +99,7 @@ include("./model/database.php");
         var body = $('.modal-body');
 
     })
-</script>
+</script> -->
 
 <?php 
 } 

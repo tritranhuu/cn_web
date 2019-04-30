@@ -79,7 +79,7 @@
             <li>
                 <a href="index.html">
                     <i class="fa fa-dashboard"></i>
-                    <span>Thống kê</span>
+                    <span class="active">Thống kê</span>
                 </a>
             </li>
             <li class="sub-menu">
@@ -89,8 +89,8 @@
                 </a>
                 <ul class="sub">
                     <li><a href="#">Tài khoản</a></li>
-                    <li><a href="#">Sản phẩm</a></li>
-                    <li class="active"><a href="#">Đơn hàng</a></li>
+                    <li><a href="product_data.php">Sản phẩm</a></li>
+                    <li><a href="order_data.php">Đơn hàng</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
