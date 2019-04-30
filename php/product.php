@@ -13,11 +13,19 @@ include("../database/dbCart.php");
 <meta name="description" content="Little Closet template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
+<link type="text/css" rel="stylesheet" href="../plugins//slick.css" />
+<link type="text/css" rel="stylesheet" href="../plugins/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="../plugins//slick-theme.css" />
+<link type="text/css" rel="stylesheet" href="../plugins//nouislider.min.css" />
 <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="../plugins/flexslider/flexslider.css">
 <link rel="stylesheet" type="text/css" href="../styles/product.css">
+<link rel="stylesheet" type="text/css" href="../styles/category.css">
 <link rel="stylesheet" type="text/css" href="../styles/product_responsive.css">
-<script src="../js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../styles/style.css">
 </head>
 
 <?php include("header.php");?>
@@ -115,7 +123,6 @@ include("../database/dbCart.php");
 											}
 									}
 									?>
-									
 								
 								</ul>
 							</div>
@@ -128,24 +135,40 @@ include("../database/dbCart.php");
 									</div>
 								</div>
 							</div>
-							<div class="card mt-4">
-								<div class="card-header">
-									Mô Tả
-								</div>
-								<div class="card-body">
-									<p class="card-text"><h6><?php  echo $_SESSION['product']['description'];?></h6></p>
-									<p class="card-text"><h6><?php  echo $_SESSION['product']['material'];?></h6></p>
-								</div>
-
-								
-							</div>
 							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
+<?php require('productDetail.php');
+		printDetail($_SESSION['product']['description'],$_SESSION['product']['material'],$_SESSION['CmtandRate']);
+?>
+<?php
+ require("../database/getProduct.php");
+  require("product_box.php");
+  $conn = connectDB();
+  $arr =  getProduct($conn);
+  echo'<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- section title -->
+				<div class="col-md-12">
+					<div class="section-title">
+						<h2 class="title">Picked For You</h2>
+					</div>
+				</div>
+	';
+	
+    for ($i = 0 ; $i < 4; $i++){
+			
+        printproduct3($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
+  }
+  
+  echo "</div></div></div></div>";
+?>
 		<div class="boxes">
 			<div class="container">
 				<div class="row">
@@ -171,6 +194,7 @@ include("../database/dbCart.php");
 			</div>
 		</div>
 </div>
+
 
 
 <!-- Modal -->
@@ -211,8 +235,16 @@ include("../database/dbCart.php");
       
     </div>
   </div>
-</div>
+  </div>
+ </div>
+
 <?php require('./footer.php'); ?>
+</div>
+  </div>
+ </div>
+
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script>
 	$('#addCart').on('click', event =>{
 		var proID = $(".product").attr("id");
@@ -236,10 +268,34 @@ include("../database/dbCart.php");
 			}
 
         })
-	})
+	});
+	$(document).ready(function() {
+ 
+ 	$("#owl-demo").owlCarousel({
+
+   navigation : false, // Show next and prev buttons
+   slideSpeed : 300,
+   paginationSpeed : 400,
+   singleItem:true,
+   responsive:{
+        0:{
+            items:1,
+            nav:true
+        },
+        600:{
+            items:1,
+            nav:false
+        },
+        1000:{
+            items:3,
+            loop:false
+        }
+    }
+	});
 
 </script>
-
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <script src="../styles/bootstrap-4.1.2/popper.js"></script>
 <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
 <script src="../plugins/greensock/TweenMax.min.js"></script>
@@ -247,11 +303,13 @@ include("../database/dbCart.php");
 <script src="../plugins/scrollmagic/ScrollMagic.min.js"></script>
 <script src="../plugins/greensock/animation.gsap.min.js"></script>
 <script src="../plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="../plugins/easing/easing.js"></script>
 <script src="../plugins/progressbar/progressbar.min.js"></script>
 <script src="../plugins/parallax-js-master/parallax.min.js"></script>
 <script src="../plugins/flexslider/jquery.flexslider-min.js"></script>
+<script src="../js/slick.min.js"></script>
+<script src="../js/nouislider.min.js"></script>
+<script src="../js/jquery.zoom.min.js"></script>
 <script src="../js/product.js"></script>
 </body>
 </html>

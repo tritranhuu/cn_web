@@ -11,7 +11,8 @@
                 'proID' => $res['proID'],
                 'proName' => $res['proName'],
                 'price' => $res['price'],
-                'url' => $urlRes['url']
+                'url' => $urlRes['url'],
+                'gender' => $res['gender']
             );
             array_push($items, $item);
         }
@@ -29,6 +30,7 @@
                 'proName' => $res['proName'],
                 'price' => $res['price'],
                 'description' => $res['description'],
+                'gender' => $res['gender'],
                 'material' => $res['material'],
                 'url' => $urlRes['url']
             );
@@ -55,6 +57,7 @@
         $sql = mysqli_query($conn, $query);
         $items= array();
         while($res = mysqli_fetch_array($sql)){
+
             array_push($items, $res['url']);
         }
         return $items;
@@ -82,17 +85,40 @@
         while($res = mysqli_fetch_array($sql)){
             $urlQuery = 'select url from img where proID='.$res['proID'].' limit 1';
             $urlRes = mysqli_fetch_array(mysqli_query($conn, $urlQuery));
+            $urlQuery2 = 'select distinct * from product_option where proID='.$res['proID'].' limit 1';
+            
             $item = array(
                 'proID' => $res['proID'],
                 'proName' => $res['proName'],
                 'price' => $res['price'],
-                'url' => $urlRes['url']
+                'url' => $urlRes['url'],
+                'size' => $urlQuery2
             );
             array_push($items, $item);
         }
         return $items;         
     }
-    function getPageProduct($type,$page){
+    function getCmtandRate($conn,$id){
+        $items= array();
+        $query = 'select * from comment_product where proID=' .$id;
+        $sql = mysqli_query($conn, $query);
+        while($res = mysqli_fetch_array($sql)){
+            $urlQuery = 'select * from account where accID='.$res['accID'].' limit 1';
+            $urlRes = mysqli_fetch_array(mysqli_query($conn, $urlQuery));
+            $urlQuery2 = 'select proName from product where proID='.$res['proID'].' limit 1';
+            $urlRes2 = mysqli_fetch_array(mysqli_query($conn, $urlQuery2));
+            $urlQuery2 = 'select point from rate_product where proID='.$res['proID'].' and '.'accID='.$res['accID'];
+            $urlRes2 = mysqli_fetch_array(mysqli_query($conn, $urlQuery2));
+            $item = array(
+                'proName' => $urlRes2['proName'],
+                'content' => $res['content'],
+                'created' => $res['created'],
+                'username' => $urlRes['username'],
+                'point' =>$urlRes3['point']
+            );
+            array_push($items, $item);
+        }
+        return $items;   
     }
   
 ?>

@@ -1,25 +1,19 @@
 /* JS Document */
 
 /******************************
-
 [Table of Contents]
-
 1. Vars and Inits
 2. Set Header
 3. Init Menu
 4. Init SVG
 5. Init Isotope
-
-
 ******************************/
 
 $(document).ready(function() {
     "use strict";
 
     /* 
-
     1. Vars and Inits
-
     */
 
     var header = $('.header');
@@ -39,9 +33,7 @@ $(document).ready(function() {
     });
 
     /* 
-
     2. Set Header
-
     */
 
     function setHeader() {
@@ -53,9 +45,7 @@ $(document).ready(function() {
     }
 
     /* 
-
     3. Init Menu
-
     */
 
     function initMenu() {
@@ -96,9 +86,7 @@ $(document).ready(function() {
     }
 
     /* 
-
     4. Init SVG
-
     */
 
     function initSvg() {
@@ -133,9 +121,7 @@ $(document).ready(function() {
     }
 
     /* 
-
     5. Init Isotope
-
     */
 
     function initIsotope() {

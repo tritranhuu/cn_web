@@ -1,5 +1,5 @@
 <?php	
-    function printProduct($proID,$url, $price,$proName){	
+    function printProduct($proID,$url, $price,$proName,$gender){	
 ?>	
 
     <div class="col-xl-4 col-md-6 grid-item ">	
@@ -10,7 +10,7 @@
                                         <div>	
                                             <div>	
                                                 <div class="product_name"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><?php echo $proName;?></a></div>	
-                                                <div class="product_category">In <<?php echo 'a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1"';?>><?php if($_SESSION['type']=='M') echo'Man';elseif($_SESSION['type']=='F') echo 'Woman';else echo 'Kids';?></a></div>	
+                                                <div class="product_category">In <<?php echo 'a href="../controller/controlcategory.php?type='.$gender.'&page=1"';?>><?php if($gender=='M') echo'Man';elseif($gender=='F') echo 'Woman';else echo 'Kids';?></a></div>	
                                             </div>	
                                         </div>	
                                         <div class="ml-auto text-right">	
@@ -89,4 +89,34 @@
     </form>	
 <?php	
 }	
+ ?> 
+ <?php  
+    function printProduct3($proID,$url, $price,$proName){   
+?>  
+    </form> 
+    <div class="col-md-3 col-sm-6 col-xs-6 "> 
+                            <div class="product ">  
+                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><img src=<?php echo "../".$url;?> alt=""></a></div>  
+                                <div class="product_content">   
+                                    <div class="product_info d-flex flex-row align-items-start justify-content-start">  
+                                        <div>   
+                                            <div>   
+                                                <div class="product_name"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><?php echo $proName;?></a></div>  
+                                                
+                                            </div>  
+                                        </div>  
+                                        <div class="ml-auto text-right">    
+                                            <div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div> 
+                                            <div class="product_price text-right"><?php echo $price;?></div>    
+                                        </div>  
+                                    </div>  
+                                    
+                                </div>  
+                            </div>  
+                        </div>  
+
+   
+    </form> 
+<?php   
+}   
  ?> 

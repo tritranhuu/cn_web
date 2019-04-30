@@ -54,7 +54,7 @@ include("../database/dbCart.php");
 	echo '<div class="row products_row products_container grid">';
     for ($i = 12*($_SESSION['page']-1),$t=0 ;$i < $_SESSION['max'] ; $i++,$t++){
 		if($t==12 ) break;
-		printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
+		printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName'],$_SESSION['type']);
 		
 	}
 	echo "</div></div>";
