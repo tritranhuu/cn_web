@@ -81,8 +81,17 @@ include("../database/dbCart.php");
 							<div class="product_name"><?php  echo $_SESSION['product']['proName'];?></div>
 							<div class="product_category">In <<?php echo 'a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1"';?>><?php if($_SESSION['type']=='M') echo'Man';elseif($_SESSION['type']=='F') echo 'Woman';else echo 'Kids';?></a></div>
 							<div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
-								<div class="rating_r rating_r_3 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-								<div class="product_reviews">4.7 out of (3514)</div>
+							<div class="rating_r rating_r_3 product_rating text-dark">Đánh giá</div>
+								<div class="product_reviews"><?php if(sizeof($_SESSION['CmtandRate'])==0) echo 5; else{
+									 $sum =0;
+									 $c =0;
+									 foreach ($_SESSION['CmtandRate'] as $k){
+										 $sum += $k['point'];
+										 $c++;
+									 }
+									 echo $sum/$c;
+								}?> out of (<?php echo sizeof($_SESSION['CmtandRate'])?>)</div>
+							
 								<div class="product_reviews_link" style="cursor: pointer" data-toggle="modal" data-target="#rateModal">Reviews</div>
 							</div>
 							<div class="product_price text-danger"><?php  echo $_SESSION['product']['price'];?></div>
@@ -228,7 +237,8 @@ include("../database/dbCart.php");
       	<div class="modal-body">
         	<div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
 				<div class="rating_r rating_r_3 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-				<div class="product_reviews">4.7 out of (3514)</div>
+				<div class="product_reviews" >4.7 out of (3514)</div>
+				
 			</div>
 
       	</div>
@@ -237,15 +247,35 @@ include("../database/dbCart.php");
   </div>
   </div>
  </div>
-
 <?php require('./footer.php'); ?>
 </div>
   </div>
  </div>
+ <script src="../js/jquery-3.2.1.min.js"></script>
+ <script language="javascript">
 
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script>
+	$('#submit').on('click',event =>{
+			var proID = $(".product").attr("id");
+			var input = $('#input').val();
+			var rating =  $("input[name='rating']:checked").val();
+			console.log(input);
+			console.log(rating);
+			var data ={
+				'input':input,
+				'rating' :rating,
+				'proID' : proID
+			};
+			$.ajax({
+				type        : 'POST', 
+				dataType		: "text",
+        url         : '../database/insertRate.php', 
+				data        : data,
+				success:function(){
+					console.log('ok');
+        }
+			})
+
+	});
 	$('#addCart').on('click', event =>{
 		var proID = $(".product").attr("id");
 		var data = {
@@ -269,32 +299,13 @@ include("../database/dbCart.php");
 
         })
 	});
-	$(document).ready(function() {
- 
- 	$("#owl-demo").owlCarousel({
+	
 
-   navigation : false, // Show next and prev buttons
-   slideSpeed : 300,
-   paginationSpeed : 400,
-   singleItem:true,
-   responsive:{
-        0:{
-            items:1,
-            nav:true
-        },
-        600:{
-            items:1,
-            nav:false
-        },
-        1000:{
-            items:3,
-            loop:false
-        }
-    }
-	});
 
 </script>
-<script src="../js/jquery.min.js"></script>
+
+<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+
 <script src="../js/bootstrap.min.js"></script>
 <script src="../styles/bootstrap-4.1.2/popper.js"></script>
 <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
