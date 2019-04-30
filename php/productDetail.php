@@ -1,7 +1,8 @@
 <?php	
 
+ 	
     function printDetail($des,$mat,$arr){	
-        
+	
     
 ?>	
 <div class="section">
@@ -32,24 +33,25 @@
 										<div class="col-md-4 col-lg-6">
 											<div class="product-reviews">
                                                 <?php
-                                                foreach ($arr as $i)
+                                                foreach ($arr as $i){
                                                 echo'<div class="single-review">
                                                 <div class="review-heading col-lg-12">
                                                     <div><a href="#"><i class="fa fa-user-o"></i> '.$i['username'].'</a></div>
                                                     <div><a href="#"><i class="fa fa-clock-o"></i> '.$i['created'].'</a></div>
-                                                    <div class="review-rating pull-right">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
+													<div class="review-rating pull-right">';
+													for($t = 1 ; $t<=$i['point']; $t++)
+														echo '<i class="fa fa-star"></i>';
+													for($t = $i['point']+1 ; $t<=5; $t++)
+                                                        echo '<i class="fa fa-star-o empty"></i>';
+                                                        
+                                                    echo'</div>
                                                 </div>
                                                 <div class="review-body col-lg-12">
                                                     <p>'.$i['content'].'</p>
                                                 </div>
                                             </div>
-                                            ';
+											';
+												}
                                                 ?>
 												
 											</div>
@@ -60,12 +62,13 @@
 											<p>Your email address will not be published.</p>
 											<form class="review-form">
 												<div class="form-group">
-													<textarea class="input" placeholder="Your review"></textarea>
+													<textarea class="input" name ="input" id ="input" placeholder="Your review"></textarea>
 												</div>
 												<div class="form-group">
 													<div class="input-rating">
 														<strong class="text-uppercase">Your Rating: </strong>
-														<div class="stars">
+														<div class="stars" name = "rate" >
+															
 															<input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
 															<input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
 															<input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
@@ -74,7 +77,7 @@
 														</div>
 													</div>
 												</div>
-												<button class="primary-btn">Submit</button>
+												<input name="submit" id="submit" class="btn btn-primary" type="button" value="Submit">
 											</form>
 										</div>
 									</div>
