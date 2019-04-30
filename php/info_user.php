@@ -1,14 +1,14 @@
-<?php 
+<?php
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
+$conn = connectDB();
+$sql    = "SELECT * FROM account WHERE accID='1'";
+$ket_qua = mysqli_query($conn,$sql);
+$row = mysqli_fetch_array($ket_qua);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-?>
 <head>
 <title>Thông tin cá nhân</title>
 <meta charset="utf-8">
@@ -47,8 +47,8 @@ header("Pragma: no-cache");
 							<div class="shipping" val="0">
 								<div class="list-group">
 									<a class="list-group-item list-group-item-action list-group-item-light active" id="info-button" style="cursor: pointer">Thông tin tài khoản</a>
-  									<a class="list-group-item list-group-item-action list-group-item-light" id="edit-button" style="cursor: pointer">Chỉnh sửa thông tin</a>
-  									<a class="list-group-item list-group-item-action list-group-item-light" id="passwd-button" style="cursor: pointer">Đổi mật khẩu</a>
+  									<a class="list-group-item list-group-item-action list-group-item-light" id="edit-button" style="cursor: pointer" href='updateUser.php'>Chỉnh sửa thông tin</a>
+  									<a class="list-group-item list-group-item-action list-group-item-light" id="passwd-button" style="cursor: pointer" href='updatePass.php'>Đổi mật khẩu</a>
 								</div>
 						
 						</div>
@@ -62,51 +62,13 @@ header("Pragma: no-cache");
 								<ul class="cart_extra_total_list">
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Tên</div>
-										<div class="cart_extra_total_value ml-auto">Trần Hữu Trí</div>
+										<div class="cart_extra_total_value ml-auto"><?php  echo  $row['name'] ; ?></div>
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Username</div>
-										<div class="cart_extra_total_value ml-auto">tritranhuu</div>
+										<div class="cart_extra_total_value ml-auto"><?php  echo  $row['username'] ; ?></div>
 									</li>
 								</ul>
-							</div>
-							<div class="acc-edit" style="position: absolute; visibility: hidden;">
-								<div class="cart_extra_title">Chỉnh sửa thông tin</div><hr><br/>
-								<form action="#" id="checkout_form" class="checkout_form">
-									<div>
-										<input type="text" id="checkout_name" name="name" placeholder="Tên" class="checkout_input" required="required">
-									</div>
-									<div>
-										<input type="text" id="checkout_address" name="address" class="checkout_input" placeholder="Địa chỉ" required="required">
-									</div>
-									<div>
-										<input type="phone" id="checkout_phone" name="phone" class="checkout_input" placeholder="Số điện thoại" required="required">
-									</div>
-									<div>
-										<select name="checkout_province" id="checkout_province" class="dropdown_item_select checkout_input" require="required">
-											<option value="" disabled selected>Giới tính</option>
-											<option value="M">Nam</option>
-											<option value="F">Nữ</option>
-											<option value="O">Khác</option>
-										</select>
-									</div>
-								</form>
-								<div class="checkout_button trans_200" name="update"><a href="info_user.php">Cập nhật</a></div>	
-							</div>
-							<div class="acc-pass" style="position: absolute; visibility: hidden;">
-								<div class="cart_extra_title">Đổi mật khẩu</div><hr><br/>
-								<form action="#" id="checkout_form" class="checkout_form">
-									<div>
-										<input type="password" id="checkout_name" name="oldpass" placeholder="Mật khẩu cũ" class="checkout_input" required="required">
-									</div>
-									<div>
-										<input type="password" id="checkout_address" name="newpass1" class="checkout_input" placeholder="Mật khẩu mới" required="required">
-									</div>
-									<div>
-										<input type="password" id="checkout_address" name="newpass2" class="checkout_input" placeholder="Nhập lại mật khẩu mới" required="required">
-									</div>
-								</form>
-								<div class="checkout_button trans_200" name="update"><a href="info_user.php">Cập nhật</a></div>	
 							</div>
 						</div>
 						</div>
@@ -115,58 +77,13 @@ header("Pragma: no-cache");
 				</div>
 			</div>
 		</div>
-	<?php include("header.php"); ?>
+<?php include("header.php"); ?>
  
 <?php
 	
 ?>
 
 <script type="text/javascript">
-
-function isEmptyOrSpaces(str){
-    return str === null || str.match(/^ *$/) !== null;
-}
-
-$('.alo').on("click", event =>{
-	var name = $('input[name=lname]').val() + ' ' + $('input[name=fname]').val();
-	var username = $('input[name=username]').val();
-	var address = $('input[name=address]').val();
-	var phone = $('select[name=phone]').val();
-	var pass = $('input[name=password]').val();
-	var pass1 = $('input[name=new_password]').val();
-	var pass2 = $('input[name=confirm_password]').val();
-	if(pass1===pass2){
-		if(isEmptyOrSpaces(name)|isEmptyOrSpaces(username)|isEmptyOrSpaces(email)|isEmptyOrSpaces(pass1)){
-    		alert("Vui lòng nhập đầy đủ thông tin");
-		}
-		else{
-			var formData = {
-				'update' : 'update',
-            	'name' : name,
-            	'username' : username,
-            	'address' : address,
-            	'pass' : pass1,
-            	'phone' : phone,
-        	};
-        	$.ajax({
-            	type        : 'POST', 
-            	url         : '../controller/modifyAccount.php', 
-            	data        : formData, 
-            	dataType    : 'application/json', 
-            	encode      : true,
-        		success 	:function(data){
-        			alert("Bạn đã cập nhật thông tin thành công");
-        		},
-        		error		:function(data){
-	        		alert("Đã có lỗi, xin vui lòng thử lại");
-        		}
-
-        	})
-
-		}	
-	}
-	
-})
 
 
 $("#info-button").on("click", event =>{
@@ -200,3 +117,6 @@ $('#passwd-button').on("click", event =>{
 })
 
 </script>
+
+
+
