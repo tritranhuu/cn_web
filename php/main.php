@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
 <head>
 <title>Little Closet</title>
 <meta charset="utf-8">
@@ -13,57 +18,77 @@
 <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="../styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
-</head>
-<?php include("header.php");?>
-
-<?php
-function printProduct($id, $name, $price){
-?>
-						<div class="product">
-							<div class="product_image"><img src="../images/product_1.jpg" alt=""></div>
-							<div class="product_content">
-								<div class="product_info d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div>
-											<div class="product_name"><a href="product.html"><?php echo $name;?></a></div>
-											<div class="product_category">In <a href="category.html">Category</a></div>
-										</div>
-									</div>
-									<div class="ml-auto text-right">
-										<div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-										<div class="product_price text-right"><?php echo $price;?></div>
-									</div>
-								</div>
-								<div class="product_buttons">
-									<div class="text-right d-flex flex-row align-items-start justify-content-start">
-										<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-											<div><div><img src="../images/heart_2.svg" class="svg" alt=""><div>+</div></div></div>
-										</div>
-										<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center" onclick=addToCart(1)>
-											<div><div><img src="../images/cart.svg" class="svg" alt=""><div>+</div></div></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-<?php
-}
+<link rel="stylesheet" type="text/css" href="../styles/style.css">
+<?php 
+include("../database/connectDB.php");
+include("../database/dbCart.php"); 
 ?>
 
+<?php require("header.php");?>
+<?php require("slide.php");?>
+<?php
 
+  require("../database/getProduct.php");
+  require("popular.php");
+  require("product_box.php");
+  
+
+  $conn = connectDB();
+  $arr =  getProduct($conn);
+  echo'
+  <div class="products">
+  <div class="container">';
+  echo "<div class=\"row products_row\">";
+    for ($i = 0 ; $i < 12; $i++){
+        printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
+  }
+?>
+</div>
+          <div class="row load_more_row">
+                        <div class="col">
+                            <div class="button load_more ml-auto mr-auto" id="loadMore"><a href="#">load more</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<?php require("feature.php");?>
+</div>
+</div>
+<?php require("footer.php");?>
+</div>
+</div>
+</div>
+
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script>
-	function addToCart(id) {
-		
-		if (localStorage[id]){
-  			localStorage[id] = Number(localStorage[id]) + 1;
-		} else {
-  			localStorage[id] = 1;
-		}
-		
-	}
+$(document).ready(
+  $(function () {
+    $("div.product").slice(0, 10).show();
+    $("#loadMore").on('click', function (e) {
+        e.preventDefault();
+        $("div.product:hidden").slice(0, 6).slideDown();
+        if ($("div.product:hidden").length == 0) {
+            $("#load").fadeOut('slow');
+        }
+    });
+  })
+);
+
+
 </script>
 
-<?php
-	printProduct(55,"Ao 1", "200000")
-?>
+<script src="../styles/bootstrap-4.1.2/popper.js"></script>
+<script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+<script src="../plugins/greensock/TweenMax.min.js"></script>
+<script src="../plugins/greensock/TimelineMax.min.js"></script>
+<script src="../plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="../plugins/greensock/animation.gsap.min.js"></script>
+<script src="../plugins/greensock/ScrollToPlugin.min.js"></script>
+
+<script src="../plugins/easing/easing.js"></script>
+<script src="../plugins/progressbar/progressbar.min.js"></script>
+<script src="../plugins/parallax-js-master/parallax.min.js"></script>
+<script src="../js/custom.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <?php
-    function connectDB(){
+	function connectDB(){
         if(!defined('DB_SERVER'))
         define("DB_SERVER", "localhost:3306");
         if(!defined("DB_USER"))
