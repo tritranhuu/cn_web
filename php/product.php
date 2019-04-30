@@ -43,7 +43,7 @@ include("../database/dbCart.php");
 				</div>
 			</div>
 </div>
-<div class="product" id='<?php echo $_GET['proID'];?>'>
+<div class="product" id="<?php echo $_SESSION['product']['proID'];?>"">
 			<div class="container">
 				<div class="row">
 					
@@ -260,6 +260,7 @@ include("../database/dbCart.php");
 			var rating =  $("input[name='rating']:checked").val();
 			console.log(input);
 			console.log(rating);
+			console.log(proID);
 			var data ={
 				'input':input,
 				'rating' :rating,
@@ -271,7 +272,7 @@ include("../database/dbCart.php");
         url         : '../database/insertRate.php', 
 				data        : data,
 				success:function(){
-					console.log('ok');
+					window.location.href ="../controller/product_controller.php?action=index&product="+proID;
         }
 			})
 
