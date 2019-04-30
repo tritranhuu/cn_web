@@ -107,9 +107,10 @@
             $urlRes = mysqli_fetch_array(mysqli_query($conn, $urlQuery));
             $urlQuery2 = 'select proName from product where proID='.$res['proID'].' limit 1';
             $urlRes2 = mysqli_fetch_array(mysqli_query($conn, $urlQuery2));
-            $urlQuery2 = 'select point from rate_product where proID='.$res['proID'].' and '.'accID='.$res['accID'];
-            $urlRes2 = mysqli_fetch_array(mysqli_query($conn, $urlQuery2));
+            $urlQuery3 = 'select point from rate_product where proID='.$res['proID'].' and '.'accID='.$res['accID'];
+            $urlRes3 = mysqli_fetch_array(mysqli_query($conn, $urlQuery3));
             $item = array(
+                
                 'proName' => $urlRes2['proName'],
                 'content' => $res['content'],
                 'created' => $res['created'],
