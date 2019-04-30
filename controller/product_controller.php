@@ -9,10 +9,12 @@ session_start();
         $proImgae = getImageProduct($conn,$data['product']);
         $proOpt = getOptionProduct($conn,$data['product']);
         $proComment = getCommentProduct($conn,$data['product']);
+        $procmt = getCmtandRate($conn,$data['product']);
         $_SESSION['product'] = $pro;
         $_SESSION['product_image'] = $proImgae;
         $_SESSION['product_comment'] = $proComment;
         $_SESSION['product_option'] = $proOpt;
+        $_SESSION['CmtandRate'] = $procmt;
         header('Location:../php/product.php');
     }
     function toCartProduct(){

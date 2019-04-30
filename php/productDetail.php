@@ -8,7 +8,7 @@
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
-			<div class="row">
+			
 				<!--  Product Details -->
 				<div class="product product-details clearfix">
 					
@@ -17,7 +17,7 @@
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab3">Details</a></li>
-								<li><a data-toggle="tab" href="#tab2">Reviews (3)</a></li>
+								<li><a data-toggle="tab" href="#tab2">Reviews </a></li>
 							</ul>
 							<div class="tab-content">
 								<div id="tab1" class="tab-pane fade in active">
@@ -55,7 +55,7 @@
 											</div>
 										</div>
                                         <br/>
-										<div class="col-md-6 col-lg-6 ">
+										<div class="col-md-6 col-lg-6 mycmt ">
 											<h4 class="text-uppercase">Write Your Review</h4>
 											<p>Your email address will not be published.</p>
 											<form class="review-form">

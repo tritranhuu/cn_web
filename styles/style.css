@@ -270,8 +270,8 @@ textarea.input {
 \*----------------------------*/
 
 .section {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .section-grey {
@@ -1078,7 +1078,7 @@ textarea.input {
 
 .product.product-widget .product-body {
     padding-left: 75px;
-    padding-top: 10px;
+    padding-top: 0px;
     min-height: 60px;
 }
 
@@ -1378,10 +1378,10 @@ textarea.input {
 }
 
 .product.product-details .product-options {
-    padding-top: 30px;
+    padding-top: 0px;
     margin-bottom: 15px;
     border-top: 1px solid #DADADA;
-    margin-top: 15px;
+    margin-top: 0px;
 }
 
 .product-options .size-option {
