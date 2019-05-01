@@ -76,6 +76,9 @@
 											</div>
 										</div>
                                         <br/>
+<?php
+if(isset($_SESSION['accID'])){
+?>
 										<div class="col-md-6 col-lg-6 mycmt ">
 											<h4 class="text-uppercase">Write Your Review</h4>
 											<p>Your email address will not be published.</p>
@@ -99,6 +102,10 @@
 												<input name="submit" id="submit" class="btn btn-primary" type="button" value="Submit">
 											</form>
 										</div>
+<?php	
+}
+?>
+
 									</div>
 
 
