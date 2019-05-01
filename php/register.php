@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (isset($_SESSION['accID']))
+{
+    header('Location: index.php');
+}
+?>
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
@@ -17,7 +24,8 @@ include("../database/dbCart.php");
 		<link rel="stylesheet" href="../plugins/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 		<link rel="stylesheet" href="../styles/sign_up.css">
 		<link rel="stylesheet" href="../styles/responsive.css">
-		<script src="../js/jquery-3.2.1.min.js"></script>	
+		<script src="../js/jquery-3.2.1.min.js"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
 	</head>
 <?php include("header.php");?>
 	<body>
@@ -81,6 +89,16 @@ function isEmptyOrSpaces(str){
     return str === null || str.match(/^ *$/) !== null;
 }
 
+function resetInput(){
+	$('input[name=lname]').val("")
+	$('input[name=fname]').val("")
+	$('input[name=username]').val("");
+	$('input[name=email]').val("");
+	$('select[name=gender]').val("");
+	$('input[name=password]').val("");
+	$('input[name=password_con]').val("");
+}
+
 $('.done').on("click", event =>{
 	var name = $('input[name=lname]').val() + ' ' + $('input[name=fname]').val();
 	var username = $('input[name=username]').val();
@@ -107,7 +125,20 @@ $('.done').on("click", event =>{
             	data        : formData,
             	encode      : true,
         		success 	:function(data){
-        			alert("Đăng ký thành công");
+        			if(data.replace(/^\s+|\s+$/g, '') == "username"){
+        				swal("Tên đăng nhập đã bị trùng");
+        				$('input[name=username]').val("");
+        				$('input[name=password_con]').val("");
+        			}
+        			else if(data.replace(/^\s+|\s+$/g, '') == "email"){
+        				swal("Địa chỉ email đã được đăng kí");
+        				$('input[name=email]').val("");
+        				$('input[name=password_con]').val("");
+        			}
+        			else{
+        				swal("Đăng kí thành công");
+        				resetInput();
+        			}
         		},
         		error		:function(data){
 	        		alert("Đã có lỗi, xin vui lòng thử lại");

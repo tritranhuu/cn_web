@@ -15,7 +15,6 @@
 
     function getOptionIdByProIDSizeColor($proID, $size, $color, $conn){
         $query = "select optID from product_option where proID=".$proID." and size='".$size."' and color='".$color."'";
-        echo $query;
         $sql = mysqli_query($conn, $query);
         if(mysqli_num_rows($sql)>0){
             $res = mysqli_fetch_array($sql);

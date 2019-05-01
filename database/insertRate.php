@@ -5,7 +5,7 @@
         if(isset($_POST['input'])){
         $dat = '30-04-2019';
         $content =$_POST['input'];
-        $accID = 2;
+        $accID = $_SESSION['accID'];
         $proID = $_SESSION['product']['proID'];
         $rate = $_POST['rating'];
         $conn = connectDB();

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['accID']))
+{
+    header('Location: index.php');
+}
+?>
+
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
@@ -177,7 +185,7 @@ header("Pragma: no-cache");
 
 <?php
 	$conn = connectDB();
-    $items = getCartByAccId("1", $conn);
+    $items = getCartByAccId($_SESSION['accID'], $conn);
     printCart($items);
 	include("footer.php");
 ?>

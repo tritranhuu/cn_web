@@ -26,6 +26,7 @@ include("../database/dbCart.php");
 <link rel="stylesheet" type="text/css" href="../styles/category.css">
 <link rel="stylesheet" type="text/css" href="../styles/product_responsive.css">
 <link rel="stylesheet" type="text/css" href="../styles/style.css">
+<script src="../js/jquery-3.2.1.min.js"></script>
 </head>
 
 <?php include("header.php");?>
@@ -43,7 +44,7 @@ include("../database/dbCart.php");
 				</div>
 			</div>
 </div>
-<div class="product" id="<?php echo $_SESSION['product']['proID'];?>"">
+<div class="product" id="<?php echo $_SESSION['product']['proID'];?>">
 			<div class="container">
 				<div class="row">
 					
@@ -54,7 +55,7 @@ include("../database/dbCart.php");
 								<ul class="slides">
 										<?php
 										foreach($_SESSION['product_image'] as  $i){
-											echo '<li><img src="../'.$i.'" /></li>';
+											echo '<li><img src="..'.$i.'" /></li>';
 										}
 										?>
 								</ul>
@@ -64,7 +65,7 @@ include("../database/dbCart.php");
 									<ul class="slides">
 									<?php
 											foreach($_SESSION['product_image'] as  $i){
-											echo '<li><div><img src="../'.$i.'" /></div></li>';
+											echo '<li><div><img src="..'.$i.'" /></div></li>';
 										}
 										?>
 									</ul>
@@ -137,10 +138,10 @@ include("../database/dbCart.php");
 							</div>
 							<br/>
 				
-							<div class="text-center" id="addCart">
+							<div class="product_buttons" id="addCart">
 								<div class="text-right d-flex flex-row align-items-start justify-content-start">
 									<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
-										<div><div><input name="" id="" class="btn btn-primary bg-danger text-center" type="submit" value="Thêm vào giỏ hàng"></div></div>
+										<div><div><img src="../images/cart.svg" class="svg" alt=""><div>+</div></div></div>
 									</div>
 								</div>
 							</div>
@@ -150,34 +151,6 @@ include("../database/dbCart.php");
 				</div>
 			</div>
 		</div>
-<?php require('productDetail.php');
-		printDetail($_SESSION['product']['description'],$_SESSION['product']['material'],$_SESSION['CmtandRate']);
-?>
-<?php
- require("../database/getProduct.php");
-  require("product_box.php");
-  $conn = connectDB();
-  $arr =  getProduct($conn);
-  echo'<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				<!-- section title -->
-				<div class="col-md-12">
-					<div class="section-title">
-						<h2 class="title">Picked For You</h2>
-					</div>
-				</div>
-	';
-	
-    for ($i = 0 ; $i < 4; $i++){
-			
-        printproduct3($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
-  }
-  
-  echo "</div></div></div></div>";
-?>
 		<div class="boxes">
 			<div class="container">
 				<div class="row">
@@ -202,6 +175,37 @@ include("../database/dbCart.php");
 				</div>
 			</div>
 		</div>
+<?php require('./viewFunction/productDetail.php');
+		printDetail($_SESSION['product']['description'],$_SESSION['product']['material'],$_SESSION['CmtandRate']);
+?>
+
+		
+<?php
+ require("../database/getProduct.php");
+  require("./viewFunction/product_box.php");
+  $conn = connectDB();
+  $arr =  getProduct($conn);
+  echo'<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!-- section title -->
+				<div class="col-md-12">
+					<div class="section-title">
+						<h2 class="title">Picked For You</h2>
+					</div>
+				</div>
+	';
+	
+    for ($i = 0 ; $i < 4; $i++){
+			
+        printproduct3($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName']);
+  }
+  
+  echo "</div></div></div></div>";
+?>
+		
 </div>
 
 
@@ -251,7 +255,7 @@ include("../database/dbCart.php");
 </div>
   </div>
  </div>
- <script src="../js/jquery-3.2.1.min.js"></script>
+
  <script language="javascript">
 
 	$('#submit').on('click',event =>{
@@ -290,9 +294,11 @@ include("../database/dbCart.php");
             type        : 'POST', 
             url         : '../controller/modifyCart.php', 
             data        : data, 
-        	success:function(){
-        		var cartItems = parseInt($(".cart a > div > div").text());
-        		$(".cart a > div > div").text(cartItems +1)
+        	success:function(data){
+        		if (data.replace(/^\s+|\s+$/g, '') == "new"){
+        			var cartItems = parseInt($(".cart a > div > div").text());
+        			$(".cart a > div > div").text(cartItems +1)	
+        		}
         	},
         	error:function(){
 				alert("Error")
@@ -309,7 +315,7 @@ include("../database/dbCart.php");
 
 <script src="../js/bootstrap.min.js"></script>
 <script src="../styles/bootstrap-4.1.2/popper.js"></script>
-<script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+
 <script src="../plugins/greensock/TweenMax.min.js"></script>
 <script src="../plugins/greensock/TimelineMax.min.js"></script>
 <script src="../plugins/scrollmagic/ScrollMagic.min.js"></script>

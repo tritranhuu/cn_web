@@ -21,6 +21,7 @@ header("Pragma: no-cache");
 <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="../styles/category.css">
 <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
+<script src="../js/jquery-3.2.1.min.js"></script>
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
@@ -45,7 +46,7 @@ include("../database/dbCart.php");
 
 <?php
 	require("../database/getProduct.php");
-	require("product_box.php");
+	require("./viewFunction/product_box.php");
 	$conn = connectDB();
 	$arr =  $_SESSION[$_SESSION['type']];
 	
@@ -54,7 +55,47 @@ include("../database/dbCart.php");
 	<div class="container">
 	<div class="col">
 	';
-	require('filter.php');
+?>
+<div class="row products_bar_row">
+					<div class="col">
+						<div class="products_bar d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-start justify-content-center">
+							<div class="products_bar_links">
+								<ul class="d-flex flex-row align-items-start justify-content-start">
+									<li><a href="#">All</a></li>
+									<li><a href="#">Hot Products</a></li>
+									<li class="active"><a href="#">New Products</a></li>
+									<li><a href="#">Sale Products</a></li>
+								</ul>
+							</div>
+							<div class="products_bar_side d-flex flex-row align-items-center justify-content-start ml-lg-auto">
+								<div class="products_dropdown product_dropdown_sorting">
+									<div class="isotope_sorting_text"><span>Default Sorting</span><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+									<ul>
+										<li class="item_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'>Default</li>
+										<li class="item_sorting_btn" data-isotope-option='{ "sortBy": "price" }'>Price</li>
+										<li class="item_sorting_btn" data-isotope-option='{ "sortBy": "name" }'>Name</li>
+									</ul>
+								</div>
+								<div class="product_view d-flex flex-row align-items-center justify-content-start">
+									<div class="view_item active"><img src="../images/view_1.png" alt=""></div>
+									<div class="view_item"><img src="../images/view_2.png" alt=""></div>
+									<div class="view_item"><img src="../images/view_3.png" alt=""></div>
+								</div>
+								<div class="products_dropdown text-right product_dropdown_filter">
+									<div class="isotope_filter_text"><span>Filter</span><i class="fa fa-caret-down" aria-hidden="true"></i></div>
+									<ul>
+										<li class="item_filter_btn" data-filter="*">All</li>
+										<li class="item_filter_btn" data-filter=".hot">Hot</li>
+										<li class="item_filter_btn" data-filter=".new">New</li>
+										<li class="item_filter_btn" data-filter=".sale">Sale</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+           </div>
+<?php
 	echo '<div class="row products_row products_container grid">';
     for ($i = 12*($_SESSION['page']-1),$t=0 ;$i < $_SESSION['max'] ; $i++,$t++){
 		if($t==12 ) break;
@@ -165,7 +206,7 @@ include("../database/dbCart.php");
 
 });
 </script>
-<script src="../js/jquery-3.2.1.min.js"></script>
+
 <script src="../styles/bootstrap-4.1.2/popper.js"></script>
 <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
 <script src="../plugins/greensock/TweenMax.min.js"></script>

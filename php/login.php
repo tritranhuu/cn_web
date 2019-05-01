@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['accID']))
+{
+    header('Location: index.php');
+}
+?>
+
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
@@ -6,7 +14,7 @@ include("../database/dbCart.php");
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Đăng ký</title>
+		<title>Đăng nhập</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="Little Closet template">
@@ -28,7 +36,7 @@ include("../database/dbCart.php");
 				<div class="image-holder">
 					<img src="../images/sign_up/registration-form-1.jpg" alt="">
 				</div>
-				<form id="login" action="" method="POST" role="form">
+				<form>
 					<h3>sign in</h3>
 					<div class="form-wrapper">
 						<input type="text" placeholder="Tên Đăng Nhập" class="form-control" name="username" required="required">
@@ -38,7 +46,7 @@ include("../database/dbCart.php");
 						<input type="password" placeholder="Mật khẩu" class="form-control" name="password" required="required">
 						<i class="zmdi zmdi-lock"></i>
 					</div>
-					<button type="submit" class="done">Đăng nhập
+					<button type="button" class="done">Đăng nhập
 						<i class="zmdi zmdi-arrow-right"></i>
 					</button>
 					<div style="padding-top:10px; text-align:center; "><a href="register.php" style="color:#333">Quên mật khẩu?</a></div>
@@ -61,7 +69,7 @@ function isEmptyOrSpaces(str){
     return 0;
 }
 
-$('#login').on("submit", event =>{
+$('.done').on("click", event =>{
 	var username = $('input[name=username]').val();
 	var pass = $('input[name=password]').val();
 	if(isEmptyOrSpaces(username)|isEmptyOrSpaces(pass)){
@@ -78,10 +86,17 @@ $('#login').on("submit", event =>{
             url         : '../controller/modifyAccount.php', 
             data        : formData, 
         	success:function(data){
-        		swal("helo");
+        		if(parseInt(data)>0){
+        			window.location.href = 'index.php';
+        		}
+        		else{
+        			swal("Thông tin sai, vui lòng nhập lại");
+        			$('input[name=username]').val("");
+        			$('input[name=password]').val("");
+        		}
         	},
         	error:function(data){
-				swal("Error")
+				swal("Lỗi hệ thống, vui lòng thử lại sau");
 			}
 
         })

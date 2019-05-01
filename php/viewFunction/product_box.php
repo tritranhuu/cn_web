@@ -4,7 +4,7 @@
 
     <div class="col-xl-4 col-md-6 grid-item ">	
                             <div class="product">	
-                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><img src=<?php echo "../".$url;?> alt=""></a></div>	
+                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&product='.$proID.'"'; ?>><img src='<?php echo "..".$url;?>' style='border-top: 1px solid #dbdbdb;border-right: 1px solid #dbdbdb;border-left: 1px solid #dbdbdb;'></a></div>	
                                 <div class="product_content">	
                                     <div class="product_info d-flex flex-row align-items-start justify-content-start">	
                                         <div>	

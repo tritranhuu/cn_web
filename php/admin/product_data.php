@@ -99,8 +99,8 @@ include("./controller/controllerData.php");
                 </a>
                 <ul class="sub">
                     <li><a href="#">Tài khoản</a></li>
-                    <li><a href="product_data.php">Sản phẩm</a></li>
-                    <li class="active"><a href="order_data.php">Đơn hàng</a></li>
+                    <li class="active"><a href="product_data.php">Sản phẩm</a></li>
+                    <li><a href="order_data.php">Đơn hàng</a></li>
                 </ul>
             </li>
             <li class="sub-menu">

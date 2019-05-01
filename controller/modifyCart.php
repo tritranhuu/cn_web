@@ -6,23 +6,23 @@ include("../database/dbProduct.php");
 <?php
     session_start();
     $conn = connectDB();
+    $accID = $_SESSION['accID'];
     if(isset($_POST['dec'])){
         $id = $_POST['dec'];
-        decCartItem($id, $conn);
+        decCartItem($accID, $id, $conn);
     }
     else if(isset($_POST['inc'])){
         $id = $_POST['inc'];
-        incCartItem($id, $conn);
+        incCartItem($accID, $id, $conn);
     }
     else if(isset($_POST['del'])){
         $id = $_POST['del'];
-        delCartItem($id, $conn);
+        delCartItem($accID, $id, $conn);
     }
     else if(isset($_POST['drop'])){
-        delCart(1, $conn);
+        delCart($accID, $conn);
     }
     else if(isset($_POST['add'])){
-        $accID = $_POST['accID'];
         $proID = $_POST['proID'];
         $size = $_POST['size'];
         $color = $_POST['color'];

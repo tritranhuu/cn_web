@@ -26,18 +26,18 @@
         return $items;       
     }
 
-    function decCartItem($optID, $conn){
-        $query="update cart set quantity=quantity-1 where accID='1' and optID=".$optID;
+    function decCartItem($accID, $optID, $conn){
+        $query="update cart set quantity=quantity-1 where accID='".$accID."' and optID=".$optID;
         mysqli_query($conn, $query);
     }
 
-    function incCartItem($optID, $conn){
-        $query="update cart set quantity=quantity+1 where accID='1' and optID=".$optID;
+    function incCartItem($accID, $optID, $conn){
+        $query="update cart set quantity=quantity+1 where accID='".$accID."' and optID=".$optID;
         mysqli_query($conn, $query);
     }
 
-    function delCartItem($optID, $conn){
-        $query="delete from cart where accID='1' and optID=".$optID;
+    function delCartItem($accID, $optID, $conn){
+        $query="delete from cart where accID='".$accID."' and optID=".$optID;
         mysqli_query($conn, $query);
     }
 
@@ -47,15 +47,16 @@
     }
 
     function addToCart($accID, $optID, $conn){
-        $check="select from cart where accID=".$accID." and optID=".$optID;
+        $check="select * from cart where accID=".$accID." and optID=".$optID;
         $res=mysqli_query($conn, $check);
-
         if(mysqli_num_rows($res)==0){
             $query="insert into cart (accID, optID, quantity) values (".$accID.", ".$optID.", 1)";
-            mysqli_query($conn, $query);    
+            mysqli_query($conn, $query);
+            echo "new";    
         }
         else{
-            incCartItem($optID, $conn);
+            incCartItem($accID, $optID, $conn);
+            echo "inc";
         }
     }
     function getCartItemNum($accID){

@@ -45,7 +45,7 @@
 		<div class="header_overlay"></div>
 		<div class="header_content d-flex flex-row align-items-center justify-content-start">
 			<div class="logo">
-				<a href="#">
+				<a href="./">
 					<div class="d-flex flex-row align-items-center justify-content-start">
 						<div><img src="../images/logo_1.png" alt=""></div>
 						<div>Little Closet</div>
@@ -71,8 +71,83 @@
 				</div>
 				
 				
-				
-				<!-- User -->
+<?php
+	session_start();
+	if(isset($_SESSION['admin'])){
+?>
+	<!-- User -->
+				<div class="user dropdown" ><a class="">
+					<div><img src="../images/user.svg"><div>&#10004;</div></div>
+					<div class="account-form dropdown-content">
+  					<div class="form-account">
+      						
+      						<p>Xin chào<?php echo " ".$_SESSION['name']?></p>
+      						<p class="message"><a href="#"></a></p>
+      						<button onclick="location.href='./admin/';">Quản lý</button>
+      						<button onclick="location.href='info_user.php';">Thông tin</button>
+      						
+      						<button id="logout">Đăng xuất</button>
+    				<script type="text/javascript">
+    					$("#logout").on("click", event=>{
+        					$.ajax({
+            					type        : 'POST', 
+            					url         : '../controller/logoutHandle.php', 
+            					data        : "logout=1",
+        						success:function(data){
+        							window.location.href = 'index.php';				
+        						},
+        						error:function(data){
+									swal("Lỗi hệ thống, vui lòng thử lại sau");
+								}
+        					})
+    					})
+    				</script>
+  					</div>
+					</div>
+				</a></div>
+				<!-- Cart -->
+				<div class="cart"><a href="cart.php"><div><img class="svg" src="../images/cart.svg"><div><?php echo getCartItemNum($_SESSION['accID']);?></div></div></a></div>	
+<?php
+	}
+	else if(isset($_SESSION['accID'])){
+?>
+	<!-- User -->
+				<div class="user dropdown" ><a class="">
+					<div><img src="../images/user.svg"><div>&#10004;</div></div>
+					<div class="account-form dropdown-content">
+  					<div class="form-account">
+      						
+      						<p>Xin chào<?php echo " ".$_SESSION['name']?></p>
+      						<p class="message"><a href="#"></a></p>
+      						<button onclick="location.href='info_user.php';">Thông tin</button>
+      						
+      						<button id="logout">Đăng xuất</button>
+    				<script type="text/javascript">
+    					$("#logout").on("click", event=>{
+        					$.ajax({
+            					type        : 'POST', 
+            					url         : '../controller/logoutHandle.php', 
+            					data        : "logout=1",
+        						success:function(data){
+        							window.location.href = 'index.php';				
+        						},
+        						error:function(data){
+									swal("Lỗi hệ thống, vui lòng thử lại sau");
+								}
+        					})
+    					})
+    				</script>
+  					</div>
+					</div>
+				</a></div>
+				<!-- Cart -->
+				<div class="cart"><a href="cart.php"><div><img class="svg" src="../images/cart.svg"><div><?php echo getCartItemNum($_SESSION['accID']);?></div></div></a></div>
+
+<?php		
+	}
+	else{
+?>
+	<!-- User -->
 				<div class="user dropdown" ><a class="">
 					<div><img src="../images/user.svg"></div>
 					<div class="account-form dropdown-content">
@@ -87,8 +162,12 @@
   					</div>
 					</div>
 				</a></div>
-				<!-- Cart -->
-				<div class="cart"><a href="cart.php"><div><img class="svg" src="../images/cart.svg"><div><?php echo getCartItemNum('1');?></div></div></a></div>
+			
+<?php
+	}
+?>				
+				
+				
 				<!-- Phone -->
 				<div class="header_phone d-flex flex-row align-items-center justify-content-start">
 					<div><div><img src="../images/phone.svg"></div></div>
