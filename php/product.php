@@ -276,7 +276,7 @@ include("../database/dbCart.php");
         url         : '../database/insertRate.php', 
 				data        : data,
 				success:function(){
-					window.location.href ="../controller/product_controller.php?action=index&product="+proID;
+					window.location.href ="../controller/product_controller.php?action=index&page=1&product="+proID;
         }
 			})
 

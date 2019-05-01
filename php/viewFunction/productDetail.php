@@ -1,5 +1,9 @@
 <?php	
-    function printDetail($des,$mat,$arr){	    
+
+ 	
+    function printDetail($des,$mat,$arr){	
+	
+    
 ?>	
 <div class="section">
 		<!-- container -->
@@ -28,34 +32,50 @@
 									<div class="row">
 										<div class="col-md-4 col-lg-6">
 											<div class="product-reviews">
-                                                <?php
-                                                foreach ($arr as $i){
+												<?php
+												if(isset($_SESSION['pagecmt']))
+                                                for ( $i = ($_SESSION['pagecmt']-1)*4 ; $i<($_SESSION['pagecmt'])*4 && $i<sizeof($arr); $i++){
                                                 echo'<div class="single-review">
                                                 <div class="review-heading col-lg-12">
-                                                    <div><a href="#"><i class="fa fa-user-o"></i> '.$i['username'].'</a></div>
-                                                    <div><a href="#"><i class="fa fa-clock-o"></i> '.$i['created'].'</a></div>
+                                                    <div><a href="#"><i class="fa fa-user-o"></i> '.$arr[$i]['username'].'</a></div>
+                                                    <div><a href="#"><i class="fa fa-clock-o"></i> '.$arr[$i]['created'].'</a></div>
 													<div class="review-rating pull-right">';
-													for($t = 1 ; $t<=$i['point']; $t++)
+													for($t = 1 ; $t<=$arr[$i]['point']; $t++)
 														echo '<i class="fa fa-star"></i>';
-													for($t = $i['point']+1 ; $t<=5; $t++)
+													for($t = $arr[$i]['point']+1 ; $t<=5; $t++)
                                                         echo '<i class="fa fa-star-o empty"></i>';
                                                         
                                                     echo'</div>
                                                 </div>
                                                 <div class="review-body col-lg-12">
-                                                    <p>'.$i['content'].'</p>
+                                                    <p>'.$arr[$i]['content'].'</p>
                                                 </div>
                                             </div>
 											';
 												}
-                                                ?>
+												?>
+												 <br/> <br/>
+											<?php if( (sizeof($arr)/4)>=1){
+												echo '<ul class="reviews-pages">';
+												for($k =1;$k<=ceil(sizeof($arr)/4);$k++){
+												echo '
+												<li><a href="../controller/product_controller.php?action=index&page='.$k.'&product='.$_SESSION['product']['proID'].'">'.$k.'</a></li>';
+												}
+												echo'
+												<li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+												</ul>';
+												}
+												else{
+												
+														echo '<li class="active">1</li>';
+													
+												}
+												
+												?>
 												
 											</div>
 										</div>
                                         <br/>
-<?php
-if(isset($_SESSION['accID'])){
-?>
 										<div class="col-md-6 col-lg-6 mycmt ">
 											<h4 class="text-uppercase">Write Your Review</h4>
 											<p>Your email address will not be published.</p>
@@ -79,10 +99,6 @@ if(isset($_SESSION['accID'])){
 												<input name="submit" id="submit" class="btn btn-primary" type="button" value="Submit">
 											</form>
 										</div>
-<?php
-}
-?>
-										
 									</div>
 
 
