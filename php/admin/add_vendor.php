@@ -120,51 +120,18 @@ include("./controller/controllerAdd.php");
             <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Thêm mặt hàng mới
+                            Thêm nhà phân phối
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
                                 
                                 <div class="form-group">
-                                    <label for="proName">Tên mặt hàng</label>
-                                    <input type="text" class="form-control" id="proName" name="proName">
-                                </div>
-<?php printCompanyList();?>                    
-                                <div class="form-group">
-                                    <label for="type">Loại</label>
-                                    <input type="text" class="form-control" id="type" name="type">
-                                </div>
-                                <div class="form-group">
-                                    <label for="material">Vật liệu</label>
-                                    <input type="text" class="form-control" id="material" name="material">
-                                </div>
-                                <div class="form-group">
-                                    <label for="gender">Loại</label>
-                                        <select class="form-control m-bot15" id="gender" name="gender">
-                                            <option value="M">Nam</option>
-                                            <option value="F">Nữ</option>
-                                            <option value="K">Trẻ Em</option>
-                                        </select>
-                                </div>                                
-                    
-                                <div class="form-group">
-                                    <label for="import-price">Giá nhập</label>
-                                    <input type="number" class="form-control" id="import-price" name="import_price">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="price">Giá bán</label>
-                                    <input type="number" class="form-control" id="price" name="price">
-                                </div>
-
-                                <div class="form-group">
-                                <label for="description">Mô tả</label>
-                                    <textarea class="form-control" rows="6" id="description" name="description"></textarea>
-                                </div>                                
-                                
+                                    <label for="vendor">Tên nhà phân phối</label>
+                                    <input type="text" class="form-control" id="vendor" name="vendor">
+                                </div>                                                  
                                 
                         
-                            <button class="btn btn-info" id="addProduct">Submit</button>
+                            <button class="btn btn-info" id="addVendor">Submit</button>
                             </div>
 
                         </div>
@@ -175,68 +142,34 @@ include("./controller/controllerAdd.php");
 </div></div></section></section></section>
 
 
-<div class="modal fade" id="imgModal" role="dialog" aria-labelledby="sizeGuide" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="sizeTitle">Thêm ảnh</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body">
-        
-              <div class="form-group">
-                <label for="img">Ảnh sản phẩm</label>
-                <span class="btn btn-default btn-file">
-                        <input id="img" name="img[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
-                </span>
-            </div>  
-            <button class="btn btn-info" id="addImage">Submit</button>
-                                
-        </div>
-      
-    </div>
-  </div>
-
-</div>
-
 <script type="text/javascript">
-$('#addProduct').on('click', event=>{
-    var proName = $('input[name=proName]').val();
-    var type = $('input[name=type]').val();
-    var price = $('input[name=price]').val();
-    var description = $('textarea[name=description]').val();
-    var material = $('input[name=material]').val();
-    var companyName = $('select[name=companyName]').val();
-    var gender = $('select[name=gender]').val();
-    var import_price = $('input[name=import_price]').val();
+$('#addVendor').on('click', event=>{
+    var vendor = $('input[name=vendor]').val();
     function isEmptyOrSpaces(str){
         return str === null;
     }
 
-    if(isEmptyOrSpaces(proName)|isEmptyOrSpaces(type)){
+    if(isEmptyOrSpaces(vendor)){
         alert("Xin vui lòng nhập đủ thông tin");
     }
     else{
         var formData = {
-            'addProduct' : 1,
-            'proName' : proName,
-            'type' : type,
-            'price' : price,
-            'description' : description,
-            'material' : material,
-            'companyName' : companyName,
-            'gender' : gender,
-            'import_price' : import_price,
+            'addVendor' : 1,
+            'vendor' : vendor
             
         };
         $.ajax({
             type        : 'POST', 
-            url         : './controller/addProduct.php', 
+            url         : './controller/addVendor.php', 
             data        : formData, 
             success:function(data){
-                $('#imgModal').modal('show');
+                if(data.replace(/^\s+|\s+$/g, '')=="duplicated"){
+                    alert("Tên nhà cung cấp đã tồn tại")
+                }
+                else{
+                    alert("Thêm thành công")
+                }
+                $('input[name=vendor]').val("");
             },
             error:function(data){
                 alert("Error");

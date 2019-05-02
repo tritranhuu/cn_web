@@ -15,9 +15,7 @@ if (isset($_FILES['img']) && !empty($_FILES['img'])) {
                 move_uploaded_file($_FILES["img"]["tmp_name"][$i], '../../../images/product/'.$_FILES["img"]["name"][$i]);
                 $new_name = $proID."_".$i.".png";
                 rename ('../../../images/product/'.$_FILES["img"]["name"][$i], '../../../images/product/'.$new_name);
-                // addImg($proID, '/../images/product/'.$new_name);
-                echo 'File successfully uploaded : ../../../images/product/'.'../../../images/product/'.$new_name.' ';
-
+                addImg($proID, '/../images/product/'.$new_name);
             }
         }
     }

@@ -2,6 +2,8 @@
 include("./controller/controllerData.php");
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +14,7 @@ include("./controller/controllerData.php");
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>Quản lí đơn hàng</title>
+    <title>Mặt hàng</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -27,6 +29,13 @@ include("./controller/controllerData.php");
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
+
+    <script src="js/jquery.js"></script>
+    <script src="bs3/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+    <script src="js/jquery.nicescroll.js"></script> 
 
 </head>
 
@@ -80,7 +89,7 @@ include("./controller/controllerData.php");
             <li>
                 <a href="index.php">
                     <i class="fa fa-dashboard"></i>
-                    <span>Thống kê</span>
+                    <span>Dashboard</span>
                 </a>
             </li>
             <li class="sub-menu">
@@ -89,9 +98,9 @@ include("./controller/controllerData.php");
                     <span>Dữ liệu</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="account_data.php">Tài khoản</a></li>
+                    <li class="active"><a href="account_data.php">Tài khoản</a></li>
                     <li><a href="product_data.php">Sản phẩm</a></li>
-                    <li class="active"><a href="order_data.php">Đơn hàng</a></li>
+                    <li><a href="order_data.php">Đơn hàng</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -127,7 +136,7 @@ include("./controller/controllerData.php");
                     <div class="panel-body">
                     <div class="adv-table">
 <?php 
-printOrderTableData();
+printAccountTableData();
 ?>         
                     </div>
                     </div>
@@ -148,12 +157,7 @@ printOrderTableData();
 
 
 <!--Core js-->
-<script src="js/jquery.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
+
 
 <!--dynamic table-->
 <script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>

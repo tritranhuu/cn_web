@@ -53,4 +53,17 @@ function addImg($proID, $url){
 	$sql = mysqli_query($conn, $query);
 }
 
+function addVendor($name){
+	$conn = connectDB();
+	$query_check = "select * from company where companyName='".$name."'";
+	$sql_check = mysqli_query($conn, $query_check);
+	if(mysqli_num_rows($sql_check)>0){
+		echo "duplicated";
+	}
+	else{
+		$query = "insert into company (companyName) values ('".$name."')";
+		mysqli_query($conn, $query);
+		echo "added";	
+	}
+}
 ?>

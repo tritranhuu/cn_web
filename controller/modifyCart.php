@@ -4,8 +4,9 @@ include("../database/dbCart.php");
 include("../database/dbProduct.php");
 ?>
 <?php
-    session_start();
-    $conn = connectDB();
+session_start();
+$conn = connectDB();
+if(isset($_SESSION['accID'])){
     $accID = $_SESSION['accID'];
     if(isset($_POST['dec'])){
         $id = $_POST['dec'];
@@ -29,4 +30,8 @@ include("../database/dbProduct.php");
         $optID = getOptionIdByProIDSizeColor($proID, $size, $color, $conn);
         addToCart($accID, $optID, $conn);
     }
+}
+else{
+    echo "no_login";
+}
 ?>

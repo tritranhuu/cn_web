@@ -59,7 +59,7 @@ include("./model/database.php");
 <?php
         $sql = getAllProduct();
         while($res = mysqli_fetch_array($sql)){
-            echo "<tr><td>".$res['proID']."</td><td>".$res['proName']."</td><td>".$res['companyName']."</td><td>".$res['import_price']."</td><td>".$res['price']."</td><td><div style='cursor: pointer' data-toggle='modal' data-target='#sizeModal' class='detail' proid='".$res['proID']."''>chi tiet</div></td></tr>";
+            echo "<tr><td>".$res['proID']."</td><td>".$res['proName']."</td><td>".$res['companyName']."</td><td>".$res['import_price']."</td><td>".$res['price']."</td><td><div style='cursor: pointer' data-toggle='modal' data-target='#sizeModal' class='detail' proid='".$res['proID']."''>Chi tiết</div></td></tr>";
         }
 ?>
                     </tbody>
@@ -100,6 +100,44 @@ include("./model/database.php");
 
     })
 </script> -->
+
+<?php 
+} 
+?>
+
+<?php
+    function printAccountTableData(){
+?>
+<table  class="display table table-bordered table-striped" id="dynamic-table">
+                    <thead>
+                    <tr>
+                        <th>Mã tài khoản</th>
+                        <th>Tên người dùng</th>
+                        <th>Email</th> 
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Admin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+<?php
+        $sql = getAllAccount();
+        while($res = mysqli_fetch_array($sql)){
+            echo "<tr><td>".$res['accID']."</td><td>".$res['name']."</td><td>".$res['email']."</td><td>".$res['address']."</td><td>".$res['phone']."</td><td>".$res['admin']."</td></tr>";
+        }
+?>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Mã tài khoản</th>
+                        <th>Tên người dùng</th>
+                        <th>Email</th> 
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Admin</th>
+                    </tr>
+                    </tfoot>
+                    </table>
 
 <?php 
 } 

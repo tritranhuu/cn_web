@@ -12,6 +12,7 @@
             $password = '12345';
             $conn = mysqli_connect($hostname, $username, $password,$dbname);
         }
+        mysqli_set_charset($conn,"utf8");
         return $conn;
     }
 
@@ -23,6 +24,7 @@
 
     function getAllProduct(){
         $conn = connectDB();
+
         $query = "select * from product join company where product.companyID = company.companyID";
         return mysqli_query($conn, $query);
     }
@@ -33,5 +35,40 @@
         return mysqli_query($conn, $query);
     }
 
+    function getAllAccount(){
+        $conn = connectDB();
+        $query = "select * from account";
+        return mysqli_query($conn, $query); 
+    }
     
+    function getOrderNum(){
+        $conn = connectDB();
+        $query = "select * from order_product";
+        $sql = mysqli_query($conn, $query);
+        return mysqli_num_rows($sql);
+    }
+    
+    function getAccountNum(){
+        $conn = connectDB();
+        $query = "select * from account";
+        $sql = mysqli_query($conn, $query);
+        return mysqli_num_rows($sql);
+    }
+
+
+    function getSoldNum(){
+        $conn = connectDB();
+        $query = "select sum(quantity) as sold from detail_order";
+        $sql = mysqli_query($conn, $query);
+        $res = mysqli_fetch_array($sql);
+        return $res['sold'];
+    }
+
+    function getIncome(){
+        $conn = connectDB();
+        $query = "select sum(total) as tol from order_product";
+        $sql = mysqli_query($conn, $query);
+        $res = mysqli_fetch_array($sql);
+        return $res['tol'];
+    }
 ?>

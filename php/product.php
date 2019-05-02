@@ -27,6 +27,7 @@ include("../database/dbCart.php");
 <link rel="stylesheet" type="text/css" href="../styles/product_responsive.css">
 <link rel="stylesheet" type="text/css" href="../styles/style.css">
 <script src="../js/jquery-3.2.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <?php include("header.php");?>
@@ -295,6 +296,9 @@ include("../database/dbCart.php");
             url         : '../controller/modifyCart.php', 
             data        : data, 
         	success:function(data){
+        		if (data.replace(/^\s+|\s+$/g, '') == "no_login"){
+        			swal("Bạn cần đăng nhập để thực hiện chức năng này");
+        		}
         		if (data.replace(/^\s+|\s+$/g, '') == "new"){
         			var cartItems = parseInt($(".cart a > div > div").text());
         			$(".cart a > div > div").text(cartItems +1)	

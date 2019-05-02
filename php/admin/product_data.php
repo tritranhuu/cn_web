@@ -98,7 +98,7 @@ include("./controller/controllerData.php");
                     <span>Dữ liệu</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="#">Tài khoản</a></li>
+                    <li><a href="account_data.php">Tài khoản</a></li>
                     <li class="active"><a href="product_data.php">Sản phẩm</a></li>
                     <li><a href="order_data.php">Đơn hàng</a></li>
                 </ul>

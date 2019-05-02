@@ -5,6 +5,9 @@ if (!isset($_SESSION['admin']))
     header('Location: ../index.php');
 }
 ?>
+<?php
+include("./model/database.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,32 +84,42 @@ if (!isset($_SESSION['admin']))
         <!-- sidebar menu start-->            <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
             <li>
-                <a href="index.html">
+                <a class="active" href="index.html">
                     <i class="fa fa-dashboard"></i>
-                    <span class="active">Thống kê</span>
+                    <span>Thống kê</span>
                 </a>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;" class="active">
+                <a href="javascript:;">
                     <i class="fa fa-th"></i>
                     <span>Dữ liệu</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="#">Tài khoản</a></li>
+                    <li><a href="account_data.php">Tài khoản</a></li>
                     <li><a href="product_data.php">Sản phẩm</a></li>
                     <li><a href="order_data.php">Đơn hàng</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-tasks"></i>
-                    <span>Quản lí</span>
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Hàng hóa</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="form_component.html">Tài khoản</a></li>
-                    <li><a href="advanced_form.html">Sản phẩm</a></li>
-                    <li><a href="form_wizard.html">Kho</a></li>
-                    <li><a href="form_validation.html">Đơn hàng</a></li>
+                    <li><a href="add_vendor.php">Thêm nhà phân phối</a></li>
+                    <li><a href="add_product.php">Thêm sản phẩm</a></li>
+                    <li><a href="edit_product.php">Chỉnh sửa sản phẩm</a></li>
+                    <li><a href="import_product.php">Nhập kho</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span>Tài khoản</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="add_account.php">Thêm tài khoản</a></li>
+                    <li><a href="edit_account.php">Chỉnh sửa tài khoản</a></li>
                 </ul>
             </li>
         </ul></div>        
@@ -124,7 +137,7 @@ if (!isset($_SESSION['admin']))
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon orange"><i class="fa fa-gavel"></i></span>
             <div class="mini-stat-info">
-                <span>320</span>
+                <span><?php echo getOrderNum();?></span>
                 Tổng số đơn hàng
             </div>
         </div>
@@ -133,7 +146,7 @@ if (!isset($_SESSION['admin']))
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon tar"><i class="fa fa-tag"></i></span>
             <div class="mini-stat-info">
-                <span>22,450</span>
+                <span><?php echo getSoldNum();?></span>
                 Số sản phẩm đã bán được
             </div>
         </div>
@@ -142,7 +155,7 @@ if (!isset($_SESSION['admin']))
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon pink"><i class="fa fa-money"></i></span>
             <div class="mini-stat-info">
-                <span>34,320</span>
+                <span><?php echo getIncome();?></span>
                 Tổng doanh thu
             </div>
         </div>
@@ -151,7 +164,7 @@ if (!isset($_SESSION['admin']))
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon green"><i class="fa fa-eye"></i></span>
             <div class="mini-stat-info">
-                <span>32720</span>
+                <span><?php echo getAccountNum();?></span>
                 Số tài khoản đã đăng kí
             </div>
         </div>

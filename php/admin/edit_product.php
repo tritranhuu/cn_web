@@ -1,12 +1,7 @@
-<?php
-include("./controller/controllerData.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ThemeBucket">
@@ -16,18 +11,18 @@ include("./controller/controllerData.php");
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="css/panel.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
 
-    <!--dynamic table-->
-    <link href="js/advanced-datatable/css/demo_page.css" rel="stylesheet" />
-    <link href="js/advanced-datatable/css/demo_table.css" rel="stylesheet" />
-    <link rel="stylesheet" href="js/data-tables/DT_bootstrap.css" />
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/fileinput.css">
 
+    <script src="js/jquery.js"></script>
+    <script src="bs3/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -78,93 +73,78 @@ include("./controller/controllerData.php");
         <!-- sidebar menu start-->            <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
             <li>
-                <a href="index.php">
+                <a href="index.html">
                     <i class="fa fa-dashboard"></i>
                     <span>Thống kê</span>
                 </a>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;" class="active">
+                <a href="javascript:;">
                     <i class="fa fa-th"></i>
                     <span>Dữ liệu</span>
                 </a>
                 <ul class="sub">
                     <li><a href="account_data.php">Tài khoản</a></li>
                     <li><a href="product_data.php">Sản phẩm</a></li>
-                    <li class="active"><a href="order_data.php">Đơn hàng</a></li>
+                    <li><a href="order_data.php">Đơn hàng</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
                 <a href="javascript:;">
-                    <i class="fa fa-tasks"></i>
-                    <span>Quản lí</span>
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Hàng hóa</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="form_component.html">Tài khoản</a></li>
-                    <li><a href="advanced_form.html">Sản phẩm</a></li>
-                    <li><a href="form_wizard.html">Kho</a></li>
-                    <li><a href="form_validation.html">Đơn hàng</a></li>
+                    <li><a href="add_vendor.php">Thêm nhà phân phối</a></li>
+                    <li><a href="add_product.php">Thêm sản phẩm</a></li>
+                    <li><a href="edit_product.php" class="active">Chỉnh sửa sản phẩm</a></li>
+                    <li><a href="import_product.php">Nhập kho</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-users"></i>
+                    <span>Tài khoản</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="add_account.php">Thêm tài khoản</a></li>
+                    <li><a href="edit_account.php">Chỉnh sửa tài khoản</a></li>
                 </ul>
             </li>
         </ul></div>        
 <!-- sidebar menu end-->
     </div>
 </aside>
-<!--sidebar end-->
 
-
- <!--main content start-->
-    <section id="main-content">
+<?php
+if(!isset($_GET['proID'])){
+?>
+	<!--main content start-->
+    <section id="main-content" class="">
         <section class="wrapper">
         <!-- page start-->
-
+        <!-- page start-->
         <div class="row">
-            <div class="col-sm-12">
-                <section class="panel">
-                    <header class="panel-heading">
-                        Dynamic Table
-                    </header>
-                    <div class="panel-body">
-                    <div class="adv-table">
-<?php 
-printOrderTableData();
-?>         
-                    </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-</section>
-</section>
+            <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Chỉnh sửa mặt hàng
+                        </header>
+                        <div class="panel-body">
+                            <div class="position-center">
+                                <div class="form-group">
+                                    <label for="proID">Nhập mã mặt hàng</label>
+                                    <input type="text" class="form-control" id="proName" name="proName">
+                                </div>
+                            <button class="btn btn-info" id="addProduct">Submit</button>
+                            </div>
+
+                        </div>
+                    </section>
 
 
-</section>
-
-
-
-
-
-
-
-
-<!--Core js-->
-<script src="js/jquery.js"></script>
-<script src="bs3/js/bootstrap.min.js"></script>
-<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-<script src="js/jquery.nicescroll.js"></script>
-
-<!--dynamic table-->
-<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
-<!--common script init for all pages-->
-<script src="js/scripts.js"></script>
-
-<!--dynamic table initialization -->
-<script src="js/dynamic_table_init.js"></script>
-
-
-
-</body>
-</html>
+                                
+</div></div></section></section></section>
+<?php
+}
+?>
