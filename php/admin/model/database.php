@@ -71,4 +71,12 @@
         $res = mysqli_fetch_array($sql);
         return $res['tol'];
     }
+
+    function getProductByID($proID){
+        $conn = connectDB();
+        $query = "select * from product";
+        $sql = mysqli_query($conn, $query);
+        $res = mysqli_fetch_array($sql);
+        return $res['tol'];        
+    }
 ?>

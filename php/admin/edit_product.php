@@ -132,11 +132,13 @@ if(!isset($_GET['proID'])){
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
+                            <form>
                                 <div class="form-group">
                                     <label for="proID">Nhập mã mặt hàng</label>
-                                    <input type="text" class="form-control" id="proName" name="proName">
+                                    <input type="text" class="form-control" id="proID" name="proID">
                                 </div>
-                            <button class="btn btn-info" id="addProduct">Submit</button>
+                            <button type="submit" class="btn btn-info" id="addProduct">Submit</button>
+                            </form>
                             </div>
 
                         </div>
@@ -146,5 +148,8 @@ if(!isset($_GET['proID'])){
                                 
 </div></div></section></section></section>
 <?php
+}
+else{
+
 }
 ?>
