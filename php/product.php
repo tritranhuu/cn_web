@@ -2,6 +2,22 @@
 session_start();
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
+require_once("../database/getProduct.php");
+$conn = connectDB();
+
+
+$proID = $_GET['product'];
+
+$pro =  getInfoProduct($conn,$proID);
+$image = getImageProduct($conn,$proID);
+$option = getOptionProduct($conn,$proID);
+$cmtandrate = getCmtandRate($conn,$proID);
+$type = $pro['gender'];
+$proName = $pro['proName'];
+$des = $pro['description'];
+$mat = $pro['material'];
+$price = $pro['price'];
+
 ?>
 
 <!DOCTYPE html>
@@ -38,14 +54,14 @@ include("../database/dbCart.php");
 					<div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
 						<ul class="d-flex flex-row align-items-start justify-content-start text-center">
 							<li><a href="./index.php">Home</a></li>
-							<li><a href="category.php"><?php if($_SESSION['type']=='M') echo'Man';elseif($_SESSION['type']=='F') echo 'Woman';else echo 'Kids';?></a></li>
-							<li><?php echo $_SESSION['product']['proName']; ?></li>
+							<li><a href="category.php?type=<?php echo $type ?>"><?php if($type=='M') echo'Man';elseif($type=='F') echo 'Woman';else echo 'Kids';?></a></li>
+							<li><?php echo $proName; ?></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 </div>
-<div class="product" id="<?php echo $_SESSION['product']['proID'];?>">
+<div class="product" id="<?php echo $proID;?>">
 			<div class="container">
 				<div class="row">
 					
@@ -55,7 +71,7 @@ include("../database/dbCart.php");
 							<div id="slider" class="flexslider">
 								<ul class="slides">
 										<?php
-										foreach($_SESSION['product_image'] as  $i){
+										foreach($image as  $i){
 											echo '<li><img src="..'.$i.'" /></li>';
 										}
 										?>
@@ -65,7 +81,7 @@ include("../database/dbCart.php");
 								<div id="carousel" class="flexslider">
 									<ul class="slides">
 									<?php
-											foreach($_SESSION['product_image'] as  $i){
+											foreach($image as  $i){
 											echo '<li><div><img src="..'.$i.'" /></div></li>';
 										}
 										?>
@@ -80,33 +96,31 @@ include("../database/dbCart.php");
 					<!-- Product Info -->
 					<div class="col-lg-6 product_col ">
 						<div class="product_info">
-							<div class="product_name"><?php  echo $_SESSION['product']['proName'];?></div>
-							<div class="product_category">In <<?php echo 'a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1"';?>><?php if($_SESSION['type']=='M') echo'Man';elseif($_SESSION['type']=='F') echo 'Woman';else echo 'Kids';?></a></div>
+							<div class="product_name"><?php  echo $proName;?></div>
+							<div class="product_category">In <<?php echo 'a href="../controller/controlcategory.php?type='.$type.'&page=1"';?>><?php if($type=='M') echo'Man';elseif($type=='F') echo 'Woman';else echo 'Kids';?></a></div>
 							<div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
 							<div class="rating_r rating_r_3 product_rating text-dark">Đánh giá</div>
-								<div class="product_reviews"><?php if(sizeof($_SESSION['CmtandRate'])==0) echo 5; else{
+								<div class="product_reviews"><?php if(sizeof($cmtandrate)==0) echo 5; else{
 									 $sum =0;
 									 $c =0;
-									 foreach ($_SESSION['CmtandRate'] as $k){
+									 foreach ($cmtandrate as $k){
 										 $sum += $k['point'];
 										 $c++;
 									 }
 									 echo $sum/$c;
-								}?> out of (<?php echo sizeof($_SESSION['CmtandRate'])?>)</div>
+								}?> out of (<?php echo sizeof($cmtandrate)?>)</div>
 							
 								<div class="product_reviews_link" style="cursor: pointer" data-toggle="modal" data-target="#rateModal">Reviews</div>
 							</div>
-							<div class="product_price text-danger"><?php  echo $_SESSION['product']['price'];?></div>
-							<div class =" mt-2 border-top border-bottom text-dark"> <h6 class="mt-1"> Miễn phí vận chuyển cho đơn hàng từ 499.000Đ</h6></div>
-							<div class ="border-top border-bottom text-dark"> <h6 class="mt-1"> Đổi trả sản phẩm nguyên giá, giảm giá trong vòng 15 ngày</h6></div>
+							<div class="product_price text-danger"><?php  echo $price ;?></div>
 							<div class="product_size">
 								<div class="product_size_title">Select Size</div>
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									
 									<?php
 										$tmp = array();
-										for( $t = 0 ; $t < sizeof( $_SESSION['product_option']) ; $t++){
-											$i =  $_SESSION['product_option'][$t]['size'];
+										for( $t = 0 ; $t < sizeof( $option) ; $t++){
+											$i =  $option[$t]['size'];
 											if(!in_array($i,$tmp)){
 											array_push($tmp,$i);
 											echo '<li>';
@@ -123,8 +137,8 @@ include("../database/dbCart.php");
 								<ul class="d-flex flex-row align-items-start justify-content-start">
 									<?php
 										$tmp = array();
-										for( $t = 0 ; $t < sizeof( $_SESSION['product_option']) ; $t++){
-											$i =  $_SESSION['product_option'][$t]['color'];
+										for( $t = 0 ; $t < sizeof( $option) ; $t++){
+											$i =  $option[$t]['color'];
 											if(!in_array($i,$tmp)){
 											array_push($tmp,$i);
 											echo '<li>';
@@ -177,12 +191,11 @@ include("../database/dbCart.php");
 			</div>
 		</div>
 <?php require('./viewFunction/productDetail.php');
-		printDetail($_SESSION['product']['description'],$_SESSION['product']['material'],$_SESSION['CmtandRate']);
+		printDetail($des,$mat,$cmtandrate,$pro['proID']);
 ?>
 
 		
 <?php
- require("../database/getProduct.php");
   require("./viewFunction/product_box.php");
   $conn = connectDB();
   $arr =  getProduct($conn);
@@ -263,9 +276,7 @@ include("../database/dbCart.php");
 			var proID = $(".product").attr("id");
 			var input = $('#input').val();
 			var rating =  $("input[name='rating']:checked").val();
-			console.log(input);
-			console.log(rating);
-			console.log(proID);
+		
 			var data ={
 				'input':input,
 				'rating' :rating,

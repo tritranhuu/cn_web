@@ -35,8 +35,8 @@
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
-																			<div class="product_category">In <a href="category.html">Category</a></div>
+																			<div class="product_name"><a href="product.php">Cool Clothing with Brown Stripes</a></div>
+																			<div class="product_category">In <a href="controlcategory.php?type=F">Category</a></div>
 																		</div>
 																	</div>
 																	<div class="ml-auto text-right">

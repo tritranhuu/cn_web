@@ -12,7 +12,8 @@
                 'proName' => $res['proName'],
                 'price' => $res['price'],
                 'url' => $urlRes['url'],
-                'gender' => $res['gender']
+                'gender' => $res['gender'],
+                'type' => $res['type']
             );
             array_push($items, $item);
         }
@@ -78,9 +79,9 @@
         }
         return $items;    
     }
-    function getListProduct($conn,$type){
+    function getListProduct($conn,$gender,$page){
         $items= array();
-        $query = "select * from product where gender='" .$type."' and proID >".(($page-1)*12);
+        $query = "select * from product where gender='" .$gender."'";
         $sql = mysqli_query($conn, $query);
         while($res = mysqli_fetch_array($sql)){
             $urlQuery = 'select url from img where proID='.$res['proID'].' limit 1';
@@ -92,7 +93,29 @@
                 'proName' => $res['proName'],
                 'price' => $res['price'],
                 'url' => $urlRes['url'],
-                'size' => $urlQuery2
+                'size' => $urlQuery2,
+                'type' => $res['type']
+            );
+            array_push($items, $item);
+        }
+        return $items;         
+    }
+    function getListProduct2($conn,$gender,$page,$type){
+        $items= array();
+        $query = "select * from product where gender='" .$gender."'and type ='".$type."'";
+        $sql = mysqli_query($conn, $query);
+        while($res = mysqli_fetch_array($sql)){
+            $urlQuery = 'select url from img where proID='.$res['proID'].' limit 1';
+            $urlRes = mysqli_fetch_array(mysqli_query($conn, $urlQuery));
+            $urlQuery2 = 'select distinct * from product_option where proID='.$res['proID'].' limit 1';
+            
+            $item = array(
+                'proID' => $res['proID'],
+                'proName' => $res['proName'],
+                'price' => $res['price'],
+                'url' => $urlRes['url'],
+                'size' => $urlQuery2,
+                'type' => $res['type']
             );
             array_push($items, $item);
         }
@@ -121,5 +144,16 @@
         }
         return $items;   
     }
-  
+    function getListType($conn,$gender){
+        $items= array();
+        $query = "select distinct type from product where gender='" .$gender."'" ;
+        $sql = mysqli_query($conn, $query);
+        while($res = mysqli_fetch_array($sql)){
+            $item = array(
+                'type' => $res['type']
+            );
+            array_push($items, $item);
+        }
+        return $items;
+    }
 ?>

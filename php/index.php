@@ -40,9 +40,9 @@ include("../database/dbCart.php");
     <div class="col">
       <div class="page_nav">
         <ul class="d-flex flex-row align-items-start justify-content-center">
-          <li><a href="../controller/controlcategory.php?type=F&page=1">Women</a></li>
-            <li><a href="../controller/controlcategory.php?type=M&page=1">Men</echo></li>
-            <li><a href="../controller/controlcategory.php?type=M&page=1">Kids</a></li>
+          <li><a href="../controller/controlcategory.php?type=F&page=1&filertype=false">Women</a></li>
+            <li><a href="../controller/controlcategory.php?type=M&page=1&filertype=false">Men</a></li>
+            <li><a href="../controller/controlcategory.php?type=K&page=1&filertype=false">Kids</a></li>
           </ul>
         </div>
       </div>

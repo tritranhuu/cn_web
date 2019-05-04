@@ -1,7 +1,5 @@
 <?php	
-
- 	
-    function printDetail($des,$mat,$arr){	
+    function printDetail($des,$mat,$arr,$proID ){	
 	
     
 ?>	
@@ -16,18 +14,18 @@
 					<div class="col-md-12">
 						<div class="product-tab">
 							<ul class="tab-nav">
-								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+								<li ><a data-toggle="tab" href="#tab1">Description</a></li>
 								<li><a data-toggle="tab" href="#tab3">Details</a></li>
-								<li><a data-toggle="tab" href="#tab2">Reviews </a></li>
+								<li class="active"><a data-toggle="tab" href="#tab2">Reviews </a></li>
 							</ul>
 							<div class="tab-content">
-								<div id="tab1" class="tab-pane fade in active">
+								<div id="tab1" class="tab-pane fade in ">
 									<p><?php echo $des ?></p>
 								</div>
-                                <div id="tab3" class="tab-pane fade in active">
+                                <div id="tab3" class="tab-pane fade in ">
 									<p><?php echo $mat ?></p>
 								</div>
-								<div id="tab2" class="tab-pane fade in">
+								<div id="tab2" class="tab-pane fade in active">
 
 									<div class="row">
 										<div class="col-md-4 col-lg-6">
@@ -55,11 +53,11 @@
 												}
 												?>
 												 <br/> <br/>
-											<?php if( (sizeof($arr)/4)>=1){
+											<?php if( (sizeof($arr)/3)>=1){
 												echo '<ul class="reviews-pages">';
-												for($k =1;$k<=ceil(sizeof($arr)/4);$k++){
+												for($k =1;$k<=ceil(sizeof($arr)/3);$k++){
 												echo '
-												<li><a href="../controller/product_controller.php?action=index&page='.$k.'&product='.$_SESSION['product']['proID'].'">'.$k.'</a></li>';
+												<li><a href="../controller/product_controller.php?action=index&page='.$k.'&product='.$proID.'">'.$k.'</a></li>';
 												}
 												echo'
 												<li><a href="#"><i class="fa fa-caret-right"></i></a></li>

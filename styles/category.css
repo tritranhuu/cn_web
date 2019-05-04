@@ -562,8 +562,7 @@ section {
     height: auto;
 }
 
-.cart a > div > div
-{
+.cart a>div>div {
     position: absolute;
     top: -12px;
     right: -4px;
@@ -859,7 +858,7 @@ section {
 }
 
 .product_dropdown_filter {
-    width: 114px;
+    width: 204px;
 }
 
 .product_dropdown_sorting {
@@ -868,7 +867,7 @@ section {
 
 .isotope_filter_text span,
 .isotope_sorting_text span {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     color: #969696;
 }
@@ -894,11 +893,11 @@ section {
     right: -15px;
     visibility: hidden;
     opacity: 0;
-    width: 100px;
-    text-align: right;
+    width: 170px;
+    text-align: center;
     background: #f6f8fa;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 0px;
     padding-top: 13px;
     padding-bottom: 15px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);

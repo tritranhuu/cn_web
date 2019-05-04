@@ -35,8 +35,8 @@ include("../database/dbCart.php");
 					<div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
 						<ul class="d-flex flex-row align-items-start justify-content-start text-center">
 							<li><a href="./index.php">Home</a></li>
-							<li><<?php echo 'a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1"';?>><?php if($_SESSION['type']=='M') echo'Man';elseif($_SESSION['type']=='F') echo 'Woman';else echo 'Kids';?></a></li>
-							<li>New Products</li>
+							<li><<?php echo 'a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1&filertype=false"';?>><?php if($_SESSION['type']=='M') echo'Man';elseif($_SESSION['type']=='F') echo 'Woman';else echo 'Kids';?></a></li>
+							<li><?php echo "New Product"?></li>
 						</ul>
 					</div>
 				</div>
@@ -45,52 +45,63 @@ include("../database/dbCart.php");
 <br/><br/><br/><br/>
 
 <?php
-	require("../database/getProduct.php");
+	require_once("../database/getProduct.php");
 	require("./viewFunction/product_box.php");
 	$conn = connectDB();
-	$arr =  $_SESSION[$_SESSION['type']];
-	
-	
+	$arr =  getListProduct($conn,$_GET['type'],1);
+	if(isset($_GET['page']))
+	$page = $_GET['page'];
+	else $page = 1 ;
+	if(isset($_GET['filertype']))
+	$type = $_GET['filertype'];
+	else $type = "false";
+	if($type!="false"){
+		$arr = getListProduct2($conn,$_GET['type'],1,$type);
+	}
 	echo'<div class="products">
 	<div class="container">
 	<div class="col">
 	';
 	require('filter.php');
+	$listType = getListType($conn,$_SESSION['type']);
+	ShowFilter($listType,$_SESSION['type']);
 	echo '<div class="row products_row products_container grid">';
-    for ($i = 12*($_SESSION['page']-1),$t=0 ;$i < $_SESSION['max'] ; $i++,$t++){
-		if($t==12 ) break;
-		$arr2= getCmtandRate($conn,$arr[$i]['proID']);
-		printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName'],$_SESSION['type'],$arr2);
-		
+    for ($i = 12*($page-1),$t=0 ;$i < $_SESSION['max'] ; $i++){
+			$t++;
+			$arr2= getCmtandRate($conn,$arr[$i]['proID']);
+			printproduct($arr[$i]['proID'],$arr[$i]['url'],$arr[$i]['price'],$arr[$i]['proName'],$_SESSION['type'],$arr2);
+			if($t==12 ) break;
 	}
 	echo "</div></div>";
 ?>
 <?php
-	if($_SESSION['page']==1){
-		echo'<div class="row page_nav_row">
-		<div class="col">
-			<div class="page_nav">
-				<ul class="d-flex flex-row align-items-start justify-content-center">
-						<li class="active"><a href="">1</a></li>
-						<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=2">2</a></li>
-						<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page=3">3</a></li>';
-						echo '<li><a href="../controller/controlcategory.php?type=M&page='.($_SESSION['page']+1).'">></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>';
-	}
-	elseif( ($_SESSION['page'])*12 >= $_SESSION['max']){
+	if($page==1){
 		echo'<div class="row page_nav_row">
 		<div class="col">
 			<div class="page_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-center">';
-				echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($_SESSION['page']-1).'"><</a></li>';
-		for($i = $_SESSION['page'] -1 ; $i<=$_SESSION['page']  && $i<= ceil($_SESSION['max']/12);$i++){
-			if($i!=$_SESSION['page'])
-			echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'">'.$i.'</a></li>';
+				for($i = 1; $i<=3 && $i<= ceil($_SESSION['max']/12);$i++){
+					 
+					echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'&filertype='.$type.'">'.$i.'</a></li>';
+					}
+					echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($_SESSION['page']+1).'&filertype='.$type.'">></a></li>';	
+				echo '</ul>
+			</div>
+		</div>
+	</div>';
+	}
+	elseif( ($page)*12 >= $_SESSION['max']){
+		echo'<div class="row page_nav_row">
+		<div class="col">
+			<div class="page_nav">
+				<ul class="d-flex flex-row align-items-start justify-content-center">';
+				echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($_SESSION['page']-1).'&filertype='.$type.'"><</a></li>';
+		for($i = $page -1 ; $i<=$page  && $i<= ceil($_SESSION['max']/12);$i++){
+			
+			if($i!=$page)
+			echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'&filertype='.$type.'">'.$i.'</a></li>';
 			else 
-			echo '<li class="active"><a  href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'">'.$i.'</a></li>';
+			echo '<li class="active"><a  href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'&filertype='.$type.'">'.$i.'</a></li>';
 		}
 			
 		echo'</ul>
@@ -103,14 +114,14 @@ include("../database/dbCart.php");
 		<div class="col">
 			<div class="page_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-center">';
-				echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($_SESSION['page']-1).'"><</a></li>';
-		for($i = $_SESSION['page'] -1 ; $i<$_SESSION['page'] + 3&& $i<= ceil($_SESSION['max']/12) ;$i++){
-			if($i!=$_SESSION['page'])
-			echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'">'.$i.'</a></li>';
+				echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($page-1).'"><</a></li>';
+		for($i = $page -1 ; $i<$page + 3&& $i<= ceil($_SESSION['max']/12) ;$i++){
+			if($i!=$page)
+			echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'&filertype='.$type.'">'.$i.'</a></li>';
 			else 
-			echo '<li class="active"><a  href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'">'.$i.'</a></li>';
+			echo '<li class="active"><a  href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'&filertype='.$type.'">'.$i.'</a></li>';
 		}
-		echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($_SESSION['page']+1).'">></a></li>';
+		echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($page+1).'&filertype='.$type.'">></a></li>';
 			
 		echo'</ul>
 			</div>
