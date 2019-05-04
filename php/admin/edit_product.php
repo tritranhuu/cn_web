@@ -1,3 +1,6 @@
+<?php 
+include("./controller/controllerAdd.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,6 +153,103 @@ if(!isset($_GET['proID'])){
 <?php
 }
 else{
+?>
+<!--main content start-->
+    <section id="main-content" class="">
+        <section class="wrapper">
+        <!-- page start-->
+        <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Chỉnh sửa mặt hàng
+                        </header>
+                        <div class="panel-body">
+                            <div class="position-center">
+                                
+                                <div class="form-group">
+                                    <label for="proName">Tên mặt hàng</label>
+                                    <input type="text" class="form-control" id="proName" name="proName">
+                                </div>
+<?php printCompanyList();?>                    
+                                <div class="form-group">
+                                    <label for="type">Loại</label>
+                                    <input type="text" class="form-control" id="type" name="type">
+                                </div>
+                                <div class="form-group">
+                                    <label for="material">Vật liệu</label>
+                                    <input type="text" class="form-control" id="material" name="material">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Loại</label>
+                                        <select class="form-control m-bot15" id="gender" name="gender">
+                                            <option value="M">Nam</option>
+                                            <option value="F">Nữ</option>
+                                            <option value="K">Trẻ Em</option>
+                                        </select>
+                                </div>                                
+                    
+                                <div class="form-group">
+                                    <label for="import-price">Giá nhập</label>
+                                    <input type="number" class="form-control" id="import-price" name="import_price">
+                                </div>
 
+                                <div class="form-group">
+                                    <label for="price">Giá bán</label>
+                                    <input type="number" class="form-control" id="price" name="price">
+                                </div>
+
+                                <div class="form-group">
+                                <label for="description">Mô tả</label>
+                                    <textarea class="form-control" rows="6" id="description" name="description"></textarea>
+                                </div>                                
+                                
+                                
+                        
+                            <button class="btn btn-info" id="addProduct">Submit</button>
+                            </div>
+
+                        </div>
+                    </section>
+
+
+                                
+</div></div></section></section>
+
+<section id="main-content" class="">
+        <section class="wrapper">
+        <!-- page start-->
+        <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Chỉnh sửa ảnh
+                        </header>
+                        <div class="panel-body">
+                            <div class="position-center">
+                                
+                                <div class="form-group">
+                <label for="img">Ảnh sản phẩm</label>
+                <span class="btn btn-default btn-file">
+                        <input id="img" name="img[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                </span>
+            </div>  
+            <button class="btn btn-info" id="addImage">Submit</button>
+                            </div>
+
+                        </div>
+                    </section>
+
+
+                                
+</div></div></section></section>
+
+</section>
+<?php
 }
 ?>
+
+<script src="./js/fileinput.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>

@@ -74,7 +74,7 @@
 
     function getProductByID($proID){
         $conn = connectDB();
-        $query = "select * from product";
+        $query = "select * from product where proID=".$proID;
         $sql = mysqli_query($conn, $query);
         $res = mysqli_fetch_array($sql);
         return $res['tol'];        

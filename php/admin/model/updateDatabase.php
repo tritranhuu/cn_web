@@ -66,4 +66,25 @@ function addVendor($name){
 		echo "added";	
 	}
 }
+
+function addAccount($username, $password, $name, $address, $phone, $admin, $email, $gender){
+		$conn = connectDB();
+    	$query_check = "select * from account where username='".$username."' or email='".$email."'";
+    	$sql_check = mysqli_query($conn, $query_check);
+    	if(mysqli_num_rows($sql_check)>0){
+    		$res = mysqli_fetch_array($sql_check);
+    		if($res['username'] === $username){
+    			echo "username";
+    			return 0;
+    		}
+    		else{
+    			echo "email";
+    			return 0;
+    		}
+    	}
+    	$query = "insert into account (username, password, name, address, phone, admin, email, gender) values ('".$username."', '".$password."', N'".$name."',N'".$address."','".$phone."',".$admin.",'".$email."', '".$gender."')";
+		mysqli_query($conn,$query);
+		return 1;
+	}
+
 ?>
