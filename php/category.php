@@ -64,7 +64,7 @@ include("../database/dbCart.php");
 	';
 	require('filter.php');
 	$listType = getListType($conn,$_SESSION['type']);
-	ShowFilter($listType,$_SESSION['type']);
+	ShowFilter($listType,$_SESSION['type'],$type);
 	echo '<div class="row products_row products_container grid">';
     for ($i = 12*($page-1),$t=0 ;$i < $_SESSION['max'] ; $i++){
 			$t++;

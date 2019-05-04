@@ -835,7 +835,7 @@ section {
 }
 
 .products_bar_links ul li:not(:last-of-type) {
-    margin-right: 50px;
+    margin-right: 10px;
 }
 
 .products_bar_links ul li a {
@@ -862,7 +862,7 @@ section {
 }
 
 .product_dropdown_sorting {
-    margin-right: 59px;
+    margin-right: 50px;
 }
 
 .isotope_filter_text span,

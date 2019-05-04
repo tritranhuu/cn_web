@@ -1,5 +1,5 @@
 <?php
-	function ShowFilter($typep,$gender){
+	function ShowFilter($typep,$gender,$ft){
 ?>
 
 <div class="row products_bar_row">
@@ -12,15 +12,18 @@
 									<div class="isotope_filter_text"><span>Loại sản phẩm</span><i class="fa fa-caret-down" aria-hidden="true"></i></div>
 									<ul>
 										<?php
-										echo'<li class="item_sorting_btn" ><a href = "../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1&filertype=false">All</a></a></li>';
+										echo'<li  ><a href = "../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1&filertype=false">All</a></a></li>';
 											foreach($typep as $i){
-												
-												echo'<li class="item_sorting_btn" ><a href = "../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1&filertype='.$i['type'].'">'.$i['type'].'</a></li>';
+												if($i['type']==$ft)
+												echo'<li class="active dropup" ><a href = "../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1&filertype='.$i['type'].'">'.$i['type'].'</a></li>';
+												else 
+												echo'<li ><a href = "../controller/controlcategory.php?type='.$_SESSION['type'].'&page=1&filertype='.$i['type'].'">'.$i['type'].'</a></li>';
 											}
 										?>
 										
 									</ul>
 								</div></li>
+								<li class="active"><a href="#"><?php if($ft!="false") echo $ft?></a></li>
 								
 								</ul>
 							</div>
