@@ -20,22 +20,17 @@
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
-														<div class="home_item_side"><a href="product.html"><img src="../images/home_1.jpg" alt=""></a></div>
+														<div class="home_item_side"><a href="product.php?product=204"><img src="../images/product/N5_1.jpg" alt=""></a></div>
 													</div>
 													<div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
 														<div class="product home_item_large">
-															<div class="product_tag d-flex flex-column align-items-center justify-content-center">
-																<div>
-																	<div>from</div>
-																	<div>$3<span>.99</span></div>
-																</div>
-															</div>
-															<div class="product_image"><img src="../images/home_2.jpg" alt=""></div>
+															
+															<div class="product_image"><a href="product.php?product=204"><img src="../images/product/N5_0.jpg" alt=""></div>
 															<div class="product_content">
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.php">Cool Clothing with Brown Stripes</a></div>
+																			<div class="product_name"><a href="product.php?product=203">Cool Clothing with Brown Stripes</a></div>
 																			<div class="product_category">In <a href="controlcategory.php?type=F">Category</a></div>
 																		</div>
 																	</div>
@@ -58,7 +53,7 @@
 														</div>
 													</div>
 													<div class="col-sm-3">
-														<div class="home_item_side"><a href="product.html"><img src="../images/home_3.jpg" alt=""></a></div>
+														<div class="home_item_side"><a href="product.php?product=204"><img src="../images/product/N5_2.jpg" alt=""></a></div>
 													</div>
 												</div>
 											</div>
@@ -82,22 +77,17 @@
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
-														<div class="home_item_side"><a href="product.html"><img src="../images/home_1.jpg" alt=""></a></div>
+														<div class="home_item_side"><a href="product.php?product=206"><img src="../images/product/N7_1.jpg" alt=""></a></div>
 													</div>
 													<div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
 														<div class="product home_item_large">
-															<div class="product_tag d-flex flex-column align-items-center justify-content-center">
-																<div>
-																	<div>from</div>
-																	<div>$3<span>.99</span></div>
-																</div>
-															</div>
-															<div class="product_image"><img src="../images/product_1.jpg" alt=""></div>
+															
+															<div class="product_image"><a href = "product.php?product=206"><img src="../images/product/N7_0.jpg" alt=""></a></div>
 															<div class="product_content">
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
+																			<div class="product_name"><a href="product.php?product=206">Áo phông nữ cộc tay</a></div>
 																			<div class="product_category">In <a href="category.html">Category</a></div>
 																		</div>
 																	</div>
@@ -120,7 +110,7 @@
 														</div>
 													</div>
 													<div class="col-sm-3">
-														<div class="home_item_side"><a href="product.html"><img src="../images/home_3.jpg" alt=""></a></div>
+														<div class="home_item_side"><a href="product.php?product=206"><img src="../images/product/N7_2.jpg" alt=""></a></div>
 													</div>
 												</div>
 											</div>
@@ -144,23 +134,18 @@
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
-														<div class="home_item_side"><a href="product.html"><img src="../images/home_1.jpg" alt=""></a></div>
+														<div class="home_item_side"><a href="product.php?product=209"><img src="../images/product/N10_1.jpg" alt=""></a></div>
 													</div>
 													<div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
 														<div class="product home_item_large">
-															<div class="product_tag d-flex flex-column align-items-center justify-content-center">
-																<div>
-																	<div>from</div>
-																	<div>$3<span>.99</span></div>
-																</div>
-															</div>
-															<div class="product_image"><img src="../images/product_2.jpg" alt=""></div>
+															
+															<div class="product_image"><a href="product.php?product=209"><img src="../images/product/N10_1.jpg" alt=""></a></div>
 															<div class="product_content">
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
-																			<div class="product_category">In <a href="category.html">Category</a></div>
+																			<div class="product_name"><a href="product.php?product=209">Cool Clothing with Brown Stripes</a></div>
+																			<div class="product_category">In <a href="category.php?typ =F">Category</a></div>
 																		</div>
 																	</div>
 																	<div class="ml-auto text-right">
@@ -182,7 +167,7 @@
 														</div>
 													</div>
 													<div class="col-sm-3">
-														<div class="home_item_side"><a href="product.html"><img src="../images/home_3.jpg" alt=""></a></div>
+														<div class="home_item_side"><a href="product.php?product=209"><img src="../images/product/N10_2.jpg" alt=""></a></div>
 													</div>
 												</div>
 											</div>
@@ -206,22 +191,17 @@
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
-														<div class="home_item_side"><a href="product.html"><img src="../images/home_1.jpg" alt=""></a></div>
+														<div class="home_item_side"><a href="product.php?product=210"><img src="../images/product/N11_1.jpg" alt=""></a></div>
 													</div>
 													<div class="col-lg-4 col-md-6 col-sm-8 offset-sm-2 offset-md-0">
 														<div class="product home_item_large">
-															<div class="product_tag d-flex flex-column align-items-center justify-content-center">
-																<div>
-																	<div>from</div>
-																	<div>$3<span>.99</span></div>
-																</div>
-															</div>
-															<div class="product_image"><img src="../images/product_3.jpg" alt=""></div>
+															
+															<div class="product_image"><a href ="product.php?product=210"><img src="../images/product/N11_0.jpg" alt=""></a></div>
 															<div class="product_content">
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.html">Cool Clothing with Brown Stripes</a></div>
+																			<div class="product_name"><a href="product.php?product=210">Cool Clothing with Brown Stripes</a></div>
 																			<div class="product_category">In <a href="category.html">Category</a></div>
 																		</div>
 																	</div>
@@ -244,7 +224,7 @@
 														</div>
 													</div>
 													<div class="col-sm-3">
-														<div class="home_item_side"><a href="product.html"><img src="../images/home_3.jpg" alt=""></a></div>
+														<div class="home_item_side"><a href="product.php?product=210"><img src="../images/product/N11_2.jpg" alt=""></a></div>
 													</div>
 												</div>
 											</div>

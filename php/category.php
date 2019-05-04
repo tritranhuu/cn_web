@@ -84,6 +84,7 @@ include("../database/dbCart.php");
 					 
 					echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.$i.'&filertype='.$type.'">'.$i.'</a></li>';
 					}
+					if($_SESSION['max'] >=13) 
 					echo '<li><a href="../controller/controlcategory.php?type='.$_SESSION['type'].'&page='.($_SESSION['page']+1).'&filertype='.$type.'">></a></li>';	
 				echo '</ul>
 			</div>
