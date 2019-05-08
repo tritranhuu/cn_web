@@ -8,13 +8,18 @@ if (isset($_FILES['img']) && !empty($_FILES['img'])) {
         if ($_FILES["img"]["error"][$i] > 0) {
             echo "Error: ".$_FILES["img"]["error"][$i]."<br>";
         } else {
-            if (file_exists('../../../images/product/'.$_FILES["img"]["name"][$i])) {
+            if (file_exists('../../../images/product/'.$proID."/".$_FILES["img"]["name"][$i])) {
                 echo 'File already exists : ../../images/product/'.$_FILES["img"]["name"][$i];
             } else {
-                move_uploaded_file($_FILES["img"]["tmp_name"][$i], '../../../images/product/'.$_FILES["img"]["name"][$i]);
-                $new_name = $proID."_".$i.".png";
-                rename ('../../../images/product/'.$_FILES["img"]["name"][$i], '../../../images/product/'.$new_name);
-                addImg($proID, '/images/product/'.$new_name);
+                $dir = '../../../images/product/'.$proID."/";
+                if (!file_exists($dir)) {
+                    mkdir('../../../images/product/'.$proID, 0777);
+                }
+                $newname = date('YmdHis',time()).mt_rand().'.jpg';
+                move_uploaded_file($_FILES["img"]["tmp_name"][$i], '../../../images/product/'.$proID."/".$newname);
+                // $new_name = $proID."_".$i.".png";
+                // rename ('../../../images/product/'.$_FILES["img"]["name"][$i], '../../../images/product/'.$new_name);
+                addImg($proID, '/images/product/'.$proID."/".$newname);
             }
         }
     }

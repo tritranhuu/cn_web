@@ -28,11 +28,13 @@
 	}
 
 	function checkCart($accID, $conn){
-		$query = "select quantity, stock_quantity, price from cart natural join product_option natural join product where quantity>stock_quantity and accID=".$accID;
+		$query = "select quantity, stock_quantity, price, proName from cart natural join product_option natural join product where quantity>stock_quantity and accID=".$accID;
 		$sql = mysqli_query($conn, $query);
 		if(mysqli_num_rows($sql)==0){
 			return 1;
 		}
+		$res = mysqli_fetch_array($sql);
+		echo $res['proName'];
 		return 0;
 	}
 

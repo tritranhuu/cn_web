@@ -1479,3 +1479,33 @@ section
 	color: #969696;
 	font-weight: 300;
 }
+
+.cart
+{
+  margin-right: 29px;
+}
+.cart a > div
+{
+  width: 37px;
+  height: 37px;
+}
+.cart a > div > svg
+{
+  max-width: 100%;
+  height: auto;
+}
+.cart a > div > div
+{
+  position: absolute;
+  top: -12px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2fce98;
+  text-align: center;
+  line-height: 20px;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+}

@@ -87,4 +87,9 @@ function addAccount($username, $password, $name, $address, $phone, $admin, $emai
 		return 1;
 	}
 
+function delImg($proID, $url){
+	$conn = connectDB();
+	$query = "delete from img where proID=".$proID." and url='".$url."'";
+	$sql = mysqli_query($conn, $query);	
+}
 ?>

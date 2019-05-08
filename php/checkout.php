@@ -15,6 +15,7 @@ include("../database/dbCart.php");
 <link rel="stylesheet" type="text/css" href="../styles/checkout.css">
 <link rel="stylesheet" type="text/css" href="../styles/checkout_responsive.css">
 <script src="../js/jquery-3.2.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>	
 </head>
 
 <?php include("header.php")?>
@@ -162,10 +163,33 @@ include("../database/dbCart.php");
             type        : 'POST', 
             url         : '../controller/modifyOrder.php', 
             data        : data, 
-        	success:function(){
-        		alert('success')
+        	success:function(data){
+        		if(data.replace(/^\s+|\s+$/g, '') == "noinfo"){
+        			swal({
+    						title: "Thất bại",
+    						text: "Hãy nhập đủ thông tin phía ô bên trái",
+    						type: "error"
+							})
+        		}
+        		else if(!data.trim().isEmpty){
+        			str = "Số lượng sản phảm " + data + " bạn lựa chọn đã vượt quá trong kho"
+        			swal({
+    						title: "Thất bại",
+    						text: str,
+    						type: "error"
+							})
+        		}
+        		else{
+        			swal({
+    						title: "Thành công",
+    						text: "Bạn đã đặt hàng thành công",
+    						type: "success"
+							}).then(function() {
+    							window.location.href = 'orders.php';
+							});	
+        		}
         	},
-        	error:function(){
+        	error:function(data){
 				alert("Error")
 			}
 

@@ -14,6 +14,10 @@ include("../database/dbOrder.php");
     	$shipping = $_POST['shipping'];
     	$payment = $_POST['payment'];
     	$message = $_POST['message'];
+        if(empty($name)||empty($address)||empty($phone)||empty($email)){
+            echo "noinfo";
+            return 0;
+        }
     	addOrder($accID, $name, $address, $phone, $message, $shipping, $payment, $conn);
     }
 ?>

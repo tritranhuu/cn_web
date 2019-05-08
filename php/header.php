@@ -64,15 +64,15 @@
 			<div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
 				<!-- Search -->
 				<div class="header_search">
-					<form action="#" id="header_search_form">
-						<input type="text" class="search_input" placeholder="Tìm kiếm" required="required">
+					<form action="search.php" id="header_search_form">
+						<input type="text" class="search_input" name="search" placeholder="Tìm kiếm" required="required">
 						<button class="header_search_button"><img src="../images/search.png" alt=""></button>
 					</form>
 				</div>
 				
 				
 <?php
-	
+	session_start();
 	if(isset($_SESSION['admin'])){
 ?>
 	<!-- User -->

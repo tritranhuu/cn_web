@@ -1,13 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['admin']))
-{
-    header('Location: ../index.php');
-}
-?>
-<?php
-include("./model/database.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,107 +23,21 @@ include("./model/database.php");
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet" />
-
+    <script src="js/jquery.js"></script>
 </head>
 
-<body>
-
-<section id="container" >
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-
-    <a href="index.html" class="logo">
-        <img src="images/logo.png" alt="">
-    </a>
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
-    </div>
-</div>
-<!--logo end-->
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            	<img alt="" src="images/avatar1_small.jpg">
-                <span class="username">Trần Hữu Trí</span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->            <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-            <li>
-                <a class="active" href="index.html">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Thống kê</span>
-                </a>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-th"></i>
-                    <span>Dữ liệu</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="account_data.php">Tài khoản</a></li>
-                    <li><a href="product_data.php">Sản phẩm</a></li>
-                    <li><a href="order_data.php">Đơn hàng</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span>Hàng hóa</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="add_vendor.php">Thêm nhà phân phối</a></li>
-                    <li><a href="add_product.php">Thêm sản phẩm</a></li>
-                    <li><a href="edit_product.php">Chỉnh sửa sản phẩm</a></li>
-                    <li><a href="import_product.php">Nhập kho</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-users"></i>
-                    <span>Tài khoản</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="add_account.php">Thêm tài khoản</a></li>
-                    <li><a href="edit_account.php">Chỉnh sửa tài khoản</a></li>
-                </ul>
-            </li>
-        </ul></div>        
-<!-- sidebar menu end-->
-    </div>
-</aside>
+<?php
+include("./model/database.php");
+include("header.php");
+?>
 <!--sidebar end-->
 <!--main content start-->
 <section id="main-content">
 <section class="wrapper">
 
 <!--mini statistics start-->
-<div class="row">
-    <div class="col-md-3">
+<div >
+    <div >
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon orange"><i class="fa fa-gavel"></i></span>
             <div class="mini-stat-info">
@@ -142,7 +46,7 @@ include("./model/database.php");
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div >
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon tar"><i class="fa fa-tag"></i></span>
             <div class="mini-stat-info">
@@ -151,7 +55,7 @@ include("./model/database.php");
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div >
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon pink"><i class="fa fa-money"></i></span>
             <div class="mini-stat-info">
@@ -160,7 +64,7 @@ include("./model/database.php");
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div >
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon green"><i class="fa fa-eye"></i></span>
             <div class="mini-stat-info">
@@ -172,64 +76,10 @@ include("./model/database.php");
 </div>
 
 
-<div class="row">
-    <div class="col-md-4">
-        <section class="panel">
-            <div class="panel-body">
-                <div class="top-stats-panel">
-                    <div class="daily-visit">
-                        <h4 class="widget-h">Lượt đăng kí mới trong hôm nay</h4>
-                        <div id="daily-visit-chart" style="width:100%; height: 100px; display: block">
 
-                        </div>
-                        <ul class="chart-meta clearfix">
-                            <li class="pull-left visit-chart-value">3233</li>
-                            <li class="pull-right visit-chart-title"><i class="fa fa-arrow-up"></i> 15%</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section class="panel">
-            <div class="panel-body">
-                <div class="top-stats-panel">
-                    <h4 class="widget-h">Top Advertise</h4>
-                    <div class="sm-pie">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section class="panel">
-            <div class="panel-body">
-                <div class="top-stats-panel">
-                    <h4 class="widget-h">Daily Sales</h4>
-                    <div class="bar-stats">
-                        <ul class="progress-stat-bar clearfix">
-                            <li data-percent="50%"><span class="progress-stat-percent pink"></span></li>
-                            <li data-percent="90%"><span class="progress-stat-percent"></span></li>
-                            <li data-percent="70%"><span class="progress-stat-percent yellow-b"></span></li>
-                        </ul>
-                        <ul class="bar-legend">
-                            <li><span class="bar-legend-pointer pink"></span> New York</li>
-                            <li><span class="bar-legend-pointer green"></span> Los Angels</li>
-                            <li><span class="bar-legend-pointer yellow-b"></span> Dallas</li>
-                        </ul>
-                        <div class="daily-sales-info">
-                            <span class="sales-count">1200 </span> <span class="sales-label">Products Sold</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-</div>
 
 <!--Core js-->
-<script src="js/jquery.js"></script>
+
 <script src="js/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
 <script src="bs3/js/bootstrap.min.js"></script>
 <script src="js/jquery.dcjqaccordion.2.7.js"></script>
@@ -250,15 +100,7 @@ include("./model/database.php");
 <script src="js/easypiechart/jquery.easypiechart.js"></script>
 <!--Sparkline Chart-->
 <script src="js/sparkline/jquery.sparkline.js"></script>
-<!--jQuery Flot Chart-->
-<script src="js/flot-chart/jquery.flot.js"></script>
-<script src="js/flot-chart/jquery.flot.tooltip.min.js"></script>
-<script src="js/flot-chart/jquery.flot.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
-<script src="js/flot-chart/jquery.flot.animator.min.js"></script>
-<script src="js/flot-chart/jquery.flot.growraf.js"></script>
-<script src="js/dashboard.js"></script>
-<script src="js/jquery.customSelect.min.js" ></script>
+
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
 <!--script for this page-->

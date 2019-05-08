@@ -59,7 +59,7 @@ include("./model/database.php");
 <?php
         $sql = getAllProduct();
         while($res = mysqli_fetch_array($sql)){
-            echo "<tr><td>".$res['proID']."</td><td>".$res['proName']."</td><td>".$res['companyName']."</td><td>".$res['import_price']."</td><td>".$res['price']."</td><td><div style='cursor: pointer' data-toggle='modal' data-target='#sizeModal' class='detail' proid='".$res['proID']."''>Chi tiết</div></td></tr>";
+            echo "<tr><td>".$res['proID']."</td><td>".$res['proName']."</td><td>".$res['companyName']."</td><td>".$res['import_price']."</td><td>".$res['price']."</td><td><div style='cursor: pointer' data-toggle='modal' data-target='#sizeModal' class='detail' proid='".$res['proID']."''><a href='edit_product.php?proID=".$res['proID']."'>Sửa</a></div></td></tr>";
         }
 ?>
                     </tbody>

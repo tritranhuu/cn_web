@@ -1,3 +1,12 @@
+<?php
+	if(isset($_GET['search'])){
+		$search = $_GET['search'];
+	}
+	else{
+		header('Location: index.php');
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -26,34 +35,38 @@ include("../database/dbCart.php");
 ?>
 
 <?php require("header.php");?>
-<?php require("slide.php");?>
+<div class="super_container">
+
+
+	
+
+	<div class="super_container_inner">
+		<div class="super_overlay"></div>
+
+</div>
 <?php
 
   require("../database/getProduct.php");
 ?>
 <div class="mt-5 row">
   <div class="col-lg-6 offset-lg-3">
-    <div class="section_title text-center">Popular on Little Closet</div>
+  	<br>
+  	<br>
+  	<br>
+  	<br>
+  	<br>
+    <div class="section_title text-center">Kết quả tìm kiếm cho <?php echo " ".$search;?></div>
+    <hr>
   </div>
   </div>
-  <div class="row page_nav_row">
-    <div class="col">
-      <div class="page_nav">
-        <ul class="d-flex flex-row align-items-start justify-content-center">
-          <li><a href="../controller/controlcategory.php?type=F&page=1&filertype=false">Women</a></li>
-            <li><a href="../controller/controlcategory.php?type=M&page=1&filertype=false">Men</a></li>
-            <li><a href="../controller/controlcategory.php?type=K&page=1&filertype=false">Kids</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+ 
 </div>
 <?php
   require("./viewFunction/product_box.php");
   
 
   $conn = connectDB();
-  $arr =  getProduct($conn);
+  $arr =  getProductBySignature($conn, $search);
   echo'
   <div class="products">
   <div class="container">';
