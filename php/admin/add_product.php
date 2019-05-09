@@ -99,14 +99,12 @@ include("header.php");
 </div></div></section></section></section>
 
 
-<div class="modal fade" id="imgModal" role="dialog" aria-labelledby="sizeGuide" aria-hidden="true">
+<div class="modal fade" id="imgModal" role="dialog" aria-labelledby="uploadImg" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title" id="sizeTitle">Thêm ảnh</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Thêm ảnh</h4>
         </div>
         <div class="modal-body">
         
@@ -117,6 +115,30 @@ include("header.php");
                 </span>
             </div>  
             <button class="btn btn-info" id="addImage">Submit</button>
+                                
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="colorModal" role="dialog" aria-labelledby="uploadColor" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Thêm màu</h4>
+        </div>
+        <div class="modal-body">
+        
+            <div class="form-group">
+                <label for="color">Màu sản phẩm</label>
+                <span class="btn btn-default btn-file">
+                        <input id="color" name="color[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+                </span>
+            </div>  
+            <button class="btn btn-info" id="addColor">Submit</button>
                                 
         </div>
       
@@ -168,7 +190,7 @@ $('#addProduct').on('click', event=>{
                             })
                 }
                 else{
-                    $('#imgModal').modal('show');    
+                    $('#colorModal').modal('show');    
                 }
                 
             },
@@ -177,6 +199,7 @@ $('#addProduct').on('click', event=>{
             }
 
         })
+
     }
 })
  
@@ -202,6 +225,31 @@ $('#addProduct').on('click', event=>{
                         success: function (response) {
                             $('#imgModal').modal('hide');
                             alert("success")
+                        },
+                        error: function (response) {
+                            alert("fail")
+                        }
+                    });
+                });
+
+                $("#addColor").on('click', function(){
+                    var form_data = new FormData();
+                    var ins = document.getElementById('color').files.length;
+                    for (var x = 0; x < ins; x++) {
+                        form_data.append("color[]", document.getElementById('color').files[x]);
+                    }
+                    $.ajax({
+                        url: './controller/addColor.php', // point to server-side PHP script 
+                        dataType: 'text', // what to expect back from the PHP script
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: form_data,
+                        type: 'post',
+                        success: function (response) {
+                            $('#colorModal').modal('hide');
+                            alert("success")
+                            $('#imgModal').modal('show');
                         },
                         error: function (response) {
                             alert("fail")

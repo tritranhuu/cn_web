@@ -35,4 +35,15 @@
 		}
 		return $imamges;
 	}
+
+	function getColorByProID($proId){
+		$conn = connectDB();
+		$query = 'select color from product natural join  product_option where proID='.$proId.' group by color';
+		$sql = mysqli_query($conn, $query);
+		$colors = array();
+		while ($res = mysqli_fetch_array($sql)) {
+            array_push($colors, $res['color']);
+		}
+		return $colors;
+	}
 ?>

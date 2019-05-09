@@ -52,14 +52,15 @@ include("./model/database.php");
                         <th>Nhà cung cấp</th> 
                         <th>Giá nhập</th>
                         <th>Giá bán</th>
-                        <th>Chi tiết</th>
+                        <th>Chỉnh sửa</th>
+                        <th>Nhập hàng</th>
                     </tr>
                     </thead>
                     <tbody>
 <?php
         $sql = getAllProduct();
         while($res = mysqli_fetch_array($sql)){
-            echo "<tr><td>".$res['proID']."</td><td>".$res['proName']."</td><td>".$res['companyName']."</td><td>".$res['import_price']."</td><td>".$res['price']."</td><td><div style='cursor: pointer' data-toggle='modal' data-target='#sizeModal' class='detail' proid='".$res['proID']."''><a href='edit_product.php?proID=".$res['proID']."'>Sửa</a></div></td></tr>";
+            echo "<tr><td>".$res['proID']."</td><td>".$res['proName']."</td><td>".$res['companyName']."</td><td>".$res['import_price']."</td><td>".$res['price']."</td><td><div style='cursor: pointer' class='detail' proid='".$res['proID']."''><a href='edit_product.php?proID=".$res['proID']."'>Sửa</a></div></td><td><div style='cursor: pointer' class='detail' proid='".$res['proID']."''><a href='import_product.php?proID=".$res['proID']."'>Nhập</a></div></td></tr>";
         }
 ?>
                     </tbody>
@@ -70,36 +71,12 @@ include("./model/database.php");
                         <th>Nhà cung cấp</th> 
                         <th>Giá nhập</th>
                         <th>Giá bán</th>
-                        <th>Chi tiết</th>
+                        <th>Chỉnh sửa</th>
+                        <th>Nhập hàng</th>
                     </tr>
                     </tfoot>
                     </table>
 
-<!-- <div class="modal fade" id="sizeModal" role="dialog" aria-labelledby="sizeGuide" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="sizeTitle">Chi tiết sản phẩm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body">
-            <div class="id"></div>
-            <div class=""></div>
-        </div>
-      
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-    $('.detail').on('click', event=>{
-        var id = $(event.target).attr("proid");
-        var body = $('.modal-body');
-
-    })
-</script> -->
 
 <?php 
 } 

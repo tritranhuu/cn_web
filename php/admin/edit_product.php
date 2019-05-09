@@ -26,6 +26,8 @@ include("./model/database.php");
 
     <script src="js/jquery.js"></script>
     <script src="bs3/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+
 </head>
 
 <?php
@@ -56,7 +58,7 @@ if(!isset($_GET['proID'])){
                                     <label for="proID">Nhập mã mặt hàng</label>
                                     <input type="text" class="form-control" id="proID" name="proID">
                                 </div>
-                            <button type="submit" class="btn btn-info" id="addProduct">Submit</button>
+                            <button type="submit" class="btn btn-info" id="">Submit</button>
                             </form>
                             </div>
 
@@ -167,6 +169,69 @@ else{
 <?php
 }
 ?>
+
+
+<script type="text/javascript">
+    $('#editProduct').on('click', event=>{
+    var proName = $('input[name=proName]').val();
+    var type = $('input[name=type]').val();
+    var price = $('input[name=price]').val();
+    var description = $('textarea[name=description]').val();
+    var material = $('input[name=material]').val();
+    var companyName = $('select[name=companyName]').val();
+    var gender = $('select[name=gender]').val();
+    var import_price = $('input[name=import_price]').val();
+    function isEmptyOrSpaces(str){
+        return str === null;
+    }
+
+    if(isEmptyOrSpaces(proName)|isEmptyOrSpaces(type)){
+        alert("Xin vui lòng nhập đủ thông tin");
+    }
+    else{
+        var formData = {
+            'edit' : 1,
+            'proID' : <?php echo $proID;?>,
+            'proName' : proName,
+            'type' : type,
+            'price' : price,
+            'description' : description,
+            'material' : material,
+            'gender' : gender,
+            'import_price' : import_price,            
+        };
+        $.ajax({
+            type        : 'POST', 
+            url         : './controller/editProduct.php', 
+            data        : formData, 
+            success:function(data){
+                if(data.replace(/^\s+|\s+$/g, '') == "noinfo"){
+                    swal({
+                            title: "Thất bại",
+                            text: "Hãy nhập đủ thông tin",
+                            type: "error"
+                            })
+                }
+                else{
+                    swal({
+                            title: "Thành công",
+                            text: "Chỉnh sửa mặt hàng thành công",
+                            type: "success"
+                            }).then( function(){
+                                window.location.reload();
+                            })
+                }
+                
+            },
+            error:function(data){
+                alert("Error");
+            }
+
+        })
+
+    }
+})
+</script>
 
 <script src="./js/fileinput.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>

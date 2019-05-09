@@ -2,7 +2,12 @@
 
 <?php
 if (isset($_FILES['img']) && !empty($_FILES['img'])) {
-    $proID = getNewestProID();
+    if(isset($_POST['proID'])){
+        $proID = $_POST['proID'];    
+    }
+    else{
+        $proID = getNewestProID();
+    }
     $no_files = count($_FILES["img"]['name']);
     for ($i = 0; $i < $no_files; $i++) {
         if ($_FILES["img"]["error"][$i] > 0) {

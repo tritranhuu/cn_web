@@ -92,4 +92,18 @@ function delImg($proID, $url){
 	$query = "delete from img where proID=".$proID." and url='".$url."'";
 	$sql = mysqli_query($conn, $query);	
 }
+
+function addColor($proID, $color){
+	$conn = connectDB();
+	$query = "insert into product_option (proID, size, color, stock_quantity) values (".$proID.", 'S', '".$color."', 0),(".$proID.", 'M', '".$color."', 0),(".$proID.", 'L', '".$color."', 0), (".$proID.", 'XL', '".$color."', 0)";
+	echo $query;
+	$sql = mysqli_query($conn, $query);
+}
+
+function editProduct($proID, $proName, $price, $type, $description, $material, $gender, $import_price){
+	$conn = connectDB();
+	$query = "update product set proName=N'".$proName."', price=".$price.", type=N'".$type."', description=N'".$description."', material=N'".$material."', gender=N'".$gender."', import_price=".$import_price." where proID=".$proID;
+	echo $query;
+	$sql = mysqli_query($conn, $query);	
+}
 ?>
