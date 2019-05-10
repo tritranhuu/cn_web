@@ -6,7 +6,7 @@
         $dat = '30-04-2019';
         $content =$_POST['input'];
         $accID = $_SESSION['accID'];
-        $proID = $_SESSION['product']['proID'];
+        $proID = $_POST['proID'];
         $rate = $_POST['rating'];
         $conn = connectDB();
         $query = 'insert into rate_product(accID, proID, point) values ('.$accID.",".$proID.",".$rate.")";
@@ -15,7 +15,6 @@
         echo $query2;
         mysqli_query($conn,$query);
         mysqli_query($conn,$query2);
-       
         }
 	
 

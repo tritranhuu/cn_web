@@ -85,7 +85,7 @@
       						<p class="message"><a href="#"></a></p>
       						<button onclick="location.href='./admin/';">Quản lý</button>
       						<button onclick="location.href='info_user.php';">Thông tin</button>
-      						
+      						<button onclick="location.href='my_order.php';">Đơn hàng</button>
       						<button id="logout">Đăng xuất</button>
     				<script type="text/javascript">
     					$("#logout").on("click", event=>{
@@ -120,7 +120,7 @@
       						<p>Xin chào<?php echo " ".$_SESSION['name']?></p>
       						<p class="message"><a href="#"></a></p>
       						<button onclick="location.href='info_user.php';">Thông tin</button>
-      						
+      						<button onclick="location.href='my_order.php';">Đơn hàng</button>
       						<button id="logout">Đăng xuất</button>
     				<script type="text/javascript">
     					$("#logout").on("click", event=>{

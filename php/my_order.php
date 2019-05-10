@@ -65,7 +65,7 @@ header("Pragma: no-cache");
                             <tbody>
                                 <?php 
                                 $username = "root"; 
-                                $password = "";     
+                                $password = "Tri200698";     
                                 $server   = "localhost";  
                                 $dbname   = "clothes_shop";   
                     

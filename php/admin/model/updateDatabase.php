@@ -90,7 +90,9 @@ function addAccount($username, $password, $name, $address, $phone, $admin, $emai
 function delImg($proID, $url){
 	$conn = connectDB();
 	$query = "delete from img where proID=".$proID." and url='".$url."'";
-	$sql = mysqli_query($conn, $query);	
+	$sql = mysqli_query($conn, $query);
+	$query2 = "delete from product_option where proID=".$proID." and color='".$url."'";
+	$sql2 = mysqli_query($conn, $query2);
 }
 
 function addColor($proID, $color){
@@ -103,7 +105,16 @@ function addColor($proID, $color){
 function editProduct($proID, $proName, $price, $type, $description, $material, $gender, $import_price){
 	$conn = connectDB();
 	$query = "update product set proName=N'".$proName."', price=".$price.", type=N'".$type."', description=N'".$description."', material=N'".$material."', gender=N'".$gender."', import_price=".$import_price." where proID=".$proID;
-	echo $query;
 	$sql = mysqli_query($conn, $query);	
+}
+
+function importProduct($proID, $size, $color, $quantity){
+	$conn = connectDB();
+	$query = "update product_option set stock_quantity=stock_quantity+$quantity where proID=$proID and size='$size' and color='$color'";
+	$sql = mysqli_query($conn, $query);
+	$query2 = "select stock_quantity from product_option where proID=$proID and size='$size' and color='$color'";
+	$sql2 = mysqli_query($conn, $query2);
+	$res = mysqli_fetch_array($sql2);
+	echo $res['stock_quantity'];
 }
 ?>

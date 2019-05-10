@@ -11,7 +11,7 @@ include("./controller/controllerAdd.php");
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>Quản lí đơn hàng</title>
+    <title>Quản lý ảnh sản phẩm</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -27,88 +27,10 @@ include("./controller/controllerAdd.php");
 
     <script src="js/jquery.js"></script>
     <script src="bs3/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 </head>
 
-<body>
-
-<section id="container" >
-<!--header start-->
-<header class="header fixed-top clearfix">
-<!--logo start-->
-<div class="brand">
-
-    <a href="index.html" class="logo">
-        <img src="images/logo.png" alt="">
-    </a>
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars"></div>
-    </div>
-</div>
-<!--logo end-->
-<div class="top-nav clearfix">
-    <!--search & user info start-->
-    <ul class="nav pull-right top-menu">
-        <li>
-            <input type="text" class="form-control search" placeholder=" Search">
-        </li>
-        <!-- user login dropdown start-->
-        <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="images/avatar1_small.jpg">
-                <span class="username">Trần Hữu Trí</span>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
-            </ul>
-        </li>
-        <!-- user login dropdown end -->
-
-    </ul>
-    <!--search & user info end-->
-</div>
-</header>
-<!--header end-->
-
-<aside>
-    <div id="sidebar" class="nav-collapse">
-        <!-- sidebar menu start-->            <div class="leftside-navigation">
-            <ul class="sidebar-menu" id="nav-accordion">
-            <li>
-                <a href="index.html">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Thống kê</span>
-                </a>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;" class="active">
-                    <i class="fa fa-th"></i>
-                    <span>Dữ liệu</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="#">Tài khoản</a></li>
-                    <li><a href="#">Sản phẩm</a></li>
-                    <li class="active"><a href="#">Đơn hàng</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu">
-                <a href="javascript:;">
-                    <i class="fa fa-tasks"></i>
-                    <span>Quản lí</span>
-                </a>
-                <ul class="sub">
-                    <li><a href="form_component.html">Tài khoản</a></li>
-                    <li><a href="advanced_form.html">Sản phẩm</a></li>
-                    <li><a href="form_wizard.html">Kho</a></li>
-                    <li><a href="form_validation.html">Đơn hàng</a></li>
-                </ul>
-            </li>
-        </ul></div>        
-<!-- sidebar menu end-->
-    </div>
-</aside>
+<?php include('header.php');?>
 
 
 <!--main content start-->
@@ -124,14 +46,32 @@ include("./controller/controllerAdd.php");
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
-                                
+                                <div class="pull-right"><a data-toggle="modal" href='#vendorList'>Danh sách nhà phân phối</a></div>
+                                <div class="modal fade" id='vendorList' tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Danh sách các nhà phân phối</h4>
+                                    </div>
+
+                                    <div class="modal-body row">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-6"><?php printCompanyListModal();?></div>
+                                        <div class="col-md-3"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                                <br>
                                 <div class="form-group">
-                                    <label for="vendor">Tên nhà phân phối</label>
+                                    <label for="vendor">Nhập tên nhà phân phối mới</label>
                                     <input type="text" class="form-control" id="vendor" name="vendor">
                                 </div>                                                  
                                 
                         
-                            <button class="btn btn-info" id="addVendor">Submit</button>
+                            <button class="btn btn-info" id="addVendor">Thêm +</button>
                             </div>
 
                         </div>
@@ -140,6 +80,8 @@ include("./controller/controllerAdd.php");
 
                                 
 </div></div></section></section></section>
+
+
 
 
 <script type="text/javascript">
@@ -222,13 +164,9 @@ $('#addVendor').on('click', event=>{
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
 
-<!--dynamic table initialization -->
-<script src="js/dynamic_table_init.js"></script>
 
 
 <script src="./js/fileinput.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-
 
 
 </body>

@@ -64,13 +64,13 @@ header("Pragma: no-cache");
                             <tbody>
                                 <?php 
                                 $username = "root"; 
-                                $password = "";     
+                                $password = "Tri200698";     
                                 $server   = "localhost";  
                                 $dbname   = "clothes_shop";   
                     
                                 $conn = mysqli_connect($server, $username, $password, $dbname);
 
-                                $query = "select * from detail_order,product where detail_order.proID=product.proID and orderID='1'";
+                                $query = "select * from detail_order natural join product_option natural join product where orderID=1";
                                 $sql = mysqli_query($conn,$query);
                                 while ($res = mysqli_fetch_array($sql)) { ?>
                                 <tr>

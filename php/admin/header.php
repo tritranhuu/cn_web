@@ -18,7 +18,7 @@ include("./model/getInfoFromDb.php");
 <div class="brand">
 
     <a href="../index.php" class="logo">
-        <img src="images/logo.png" alt="">
+        <img src="images/logo5.png" alt="">
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
@@ -30,10 +30,10 @@ include("./model/getInfoFromDb.php");
     <ul class="nav pull-right top-menu">
         <!-- user login dropdown start-->
         <li>
-            <a href="#">
+            <a>
             	<img alt="" src="images/admin.png">
                 <span class="username"><?php echo getNameById($_SESSION['accID']);?></span>
-                <b class="caret"></b>
+                
             </a>
         </li>
         <!-- user login dropdown end -->

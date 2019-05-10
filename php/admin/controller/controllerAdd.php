@@ -21,3 +21,18 @@ include("./model/database.php");
 <?php 
 } 
 ?>
+
+<?php
+	function printCompanyListModal(){
+?>
+		<div class="list-group">
+<?php
+		$sql = getAllCompany();
+		while($res = mysqli_fetch_array($sql)){
+			echo "<a class='list-group-item'>".$res['companyName']."</a>";
+		}
+?>
+		</div>
+<?php 
+} 
+?>

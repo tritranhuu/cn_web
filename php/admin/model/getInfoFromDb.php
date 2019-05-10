@@ -46,4 +46,30 @@
 		}
 		return $colors;
 	}
+
+	function getAllVendorName(){
+		$conn = connectDB();
+		$query = 'select * from company';
+		$sql = mysqli_query($conn, $query);
+		$names = array();
+		while ($res = mysqli_fetch_array($sql)) {
+            array_push($names, $res['companyName']);
+		}
+		return $names;
+	}
+
+	function getStockById($proID){
+		$conn = connectDB();
+		$stocks = array();
+		$query = 'select * from product_option where proID='.$proID;
+		$sql = mysqli_query($conn, $query);
+		while ($res = mysqli_fetch_array($sql)) {
+            $stock = array('size' => $res['size'],
+            			   'color' => $res['color'],
+            			   'stock' => $res['stock_quantity']
+            				);
+            array_push($stocks, $stock);
+		}
+		return $stocks;
+	}
 ?>

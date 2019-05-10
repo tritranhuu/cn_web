@@ -202,6 +202,8 @@ $(document).ready(
   })
 );
 
+$('.product_cart').on('click', event=>{})
+
 
 </script>
 
