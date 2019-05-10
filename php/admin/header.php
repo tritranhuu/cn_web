@@ -55,7 +55,7 @@ include("./model/getInfoFromDb.php");
                 </a>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="javascript:;" class="dcjq-parent">
                     <i class="fa fa-th"></i>
                     <span>Dữ liệu</span>
                 </a>
@@ -66,19 +66,19 @@ include("./model/getInfoFromDb.php");
                 </ul>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="javascript:;" class="dcjq-parent">
                     <i class="fa fa-shopping-cart"></i>
                     <span>Hàng hóa</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="add_vendor.php" class="active">Thêm nhà phân phối</a></li>
+                    <li><a href="add_vendor.php" >Thêm nhà phân phối</a></li>
                     <li><a href="add_product.php">Thêm sản phẩm</a></li>
                     <li><a href="edit_product.php">Chỉnh sửa sản phẩm</a></li>
                     <li><a href="import_product.php">Nhập kho</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
-                <a href="javascript:;">
+                <a href="javascript:;" class="dcjq-parent">
                     <i class="fa fa-users"></i>
                     <span>Tài khoản</span>
                 </a>
@@ -93,7 +93,18 @@ include("./model/getInfoFromDb.php");
 </aside>
 <!--sidebar end-->
 <script type="text/javascript">
+    $("document").ready(function () {
     var page = window.location.pathname.split("/").pop()
     var element = $(`a[href='${page}']`)
-    element.attr("class", "active")
+    var element_3 = element.closest('li')
+    var element_2 = element_3.closest('ul').closest('li').find("a[href='javascript:;']")
+    if(element_2.text()){
+    element_3.attr("class", "active")
+    element_2.attr("class", "active dcjq-parent")
+    }
+    else{
+        element.attr("class", "active")
+    }
+    });
+    
 </script>

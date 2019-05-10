@@ -191,7 +191,7 @@ else{
     else{
         var formData = {
             'edit' : 1,
-            'proID' : <?php echo $proID;?>,
+            'proID' : <?php if($proID){echo $proID;}else{echo 0;}?>,
             'proName' : proName,
             'type' : type,
             'price' : price,
@@ -235,3 +235,14 @@ else{
 
 <script src="./js/fileinput.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!--dynamic table-->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!--common script init for all pages-->
+<script src="js/scripts.js"></script>
+

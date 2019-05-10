@@ -117,4 +117,11 @@ function importProduct($proID, $size, $color, $quantity){
 	$res = mysqli_fetch_array($sql2);
 	echo $res['stock_quantity'];
 }
+
+function changeStatus($orderID, $status){
+	$conn = connectDB();
+	$query = "update order_product set status='".$status."' where orderID=".$orderID;
+	$sql = mysqli_query($conn, $query);
+	
+}
 ?>

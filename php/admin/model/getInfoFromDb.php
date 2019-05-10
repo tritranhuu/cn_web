@@ -72,4 +72,21 @@
 		}
 		return $stocks;
 	}
+
+	function getOrderDetail($orderID){
+        $conn = connectDB();
+        $query = "select * from detail_order natural join product_option natural join product where orderID=".$orderID;
+        $sql = mysqli_query($conn, $query);
+        $items = array();
+        while ($res = mysqli_fetch_array($sql)) {
+            $item = array('proID' => $res['proID'], 
+                          'proName' => $res['proName'], 
+                          'size' => $res['size'], 
+                          'color' => $res['color'], 
+                          'quantity' => $res['quantity'], 
+                            );
+            array_push($items, $item);
+        }
+        return $items;
+    }
 ?>

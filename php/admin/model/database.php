@@ -79,4 +79,6 @@
         $res = mysqli_fetch_array($sql);
         return $res['tol'];        
     }
+
+    
 ?>

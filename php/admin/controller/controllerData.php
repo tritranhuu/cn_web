@@ -13,6 +13,7 @@ include("./model/database.php");
                         <th>Địa chỉ</th> 
                         <th>Hình thức vận chuyển</th>
                         <th>Phương thức thanh toán</th>
+                        <th>Trạng thái đơn hàng</th>
                         <th>Tổng đơn hàng</th>
                     </tr>
                     </thead>
@@ -20,7 +21,7 @@ include("./model/database.php");
 <?php
 		$sql = getAllOrder();
 		while($res = mysqli_fetch_array($sql)){
-			echo "<tr><td>".$res['orderID']."</td><td>".$res['name']."</td><td>".$res['address']."</td><td>".$res['shipping']."</td><td>".$res['payment']."</td><td>".$res['total']."</td></tr>";
+			echo "<tr><td data-toggle='modal' data-target='#orderModal' style='cursor: pointer' id='".$res['orderID']."' class='orderDetail'>".$res['orderID']."</td><td>".$res['name']."</td><td>".$res['address']."</td><td>".$res['shipping']."</td><td>".$res['payment']."</td><td>".$res['status']."</td><td>".$res['total']."</td></tr>";
 		}
 ?>
                     </tbody>
@@ -31,6 +32,7 @@ include("./model/database.php");
                         <th>Địa chỉ</th> 
                         <th>Hình thức vận chuyển</th>
                         <th>Phương thức thanh toán</th>
+                        <th>Trạng thái đơn hàng</th>
                         <th>Tổng đơn hàng</th>
                     </tr>
                     </tfoot>

@@ -5,7 +5,7 @@
 
     <div class="col-xl-4 col-md-6 grid-item <?php if($price<200000) echo "nho"; else echo "lon";?> ">   
                             <div class="product">   
-                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&page=1&product='.$proID.'"'; ?>><img src='<?php echo "../".$url;?>' style='border: 1px solid gray;'></a></div>   
+                                <div class="product_image"><<?php echo 'a href="../controller/product_controller.php?action=index&page=1&product='.$proID.'"'; ?>><img src='<?php echo "../".$url;?>' style='border: 1px solid gray; min-width: 100%; min-height: 100%;'></a></div>   
                                 <div class="product_content">   
                                     <div class="product_info d-flex flex-row align-items-start justify-content-start">  
                                         <div>   
