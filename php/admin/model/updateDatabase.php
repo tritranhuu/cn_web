@@ -27,13 +27,13 @@ function getCompanyIdByName($name){
 	return -1;
 }
 
-function addProduct($proName, $price, $type, $description, $material, $companyName, $gender, $import_price){
+function addProduct($proName, $price, $type, $description, $material, $companyName, $gender, $import_price,$date){
 
 	$conn = connectDB();
 	$companyID = getCompanyIdByName($companyName);
 	echo $companyID;
 	if($companyID > 0){
-		$query = "insert into product (proName, price, type, created, description, material, companyID, viewed, gender, import_price) values (N'".$proName."', ".$price.", N'".$type."', 3, N'".$description."', '".$material."', ".$companyID.", 0, '".$gender."', ".$import_price.")";
+		$query = "insert into product (proName, price, type, created, description, material, companyID, viewed, gender, import_price) values (N'".$proName."', ".$price.", N'".$type."','".$date."', N'".$description."', '".$material."', ".$companyID.", 0, '".$gender."', ".$import_price.")";
 		echo $query; 
 		$sql = mysqli_query($conn, $query);		
 	}
@@ -67,26 +67,37 @@ function addVendor($name){
 	}
 }
 
-function addAccount($username, $password, $name, $address, $phone, $admin, $email, $gender){
-		$conn = connectDB();
-    	$query_check = "select * from account where username='".$username."' or email='".$email."'";
-    	$sql_check = mysqli_query($conn, $query_check);
-    	if(mysqli_num_rows($sql_check)>0){
-    		$res = mysqli_fetch_array($sql_check);
-    		if($res['username'] === $username){
-    			echo "username";
-    			return 0;
-    		}
-    		else{
-    			echo "email";
-    			return 0;
-    		}
-    	}
-    	$query = "insert into account (username, password, name, address, phone, admin, email, gender) values ('".$username."', '".$password."', N'".$name."',N'".$address."','".$phone."',".$admin.",'".$email."', '".$gender."')";
-		mysqli_query($conn,$query);
-		return 1;
+function addAccount($username, $password, $name, $address, $phone, $admin, $email, $gender,$date){
+	$conn = connectDB();
+	$query_check = "select * from account where username='".$username."' or email='".$email."'";
+	$sql_check = mysqli_query($conn, $query_check);
+	if(mysqli_num_rows($sql_check)>0){
+		$res = mysqli_fetch_array($sql_check);
+		if($res['username'] === $username){
+			echo "username";
+			return 0;
+		}
+		else{
+			echo "email";
+			return 0;
+		}
 	}
-
+	$query = "insert into account (username, password, name, address, phone, admin, email, gender,created) values ('".$username."', '".$password."', N'".$name."',N'".$address."','".$phone."',".$admin.",'".$email."', '".$gender."','".$date."')";
+	mysqli_query($conn,$query);
+	return 1;
+}
+function editAccount($username, $password, $name, $address, $phone, $admin, $email, $gender,$id){
+	$conn = connectDB();
+	$query = "update account set username= '".$username."', password = '".$password."', name= '".$name."', address = '".$address."', phone='".$phone."', admin=".$admin.", email='".$email."', gender ='".$gender."' where accID=".$id;
+	mysqli_query($conn,$query);
+	return $query;
+}
+function delAcc($id){
+	$conn = connectDB();
+	$query = "delete from account where accID = '".$id."'";
+	$sql = mysqli_query($conn, $query);	
+	echo $query;
+}
 function delImg($proID, $url){
 	$conn = connectDB();
 	$query = "delete from img where proID=".$proID." and url='".$url."'";

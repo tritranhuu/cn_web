@@ -1,5 +1,7 @@
 <div class="super_container">
-
+<?php 
+	function printSlide(){
+?>
 
 	
 
@@ -15,8 +17,8 @@
 								<div class="col fill_height">
 									<div class="home_container d-flex flex-column align-items-center justify-content-start">
 										<div class="home_content">
-											<div class="home_title">New Arrivals</div>
-											<div class="home_subtitle">Summer Wear</div>
+											<div class="home_title">Hàng mới về</div>
+											<div class="home_subtitle"></div>
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
@@ -30,13 +32,13 @@
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.php?product=203">Cool Clothing with Brown Stripes</a></div>
+																			<div class="product_name"><a href="product.php?product=203">Áo phông mickey vàng</a></div>
 																			<div class="product_category">In <a href="controlcategory.php?type=F">Category</a></div>
 																		</div>
 																	</div>
 																	<div class="ml-auto text-right">
 																		<div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-																		<div class="product_price text-right">$3<span>.99</span></div>
+																		<div class="product_price text-right">200000</span></div>
 																	</div>
 																</div>
 																<div class="product_buttons">
@@ -72,8 +74,8 @@
 								<div class="col fill_height">
 									<div class="home_container d-flex flex-column align-items-center justify-content-start">
 										<div class="home_content">
-											<div class="home_title">Popular</div>
-											<div class="home_subtitle">Summer Wear</div>
+											<div class="home_title">Phổ biến nhất</div>
+											<div class="home_subtitle"></div>
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
@@ -87,13 +89,13 @@
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.php?product=206">Áo phông nữ cộc tay</a></div>
+																			<div class="product_name"><a href="product.php?product=206">Áo phông nữ cổ tim</a></div>
 																			<div class="product_category">In <a href="category.html">Category</a></div>
 																		</div>
 																	</div>
 																	<div class="ml-auto text-right">
 																		<div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-																		<div class="product_price text-right">$3<span>.99</span></div>
+																		<div class="product_price text-right">249000</div>
 																	</div>
 																</div>
 																<div class="product_buttons">
@@ -129,8 +131,8 @@
 								<div class="col fill_height">
 									<div class="home_container d-flex flex-column align-items-center justify-content-start">
 										<div class="home_content">
-											<div class="home_title">Trendsetters</div>
-											<div class="home_subtitle">Summer Wear</div>
+											<div class="home_title">Xu hướng thời trang</div>
+											<div class="home_subtitle"></div>
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
@@ -144,13 +146,13 @@
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.php?product=209">Cool Clothing with Brown Stripes</a></div>
+																			<div class="product_name"><a href="product.php?product=209">Áo phông nữ tay chờm</a></div>
 																			<div class="product_category">In <a href="category.php?typ =F">Category</a></div>
 																		</div>
 																	</div>
 																	<div class="ml-auto text-right">
 																		<div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-																		<div class="product_price text-right">$3<span>.99</span></div>
+																		<div class="product_price text-right">249.000</div>
 																	</div>
 																</div>
 																<div class="product_buttons">
@@ -186,8 +188,8 @@
 								<div class="col fill_height">
 									<div class="home_container d-flex flex-column align-items-center justify-content-start">
 										<div class="home_content">
-											<div class="home_title">Premium Items</div>
-											<div class="home_subtitle">Summer Wear</div>
+											<div class="home_title">Thiết kế mới</div>
+											<div class="home_subtitle"></div>
 											<div class="home_items">
 												<div class="row">
 													<div class="col-sm-3 offset-lg-1">
@@ -201,13 +203,13 @@
 																<div class="product_info d-flex flex-row align-items-start justify-content-start">
 																	<div>
 																		<div>
-																			<div class="product_name"><a href="product.php?product=210">Cool Clothing with Brown Stripes</a></div>
+																			<div class="product_name"><a href="product.php?product=210">Áo phông nữ </a></div>
 																			<div class="product_category">In <a href="category.html">Category</a></div>
 																		</div>
 																	</div>
 																	<div class="ml-auto text-right">
 																		<div class="rating_r rating_r_4 home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-																		<div class="product_price text-right">$3<span>.99</span></div>
+																		<div class="product_price text-right">249.000</div>
 																	</div>
 																</div>
 																<div class="product_buttons">
@@ -261,3 +263,6 @@
 			</div>
 		</div>	
 </div>
+<?php
+	}
+?>

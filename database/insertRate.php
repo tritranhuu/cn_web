@@ -3,7 +3,7 @@
         session_start();
         include("../database/connectDB.php");
         if(isset($_POST['input'])){
-        $dat = '30-04-2019';
+        $dat = date('d-m-Y ', time());
         $content =$_POST['input'];
         $accID = $_SESSION['accID'];
         $proID = $_POST['proID'];
@@ -15,6 +15,7 @@
         echo $query2;
         mysqli_query($conn,$query);
         mysqli_query($conn,$query2);
+       
         }
 	
 

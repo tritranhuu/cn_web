@@ -23,6 +23,7 @@ header("Pragma: no-cache");
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
+
 ?>
 
 <?php require("header.php");?>
@@ -30,6 +31,8 @@ include("../database/dbCart.php");
 <?php
 
   require("../database/getProduct.php");
+  
+  printSlide();
 ?>
 <div class="mt-5 row">
   <div class="col-lg-6 offset-lg-3">
@@ -49,9 +52,8 @@ include("../database/dbCart.php");
     </div>
 </div>
 <?php
-  require("./viewFunction/product_box.php");
   
-
+  require("./viewFunction/product_box.php");
   $conn = connectDB();
   $arr =  getProduct($conn);
   echo'
@@ -201,8 +203,6 @@ $(document).ready(
     });
   })
 );
-
-$('.product_cart').on('click', event=>{})
 
 
 </script>

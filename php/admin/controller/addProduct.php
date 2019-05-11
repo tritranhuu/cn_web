@@ -4,7 +4,7 @@ include("../model/updateDatabase.php");
 <?php
 if(isset($_POST['addProduct'])){
 	$proName = $_POST['proName'];
-
+	$date = date('d-m-Y ', time());
 	$price = $_POST['price'];
 	$type = $_POST['type'];
 	$description = $_POST['description'];
@@ -22,7 +22,7 @@ if(isset($_POST['addProduct'])){
 	else{
 		$_SESSION['proName'] = $proName;
 	}
- 	addProduct($proName, $price, $type, $description, $material, $companyName, $gender, $import_price);
+ 	addProduct($proName, $price, $type, $description, $material, $companyName, $gender, $import_price,$date);
 
 }
 ?>
