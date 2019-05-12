@@ -72,7 +72,7 @@ $price = $pro['price'];
 								<ul class="slides">
 										<?php
 										foreach($image as  $i){
-											echo '<li><img src="..'.$i.'" /></li>';
+											echo '<li><img src="../images/product/'.$i.'" /></li>';
 										}
 										?>
 								</ul>
@@ -82,7 +82,7 @@ $price = $pro['price'];
 									<ul class="slides">
 									<?php
 											foreach($image as  $i){
-											echo '<li><div><img src="..'.$i.'" /></div></li>';
+											echo '<li><div><img src="../images/product/'.$proID.'/'.$i.'" /></div></li>';
 										}
 										?>
 									</ul>
@@ -143,7 +143,7 @@ $price = $pro['price'];
 											array_push($tmp,$i);
 											echo '<li>';
 											echo '<input type="radio" id="radio_'.$i.'"name="color_radio" class="regular_radio" checked value="'.$i.'">';
-											echo '<label for="radio_'.$i.'"><img src="../images/color/'.$i.'.png" width="36px" height="36px"></label>';
+											echo '<label for="radio_'.$i.'"><img src="../images/product/'.$proID."/color/".$i.'.png" width="36px" height="36px"></label>';
 											echo '</li>';
 											}
 									}

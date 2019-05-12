@@ -37,13 +37,27 @@ $conn = connectDB();
 $arrAcc = getAllAcc($conn);
 ?>
 <section id="main-content" class="container"">
-        <section class="wrapper >
+        <section class="wrapper" >
+        
+        <div class="row">
+        <div class="col-lg-9">
+        <h4>Quản lý tài khoản</h4>
+        </div>
+      
+        
+        <div class="col-lg-2">
+        <input type="search" name="" id="myInput" class="form-control" value="" required="required" onkeyup="myFunction()" placeholder="Search for names..">
+        </div>
+        </div>
+        
+       
+        <br/>
         <!-- page start-->
         <!-- page start-->
         <div class="row">
             <div class="col-lg-11">
                     <section class="panel">
-                        <table class="table">
+                        <table class="table" id="myTable"> 
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -72,7 +86,26 @@ $arrAcc = getAllAcc($conn);
         </div>
     </section>
 </section>
-
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 <script type="text/javascript">
     function do_delete(id) {
         var answer = confirm("Delete user?")
