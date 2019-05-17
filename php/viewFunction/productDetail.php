@@ -3,7 +3,7 @@
 	
     
 ?>	
-<div class="section">
+<div class="section" id="review">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
@@ -14,9 +14,9 @@
 					<div class="col-md-12">
 						<div class="product-tab">
 							<ul class="tab-nav">
-								<li ><a data-toggle="tab" href="#tab1">Description</a></li>
-								<li><a data-toggle="tab" href="#tab3">Details</a></li>
-								<li class="active"><a data-toggle="tab" href="#tab2">Reviews </a></li>
+								<li ><a data-toggle="tab" href="#tab1">Mô tả</a></li>
+								<li><a data-toggle="tab" href="#tab3">Chất liệu</a></li>
+								<li class="active"><a data-toggle="tab" href="#tab2">Đánh giá</a></li>
 							</ul>
 							<div class="tab-content">
 								<div id="tab1" class="tab-pane fade in ">
@@ -78,15 +78,15 @@
 if(isset($_SESSION['accID'])){
 ?>
 										<div class="col-md-6 col-lg-6 mycmt ">
-											<h4 class="text-uppercase">Write Your Review</h4>
-											<p>Your email address will not be published.</p>
+											<h4 class="text-uppercase">Bình luận</h4>
+											<p>Địa chỉ email của bạn sẽ không công khai</p>
 											<form class="review-form">
 												<div class="form-group">
-													<textarea class="input" name ="input" id ="input" placeholder="Your review"></textarea>
+													<textarea class="input" name ="input" id ="input" placeholder="Nhận xét của bạn"></textarea>
 												</div>
 												<div class="form-group">
 													<div class="input-rating">
-														<strong class="text-uppercase">Your Rating: </strong>
+														<strong class="text-uppercase">Đánh giá: </strong>
 														<div class="stars" name = "rate" >
 															
 															<input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
@@ -97,7 +97,7 @@ if(isset($_SESSION['accID'])){
 														</div>
 													</div>
 												</div>
-												<input name="submit" id="submit" class="btn btn-primary" type="button" value="Submit">
+												<input name="submit" id="submit" class="btn btn-success" type="button" value="Gửi">
 											</form>
 										</div>
 <?php	

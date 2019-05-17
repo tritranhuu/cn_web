@@ -4,11 +4,15 @@ if (!isset($_SESSION['accID']))
 {
     header('Location: index.php');
 }
+else{
+    $accID = $_SESSION['accID'];
+}
 ?>
 
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
+include("../database/dbOrder.php"); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +23,7 @@ header("Pragma: no-cache");
 ?>
 
 <head>
-<title>My order</title>
+<title>Danh sách đơn hàng</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Little Closet template">
@@ -27,13 +31,14 @@ header("Pragma: no-cache");
 <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
 <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="../styles/cart.css">
-<link rel="stylesheet" type="text/css" href="../styles/order.css">
 <link rel="stylesheet" type="text/css" href="../styles/cart_responsive.css">
 <script src="../js/jquery-3.2.1.min.js"></script>
 
 
 
-<?php include("header.php"); ?>
+<?php 
+include("header.php"); 
+?>
 		<div class="home">
 			<div class="home_container d-flex flex-column align-items-center justify-content-end">
 				<div class="home_content text-center">
@@ -51,36 +56,31 @@ header("Pragma: no-cache");
 			<div class="container">
 				<div class="row">
 					<div class="col">
-                        <table class="table table-bordered table-condensed">
+                        <table class="table table-hover ">
                             <thead>
                                 <tr>
-                                    <th>Mã đơn hàng</th> 
-                                    <th>Ngày mua</th> 
-                                    <th>Gửi đến</th> 
-                                    <th>Tổng tiền</th> 
-                                    <th>Trạng thái đơn hàng</th>
-                                    <th>Hành động</th>
+                                    <th style="text-align: center; vertical-align: middle;"><b>Mã đơn hàng</b></th> 
+                                    <th style="text-align: center; vertical-align: middle;"><b>Tên nguời đặt</b></th> 
+                                    <th style="text-align: center; vertical-align: middle;"><b>Địa chỉ</b></th> 
+                                    <th style="text-align: center; vertical-align: middle;"><b>Số điện thoại</b></th> 
+                                    <th style="text-align: center; vertical-align: middle;"><b>Ngày đặt hàng</b></th>
+                                    <th style="text-align: center; vertical-align: middle;"><b>Trạng thái đơn hàng</b></th>
+                                    <th style="text-align: center; vertical-align: middle;"><b>Tổng đơn</b></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                $username = "root"; 
-                                $password = "Tri200698";     
-                                $server   = "localhost";  
-                                $dbname   = "clothes_shop";   
-                    
-                                $conn = mysqli_connect($server, $username, $password, $dbname);
-
-                                $query = "select * from order_product where accID='1'";
-                                $sql = mysqli_query($conn,$query);
-                                while ($result = mysqli_fetch_array($sql)) { ?>
+                                $conn = connectDB();
+                                $orders = getAllOrderByAccID($accID, $conn);
+                                for($i = 0; $i < sizeof($orders); $i++) { ?>
                                 <tr>
-                                    <td><?php echo $result['orderID']; ?></td>
-                                    <td><?php echo $result['created']; ?></td>
-                                    <td><?php echo $result['address_user']; ?></td>
-                                    <td><?php echo $result['amount']; ?></td>
-                                    <td><?php echo $result['status_order']; ?></td>
-                                    <td><a href="detail_order.php?id=<?php echo $result['orderID'];?>">Xem chi tiết đơn hàng</a></td>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="detail_order.php?id=<?php echo $orders[$i]['orderID'];?>"><?php echo $orders[$i]['orderID']; ?></a></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $orders[$i]['name']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $orders[$i]['address']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $orders[$i]['phone']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $orders[$i]['created']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $orders[$i]['status']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $orders[$i]['total']; ?></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>

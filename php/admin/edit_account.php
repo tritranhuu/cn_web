@@ -10,7 +10,7 @@ include("./model/database.php");
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>Quản lý tài khoản</title>
+    <title>Chỉnh sửa tài khoản</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@ include("./model/Account.php");
 $conn = connectDB();
 $arrAcc = getAllAcc($conn);
 ?>
-<section id="main-content" class="container"">
+<section id="main-content" class="container">
         <section class="wrapper" >
         
         <div class="row">
@@ -143,3 +143,13 @@ function myFunction() {
 
 <script src="./js/fileinput.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+<script class="include" type="text/javascript" src="js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!--dynamic table-->
+<script type="text/javascript" language="javascript" src="js/advanced-datatable/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/data-tables/DT_bootstrap.js"></script>
+<!--common script init for all pages-->
+<script src="js/scripts.js"></script>

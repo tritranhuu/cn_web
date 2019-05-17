@@ -53,7 +53,7 @@ include("header.php");
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Dynamic Table
+                       Dữ liệu mặt hàng
                     </header>
                     <div class="panel-body">
                     <div class="adv-table">

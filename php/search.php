@@ -67,6 +67,7 @@ include("../database/dbCart.php");
 
   $conn = connectDB();
   $arr =  getProductBySignature($conn, $search);
+  if(sizeof($arr)>0){
   echo'
   <div class="products">
   <div class="container">';
@@ -79,11 +80,19 @@ include("../database/dbCart.php");
 </div>
           <div class="row load_more_row">
                         <div class="col">
-                            <div class="button load_more ml-auto mr-auto" id="loadMore"><a href="#">load more</a></div>
+                            <div class="button load_more ml-auto mr-auto" id="loadMore"><a href="#">xem thêm</a></div>
                         </div>
                     </div>
                 </div>
             </div>
+<?php
+}
+else{
+?>
+  <div style="text-align: center; font-family: sans-serif; font-size: 60px; color: #D2D1D1; margin: 50px 0px 200px 0px">KHÔNG CÓ KẾT QUẢ PHÙ HỢP</div>
+<?php
+}
+?>
 <div class="boxes">
       <div class="container">
         <div class="row">
@@ -205,12 +214,16 @@ include("../database/dbCart.php");
 $(document).ready(
   $(function () {
     $("div.product").slice(0, 10).show();
+    if ($("div.product:hidden").length == 0) {
+            $("#loadMore").remove();
+        }
     $("#loadMore").on('click', function (e) {
         e.preventDefault();
-        $("div.product:hidden").slice(0, 6).slideDown();
         if ($("div.product:hidden").length == 0) {
-            $("#load").fadeOut('slow');
+            $("#loadMore").remove();
         }
+        $("div.product:hidden").slice(0, 6).slideDown();
+        
     });
   })
 );

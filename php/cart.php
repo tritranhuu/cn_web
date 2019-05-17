@@ -86,7 +86,7 @@ header("Pragma: no-cache");
 							<div class="cart_buttons d-flex flex-row align-items-start justify-content-start">
 								<div class="cart_buttons_inner ml-sm-auto d-flex flex-row align-items-start justify-content-start flex-wrap">
 									<div class="button button_clear trans_200" id="deleteCart"><a style="color: white; cursor: pointer">xóa giỏ hàng</a></div>
-									<div class="button button_continue trans_200"><a style="color: white; cursor: pointer">tiếp tục mua sắm</a></div>
+									<div class="button button_continue trans_200"><a style="color: white; cursor: pointer" href="index.php">tiếp tục mua sắm</a></div>
 								</div>
 							</div>
 						</div>
@@ -166,7 +166,7 @@ header("Pragma: no-cache");
 												<div class="product_text"><?php echo $item['description'];?></div>
 											</div>
 										</div>
-										<div class="product_color product_text"><span>Color: </span><img src="../images/color/1.png" width="36px" height="36px"></div>
+										<div class="product_color product_text"><span>Color: </span><img src="../<?php echo $item['color'];?>" width="36px" height="36px"></div>
 										<div class="product_size product_text"><span>Size: </span><?php echo $item['size'];?></div>
 										<div class="product_price product_text"><?php echo (int)$item['price'];?></div>
 										<div class="product_quantity_container">

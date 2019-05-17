@@ -4,10 +4,16 @@ if (!isset($_SESSION['accID']))
 {
     header('Location: index.php');
 }
+else{
+    $orderID = $_GET['id'];
+    $accID = $_SESSION['accID'];
+}
 ?>
 <?php 
 include("../database/connectDB.php");
-include("../database/dbCart.php"); 
+include("../database/dbCart.php");
+include("../database/dbOrder.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +24,7 @@ header("Pragma: no-cache");
 ?>
 
 <head>
-<title>Detail order</title>
+<title>Chi tiết đơn hàng</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Little Closet template">
@@ -40,7 +46,7 @@ header("Pragma: no-cache");
 					<div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
 						<ul class="d-flex flex-row align-items-start justify-content-start text-center">
 							<li><a href="index.php">Trang chủ</a></li>
-							<li>Đơn hàng của tôi</li>
+							<li>Chi tiết đơn hàng</li>
 						</ul>
 					</div>
 				</div>
@@ -50,41 +56,42 @@ header("Pragma: no-cache");
 			<div class="container">
 				<div class="row">
 					<div class="col">
-                    <h2><b>Đơn hàng của tôi</b></h2>
-                        <table class="table table-bordered table-condensed">
+                    <h2 style="text-align: center; margin-bottom: 20px">Đơn hàng mã <?php echo " ".$orderID?></h2>
+                        <table class="table table-hover ">
                             <thead>
                                 <tr>
-                                    <th><b>Sản phẩm</b></th> 
-                                    <th><b>Giá</b></th> 
-                                    <th><b>Số lượng</b></th> 
-                                    <th><b>Tổng </b></th> 
+                                    <th style="text-align: center; vertical-align: middle;"><b></b></th>
+                                    <th style="text-align: center; vertical-align: middle;"><b>Tên sản phẩm</b></th>
+                                    <th style="text-align: center; vertical-align: middle;"><b>Kích cỡ</b></th>
+                                    <th style="text-align: center; vertical-align: middle;"><b>Màu sắc</b></th> 
+                                    <th style="text-align: center; vertical-align: middle;"><b>Giá</b></th> 
+                                    <th style="text-align: center; vertical-align: middle;"><b>Số lượng</b></th> 
+                                    <th style="text-align: center; vertical-align: middle;"><b>Tổng </b></th> 
                                 </tr>
                             </thead>
                             
                             <tbody>
                                 <?php 
-                                $username = "root"; 
-                                $password = "Tri200698";     
-                                $server   = "localhost";  
-                                $dbname   = "clothes_shop";   
-                    
-                                $conn = mysqli_connect($server, $username, $password, $dbname);
-
-                                $query = "select * from detail_order natural join product_option natural join product where orderID=1";
-                                $sql = mysqli_query($conn,$query);
-                                while ($res = mysqli_fetch_array($sql)) { ?>
+                                $conn = connectDB();
+                                $items = getItemsByOrderID($orderID, $accID, $conn);
+                                $total = 0;
+                                for($i = 0; $i < sizeof($items); $i++) { ?>
                                 <tr>
-                                    <td><?php echo $res['proName']; ?></td>
-                                    <td><?php echo $res['price']; ?></td>
-                                    <td><?php echo $res['quantity']; ?></td>
-                                    <td><?php echo $res['price']*$res['quantity']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><img src="../<?php echo $items[$i]['url']; ?>" height=50 width=50></td>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="product.php?<?php echo $items[$i]['proID']?>"><?php echo $items[$i]['proName']; ?></a></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['size']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><img src="../<?php echo $items[$i]['color']; ?>"></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['price']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['quantity']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['quantity']*$items[$i]['price']; $total+=$items[$i]['quantity']*$items[$i]['price'];?></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
                             <tfoot align="right">
                                 <tr>
-                                    <td colspan="3">Tổng hóa đơn</td>
-                                    <td><?php ?></td>
+                                    <td colspan="5" style="text-align: center; vertical-align: middle;"></td>
+                                    <td colspan="1" style="text-align: center; vertical-align: middle;"><b>Tổng hóa đơn</b></td>
+                                    <td colspan="1" style="text-align: center; vertical-align: middle;"><?php echo $total;?></td>
                                 </tr>
                                 
                             </tfoot>

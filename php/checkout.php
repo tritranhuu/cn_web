@@ -147,7 +147,14 @@ include("../database/dbCart.php");
 	}	
 
 	$('#checkOut').on('click', event=>{
-		
+		if(total.find("#totalProduct").text()=='0'){
+			swal({
+    				title: "Thất bại",
+    				text: "Bạn không có sản phẩm nào trong giỏ hàng",
+    				type: "error"
+				})
+			return;
+		}
 		var data = {
 			'addOrder'	: '1',
         	'accID' : '1',
@@ -167,11 +174,11 @@ include("../database/dbCart.php");
         		if(data.replace(/^\s+|\s+$/g, '') == "noinfo"){
         			swal({
     						title: "Thất bại",
-    						text: "Hãy nhập đủ thông tin phía ô bên trái",
+    						text: "Hãy nhập đủ thông tin",
     						type: "error"
 							})
         		}
-        		else if(!data.trim().isEmpty){
+        		else if(data!==""){
         			str = "Số lượng sản phảm " + data + " bạn lựa chọn đã vượt quá trong kho"
         			swal({
     						title: "Thất bại",
@@ -185,7 +192,7 @@ include("../database/dbCart.php");
     						text: "Bạn đã đặt hàng thành công",
     						type: "success"
 							}).then(function() {
-    							window.location.href = 'orders.php';
+    							window.location.href = 'my_order.php';
 							});	
         		}
         	},

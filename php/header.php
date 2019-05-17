@@ -15,9 +15,9 @@
 	<!-- Navigation -->
 	<div class="menu_nav">
 		<ul>
-			<li><a href="#">Nữ</a></li>
-			<li><a href="#">Nam</a></li>
-			<li><a href="#">Trẻ em</a></li>
+			<li><a href="../controller/controlcategory.php?type=F&page=1&filertype=false">Nữ</a></li>
+			<li><a href="../controller/controlcategory.php?type=M&page=1&filertype=false">Nam</a></li>
+			<li><a href="../controller/controlcategory.php?type=K&page=1&filertype=false">Trẻ em</a></li>
 			<li><a href="#">Liên hệ</a></li>
 		</ul>
 	</div>
@@ -48,16 +48,16 @@
 				<a href="./">
 					<div class="d-flex flex-row align-items-center justify-content-start">
 						<div><img src="../images/logo_1.png" alt=""></div>
-						<div>Little Closet</div>
+						<div>BKStyle</div>
 					</div>
 				</a>	
 			</div>
 			<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
 			<nav class="main_nav">
 				<ul class="d-flex flex-row align-items-start justify-content-start">
-					<li class="active"><a href="#">Nữ</a></li>
-					<li><a href="#">Nam</a></li>
-					<li><a href="#">Trẻ em</a></li>
+					<li><a href="../controller/controlcategory.php?type=F&page=1&filertype=false">Nữ</a></li>
+					<li><a href="../controller/controlcategory.php?type=M&page=1&filertype=false">Nam</a></li>
+					<li><a href="../controller/controlcategory.php?type=K&page=1&filertype=false">Trẻ em</a></li>
 					<li><a href="#">Liên hệ</a></li>
 				</ul>
 			</nav>

@@ -47,7 +47,7 @@ include("header.php");
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        Dynamic Table
+                        Dữ liệu đơn hàng
                     </header>
                     <div class="panel-body">
                     <div class="adv-table">
@@ -101,9 +101,9 @@ printOrderTableData();
                                     <div class="col-md-1"></div>                            
                                     <div class="col-md-4 form-group">
                                         <select class="form-control m-bot15" id="status" name="status" style="color: black">
-                                            <option value="fresh">Đã xác nhận</option>
-                                            <option value="delivering">Đang giao hàng</option>
-                                            <option value="complete">Hoàn thành</option>
+                                            <option value="Đã xác nhận">Đã xác nhận</option>
+                                            <option value="Đang giao hàng">Đang giao hàng</option>
+                                            <option value="Hoàn thành">Hoàn thành</option>
                                         </select>
                                     </div>
                                     <div class="col-md-7 pull-right">

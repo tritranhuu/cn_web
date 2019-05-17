@@ -31,21 +31,26 @@ include("../database/dbCart.php");
 <?php
 
   require("../database/getProduct.php");
-  
-  printSlide();
+  include('../database/dbProduct.php');
+  $conn = connectDB();
+  $newest = getLatestProduct($conn);
+  $popular = getMostCommentedProduct($conn);
+  $royal = getHighestPriceProduct($conn);
+  $favorite = getHighestScoreProduct($conn); 
+  printSlide($newest, $popular, $royal, $favorite);
 ?>
 <div class="mt-5 row">
   <div class="col-lg-6 offset-lg-3">
-    <div class="section_title text-center">Popular on Little Closet</div>
+    <div class="section_title text-center">Sản phẩm trong cửa hàng</div>
   </div>
   </div>
   <div class="row page_nav_row">
     <div class="col">
       <div class="page_nav">
         <ul class="d-flex flex-row align-items-start justify-content-center">
-          <li><a href="../controller/controlcategory.php?type=F&page=1&filertype=false">Women</a></li>
-            <li><a href="../controller/controlcategory.php?type=M&page=1&filertype=false">Men</a></li>
-            <li><a href="../controller/controlcategory.php?type=K&page=1&filertype=false">Kids</a></li>
+          <li><a href="../controller/controlcategory.php?type=F&page=1&filertype=false">Nữ</a></li>
+            <li><a href="../controller/controlcategory.php?type=M&page=1&filertype=false">Nam</a></li>
+            <li><a href="../controller/controlcategory.php?type=K&page=1&filertype=false">Trẻ em</a></li>
           </ul>
         </div>
       </div>
@@ -68,12 +73,12 @@ include("../database/dbCart.php");
 </div>
           <div class="row load_more_row">
                         <div class="col">
-                            <div class="button load_more ml-auto mr-auto" id="loadMore"><a href="#">load more</a></div>
-                        </div>
+                            <div class="button load_more ml-auto mr-auto" id="loadMore" ><a href="#" style="color: white" onmouseover="this.style.color='#2fce98'" onmouseout="this.style.color='white'">xem thêm</a></div>
+                        </div
                     </div>
                 </div>
             </div>
-<div class="boxes">
+<div class="boxes" style="padding-top: 50px">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -91,7 +96,7 @@ include("../database/dbCart.php");
                     </div>
                   </div>
                   <div class="box_right text-center">
-                    <div class="box_title">Trendsetter Collection</div>
+                    <div class="box_title"></div>
                   </div>
                 </div>
               </div>
@@ -189,6 +194,8 @@ include("../database/dbCart.php");
 </div>
 
 
+
+
 <script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script>
 $(document).ready(
@@ -196,11 +203,15 @@ $(document).ready(
     $("div.product").slice(0, 10).show();
     $("#loadMore").on('click', function (e) {
         e.preventDefault();
+       
         $("div.product:hidden").slice(0, 6).slideDown();
-        if ($("div.product:hidden").length == 0) {
-            $("#load").fadeOut('slow');
+         if ($("div.product:hidden").length == 0) {
+            $("#loadMore").remove();
         }
     });
+    $('.addCartSmall').on('click', event=>{
+      alert($(event.target).attr("proid"));
+    })
   })
 );
 

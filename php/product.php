@@ -5,6 +5,9 @@ include("../database/dbCart.php");
 require_once("../database/getProduct.php");
 $conn = connectDB();
 
+if(!isset($_GET['product'])){
+	header('Location: index.php');
+}
 
 $proID = $_GET['product'];
 
@@ -72,7 +75,7 @@ $price = $pro['price'];
 								<ul class="slides">
 										<?php
 										foreach($image as  $i){
-											echo '<li><img src="../images/product/'.$i.'" /></li>';
+											echo '<li><img src="../'.$i.'" /></li>';
 										}
 										?>
 								</ul>
@@ -82,7 +85,7 @@ $price = $pro['price'];
 									<ul class="slides">
 									<?php
 											foreach($image as  $i){
-											echo '<li><div><img src="../images/product/'.$proID.'/'.$i.'" /></div></li>';
+											echo '<li><div><img src="../'.$i.'" /></div></li>';
 										}
 										?>
 									</ul>
@@ -110,7 +113,7 @@ $price = $pro['price'];
 									 echo $sum/$c;
 								}?> out of (<?php echo sizeof($cmtandrate)?>)</div>
 							
-								<div class="product_reviews_link" style="cursor: pointer" data-toggle="modal" data-target="#rateModal">Reviews</div>
+								<div class="product_reviews_link" style="cursor: pointer" onclick="window.location.href='#review'">Reviews</div>
 							</div>
 							<div class="product_price text-danger"><?php  echo $price ;?></div>
 							<div class="product_size">
@@ -143,7 +146,7 @@ $price = $pro['price'];
 											array_push($tmp,$i);
 											echo '<li>';
 											echo '<input type="radio" id="radio_'.$i.'"name="color_radio" class="regular_radio" checked value="'.$i.'">';
-											echo '<label for="radio_'.$i.'"><img src="../images/product/'.$proID."/color/".$i.'.png" width="36px" height="36px"></label>';
+											echo '<label for="radio_'.$i.'"><img src="../'.$i.'" width="36px" height="36px"></label>';
 											echo '</li>';
 											}
 									}
@@ -179,7 +182,7 @@ $price = $pro['price'];
 						</div>
 					</div>
 					<div class="col-lg-6 box_col">
-						<div class="box d-flex flex-row align-items-center justify-content-start">
+						<div class="box d-flex flex-row align-items-center justify-content-start" id="size" style="cursor: pointer" data-toggle="modal" data-target="#shipModal">
 							<div class="mt-auto"><div class="box_image"><img src="../images/boxes_2.png" alt=""></div></div>
 							<div class="box_content">
 								<div class="box_title">Vận chuyển</div>
@@ -198,7 +201,7 @@ $price = $pro['price'];
 <?php
   require("./viewFunction/product_box.php");
   $conn = connectDB();
-  $arr =  getProduct($conn);
+  $arr =  getProductRand($conn);
   echo'<div class="section">
 		<!-- container -->
 		<div class="container">
@@ -207,7 +210,7 @@ $price = $pro['price'];
 				<!-- section title -->
 				<div class="col-md-12">
 					<div class="section-title">
-						<h2 class="title">Picked For You</h2>
+						<h2 class="title">Xem thêm</h2>
 					</div>
 				</div>
 	';
@@ -243,21 +246,42 @@ $price = $pro['price'];
 </div>
 
 
-<div class="modal fade" id="rateModal" role="dialog" aria-labelledby="sizeGuide" aria-hidden="true">
+<div class="modal fade" id="shipModal" role="dialog" aria-labelledby="shipGuide" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
     	<div class="modal-header">
-        <h5 class="modal-title" id="sizeTitle">Bảng so kích cỡ</h5>
+        <h5 class="modal-title" id="sizeTitle">Chính sách vận chuyển</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       	</div>
       	<div class="modal-body">
-        	<div class="product_rating_container d-flex flex-row align-items-center justify-content-start">
-				<div class="rating_r rating_r_3 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-				<div class="product_reviews" >4.7 out of (3514)</div>
-				
-			</div>
+        	<table class="table table-hover">
+    <thead>
+    	<tr>
+    		<td width="30%"></td>
+    		<td width="50%"></td>
+    		<td width="20%"></td>
+    	</tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vận chuyển nhanh (24h)</td>
+        <td>Giao hàng ngay trong ngày cho bạn, nhanh chóng, tiện lợi</td>
+        <td>30.000</td>
+      </tr>
+      <tr>
+        <td>Vận chuyển cơ bản</td>
+        <td>Bạn sẽ nhận được hàng sau từ 3-5 ngày kể từ ngày đặt hàng trên hệ thống</td>
+        <td>10.000</td>
+      </tr>
+      <tr>
+        <td>Đến lấy về</td>
+        <td>Chúng tôi sẽ gói và giữ hàng cho bạn, bạn sẽ tới địa chỉ cửa hàng tại số 1 Đại Cồ Việt để nhận hàng</td>
+        <td>Miễn phí</td>
+      </tr>
+    </tbody>
+  </table>
 
       	</div>
       
