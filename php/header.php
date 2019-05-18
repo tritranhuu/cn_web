@@ -146,6 +146,7 @@
 <?php		
 	}
 	else{
+		echo $_SESSION['accID'];
 ?>
 	<!-- User -->
 				<div class="user dropdown" ><a class="">

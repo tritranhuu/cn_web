@@ -105,7 +105,7 @@ header("Pragma: no-cache");
 												<span class="radio_mark"></span>
 												<span class="radio_text">Giao hàng 24h</span>
 											</label>
-											<div class="shipping_price ml-auto" >30.000</div>
+											<div class="shipping_price ml-auto" >30.000đ</div>
 										</li>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
@@ -113,7 +113,7 @@ header("Pragma: no-cache");
 												<span class="radio_mark"></span>
 												<span class="radio_text">Giao hàng chuẩn</span>
 											</label>
-											<div class="shipping_price ml-auto" val="10000">10.000</div>
+											<div class="shipping_price ml-auto" val="10000">10.000đ</div>
 										</li>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">

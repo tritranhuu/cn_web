@@ -1579,3 +1579,46 @@ section {
     color: #969696;
     font-weight: 300;
 }
+
+.product_size ul {
+    margin-top: 22px;
+}
+
+.regular_radio {
+    display: none;
+}
+
+.regular_radio:checked+label {
+    color: #2fce98;
+    border-color: #2fce98;
+}
+
+.regular_radio+label {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: solid 2px #4a4a4a;
+    color: #4a4a4a;
+    cursor: pointer;
+    margin-right: 14px;
+    font-weight: 700;
+}
+
+.regular_radio[disabled]+label {
+    border: solid 2px #969696;
+    color: #969696;
+    cursor: default;
+}

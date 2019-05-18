@@ -41,7 +41,7 @@ include("getProduct.php");
 	}
 
 	function getCartTotal($accID, $conn){
-		$query = "select sum(quantity*price) as total from cart natural join product_option natural join product where accID=1";
+		$query = "select sum(quantity*price) as total from cart natural join product_option natural join product where accID=".$accID;
 		$sql = mysqli_query($conn, $query);
 		return mysqli_fetch_array($sql)['total'];
 	}

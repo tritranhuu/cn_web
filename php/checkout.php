@@ -157,7 +157,6 @@ include("../database/dbCart.php");
 		}
 		var data = {
 			'addOrder'	: '1',
-        	'accID' : '1',
         	'name'  : $("input[name='name']").val(),
         	'address' : $("input[name='address']").val(),
         	'phone' : $("input[name='phone']").val(),

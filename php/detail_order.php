@@ -78,7 +78,7 @@ header("Pragma: no-cache");
                                 for($i = 0; $i < sizeof($items); $i++) { ?>
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;"><img src="../<?php echo $items[$i]['url']; ?>" height=50 width=50></td>
-                                    <td style="text-align: center; vertical-align: middle;"><a href="product.php?<?php echo $items[$i]['proID']?>"><?php echo $items[$i]['proName']; ?></a></td>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="product.php?product=<?php echo $items[$i]['proID']?>"><?php echo $items[$i]['proName']; ?></a></td>
                                     <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['size']; ?></td>
                                     <td style="text-align: center; vertical-align: middle;"><img src="../<?php echo $items[$i]['color']; ?>"></td>
                                     <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['price']; ?></td>

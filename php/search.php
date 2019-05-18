@@ -1,4 +1,5 @@
 <?php
+  session_start();
 	if(isset($_GET['search'])){
 		$search = $_GET['search'];
 	}
@@ -29,6 +30,7 @@ header("Pragma: no-cache");
 <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
 <link rel="stylesheet" type="text/css" href="../styles/style.css">
 <script src="../js/jquery-3.2.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php 
 include("../database/connectDB.php");
 include("../database/dbCart.php"); 
@@ -93,6 +95,10 @@ else{
 <?php
 }
 ?>
+
+
+
+
 <div class="boxes">
       <div class="container">
         <div class="row">
@@ -210,21 +216,90 @@ else{
 
 
 <script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<div class="modal fade" id="sizecolorMPick" role="dialog" aria-labelledby="sizeGuide" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sizeTitle">Lựa chọn kích cỡ và màu sắc</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success addCart" addID="0">Thêm +</button>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <script>
 $(document).ready(
   $(function () {
     $("div.product").slice(0, 10).show();
-    if ($("div.product:hidden").length == 0) {
-            $("#loadMore").remove();
-        }
     $("#loadMore").on('click', function (e) {
         e.preventDefault();
-        if ($("div.product:hidden").length == 0) {
+       
+        $("div.product:hidden").slice(0, 6).slideDown();
+         if ($("div.product:hidden").length == 0) {
             $("#loadMore").remove();
         }
-        $("div.product:hidden").slice(0, 6).slideDown();
-        
     });
+    $('.addCartSmall').on('click', event=>{
+      var proID = $(event.target).attr("proid");
+      var formData = {
+          'getCS' : 1,
+          'proID' : proID,
+        };
+        $.ajax({
+            type        : 'POST', 
+            url         : '../controller/sizecolorModal.php', 
+            data        : formData, 
+          success:function(data){
+            $(".modal-body").text("");
+            $(".modal-body").append(data);
+            $(".addCart").attr('addID', proID)
+          },
+          error:function(data){
+        alert("Lỗi hệ thống, vui lòng thử lại sau");
+      }
+
+        })
+    })
+    $('.addCart').on('click', event=>{
+      var proID = $(event.target).attr("addid");
+      var data = {
+          'add' : '1',
+          'proID' : proID,
+          'accID' : '1',
+          'size'  : $("input[name='size_radio']:checked").val(),
+          'color' : $("input[name='color_radio']:checked").val()
+        };
+        $.ajax({
+            type        : 'POST', 
+            url         : '../controller/modifyCart.php', 
+            data        : data, 
+          success:function(data){
+            if (data.replace(/^\s+|\s+$/g, '') == "no_login"){
+              swal("Bạn cần đăng nhập để thực hiện chức năng này");
+            }
+            if (data.replace(/^\s+|\s+$/g, '') == "new"){
+              var cartItems = parseInt($(".cart a > div > div").text());
+              $(".cart a > div > div").text(cartItems +1) 
+            }
+          },
+          error:function(){
+        swal("Error")
+      }
+
+        })
+    })
   })
 );
 

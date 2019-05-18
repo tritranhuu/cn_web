@@ -29,7 +29,6 @@ $price = $pro['price'];
 <title>Product</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Little Closet template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -42,7 +41,6 @@ $price = $pro['price'];
 <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="../plugins/flexslider/flexslider.css">
 <link rel="stylesheet" type="text/css" href="../styles/product.css">
-<link rel="stylesheet" type="text/css" href="../styles/category.css">
 <link rel="stylesheet" type="text/css" href="../styles/product_responsive.css">
 <link rel="stylesheet" type="text/css" href="../styles/style.css">
 <script src="../js/jquery-3.2.1.min.js"></script>
@@ -115,7 +113,7 @@ $price = $pro['price'];
 							
 								<div class="product_reviews_link" style="cursor: pointer" onclick="window.location.href='#review'">Reviews</div>
 							</div>
-							<div class="product_price text-danger"><?php  echo $price ;?></div>
+							<div class="product_price "><?php  echo number_format((int)$price , 0, ',', '.') ;?><span>đ</span></div>
 							<div class="product_size">
 								<div class="product_size_title">Select Size</div>
 								<ul class="d-flex flex-row align-items-start justify-content-start">
@@ -154,7 +152,7 @@ $price = $pro['price'];
 								
 								</ul>
 							</div>
-							<br/>
+							<div class="product_text"></div>
 				
 							<div class="product_buttons" id="addCart">
 								<div class="text-right d-flex flex-row align-items-start justify-content-start">
@@ -173,7 +171,7 @@ $price = $pro['price'];
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6">
-						<div class="box d-flex flex-row align-items-center justify-content-start" id="size" style="cursor: pointer" data-toggle="modal" data-target="#sizeModal">
+						<div class="box d-flex flex-row align-items-center justify-content-start" style="cursor: pointer" data-toggle="modal" data-target="#sizeModal">
 							<div class="mt-auto"><div class="box_image"><img src="../images/boxes_1.png" alt=""></div></div>
 							<div class="box_content">
 								<div class="box_title">Hướng dẫn chọn size</div>
@@ -182,7 +180,7 @@ $price = $pro['price'];
 						</div>
 					</div>
 					<div class="col-lg-6 box_col">
-						<div class="box d-flex flex-row align-items-center justify-content-start" id="size" style="cursor: pointer" data-toggle="modal" data-target="#shipModal">
+						<div class="box d-flex flex-row align-items-center justify-content-start" style="cursor: pointer" data-toggle="modal" data-target="#shipModal">
 							<div class="mt-auto"><div class="box_image"><img src="../images/boxes_2.png" alt=""></div></div>
 							<div class="box_content">
 								<div class="box_title">Vận chuyển</div>
@@ -193,7 +191,8 @@ $price = $pro['price'];
 				</div>
 			</div>
 		</div>
-<?php require('./viewFunction/productDetail.php');
+<?php 
+		require('./viewFunction/productDetail.php');
 		printDetail($des,$mat,$cmtandrate,$pro['proID']);
 ?>
 

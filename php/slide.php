@@ -46,15 +46,15 @@
 																	</div>
 																	<div class="ml-auto text-right">
 																		<div class="rating_r rating_r_<?php echo $newest['rate'];?> home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-																		<div class="product_price text-right"><?php echo $newest['price'];?></span></div>
+																		<div class="product_price text-right"><?php echo number_format((int)$newest['price'] , 0, ',', '.');?><span>đ</span></div>
 																	</div>
 																</div>
 																<div class="product_buttons">
 																	<div class="text-right d-flex flex-row align-items-start justify-content-start">
-																		<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-																			<div><div><img src="../images/icon_3.svg" alt="" onclick="window.locarion.href='product.php?product=<?php echo $newest['proID'];?>'"><div>+</div></div></div>
+																		<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center" onclick="window.location.href='product.php?product=<?php echo $newest['proID'];?>'">
+																			<div><div><img src="../images/icon_3.svg" alt=""><div>+</div></div></div>
 																		</div>
-																		<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
+																		<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center addCartSmall" proID="<?php echo $newest['proID'];?>" data-toggle="modal" data-target="#sizecolorMPick">
 																			<div><div><img src="../images/cart_2.svg" alt=""><div>+</div></div></div>
 																		</div>
 																	</div>
@@ -108,15 +108,15 @@
 																	</div>
 																	<div class="ml-auto text-right">
 																		<div class="rating_r rating_r_<?php echo $popular['rate'];?> home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-																		<div class="product_price text-right"><?php echo $popular['price'];?></span></div>
+																		<div class="product_price text-right"><?php echo number_format((int)$popular['price'] , 0, ',', '.');?><span>đ</span></div>
 																	</div>
 																</div>
 																<div class="product_buttons">
 																	<div class="text-right d-flex flex-row align-items-start justify-content-start">
-																		<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-																			<div><div><img src="../images/icon_3.svg" alt=""  onclick="window.locarion.href='product.php?product=<?php echo $popular['proID'];?>'"><div>+</div></div></div>
+																		<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center" onclick="window.location.href='product.php?product=<?php echo $popular['proID'];?>'">
+																			<div><div><img src="../images/icon_3.svg" alt="" ><div>+</div></div></div>
 																		</div>
-																		<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
+																		<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center addCartSmall" proID="<?php echo $popular['proID'];?>" data-toggle="modal" data-target="#sizecolorMPick">
 																			<div><div><img src="../images/cart_2.svg" alt=""><div>+</div></div></div>
 																		</div>
 																	</div>
@@ -170,15 +170,15 @@
 																	</div>
 																	<div class="ml-auto text-right">
 																		<div class="rating_r rating_r_<?php echo $royal['rate'];?> home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-																		<div class="product_price text-right"><?php echo $royal['price'];?></span></div>
+																		<div class="product_price text-right"><?php echo number_format((int)$royal['price'] , 0, ',', '.');?><span>đ</span></span></div>
 																	</div>
 																</div>
 																<div class="product_buttons">
 																	<div class="text-right d-flex flex-row align-items-start justify-content-start">
-																		<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-																			<div><div><img src="../images/icon_3.svg" alt=""  onclick="window.locarion.href='product.php?product=<?php echo $royal['proID'];?>'"><div>+</div></div></div>
+																		<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center" onclick="window.location.href='product.php?product=<?php echo $royal['proID'];?>'">
+																			<div><div><img src="../images/icon_3.svg" alt="" ><div>+</div></div></div>
 																		</div>
-																		<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
+																		<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center addCartSmall" proID="<?php echo $royal['proID'];?>" data-toggle="modal" data-target="#sizecolorMPick">
 																			<div><div><img src="../images/cart_2.svg" alt=""><div>+</div></div></div>
 																		</div>
 																	</div>
@@ -232,15 +232,15 @@
 																	</div>
 																	<div class="ml-auto text-right">
 																		<div class="rating_r rating_r_<?php echo $favorite['rate'];?> home_item_rating"><i></i><i></i><i></i><i></i><i></i></div>
-																		<div class="product_price text-right"><?php echo $favorite['price'];?></span></div>
+																		<div class="product_price text-right"><?php echo number_format((int)$favorite['price'] , 0, ',', '.');?><span>đ</span></span></div>
 																	</div>
 																</div>
 																<div class="product_buttons">
 																	<div class="text-right d-flex flex-row align-items-start justify-content-start">
-																		<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center">
-																			<div><div><img src="../images/icon_3.svg" alt=""  onclick="window.locarion.href='product.php?product=<?php echo $favorite['proID'];?>'"><div>+</div></div></div>
+																		<div class="product_button product_fav text-center d-flex flex-column align-items-center justify-content-center" onclick="window.location.href='product.php?product=<?php echo $favorite['proID'];?>'">
+																			<div><div><img src="../images/icon_3.svg" alt="" ><div>+</div></div></div>
 																		</div>
-																		<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center">
+																		<div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center addCartSmall" proID="<?php echo $favorite['proID'];?>" data-toggle="modal" data-target="#sizecolorMPick">
 																			<div><div><img src="../images/cart_2.svg" alt=""><div>+</div></div></div>
 																		</div>
 																	</div>

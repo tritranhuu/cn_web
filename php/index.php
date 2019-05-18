@@ -5,11 +5,13 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 ?>
+<?php
+session_start();
+?>
 <head>
 <title>Little Closet</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Little Closet template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
 <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -20,9 +22,10 @@ header("Pragma: no-cache");
 <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
 <link rel="stylesheet" type="text/css" href="../styles/style.css">
 <script src="../js/jquery-3.2.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php 
 include("../database/connectDB.php");
-include("../database/dbCart.php"); 
+include("../database/dbCart.php");
 
 ?>
 
@@ -60,7 +63,7 @@ include("../database/dbCart.php");
   
   require("./viewFunction/product_box.php");
   $conn = connectDB();
-  $arr =  getProduct($conn);
+  $arr =  getProductRand($conn);
   echo'
   <div class="products">
   <div class="container">';
@@ -96,7 +99,7 @@ include("../database/dbCart.php");
                     </div>
                   </div>
                   <div class="box_right text-center">
-                    <div class="box_title"></div>
+                    <div class="box_title">Đồ Ngủ</div>
                   </div>
                 </div>
               </div>
@@ -113,7 +116,7 @@ include("../database/dbCart.php");
                     </div>
                   </div>
                   <div class="box_right text-center">
-                    <div class="box_title">Popular Choice</div>
+                    <div class="box_title">Áo Khoác</div>
                   </div>
                 </div>
               </div>
@@ -130,7 +133,7 @@ include("../database/dbCart.php");
                     </div>
                   </div>
                   <div class="box_right text-center">
-                    <div class="box_title">Popular Choice</div>
+                    <div class="box_title">Hoodie</div>
                   </div>
                 </div>
               </div>
@@ -194,9 +197,29 @@ include("../database/dbCart.php");
 </div>
 
 
+<div class="modal fade" id="sizecolorMPick" role="dialog" aria-labelledby="sizeGuide" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sizeTitle">Lựa chọn kích cỡ và màu sắc</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success addCart" addID="0">Thêm +</button>
+        </div>
+      
+    </div>
+  </div>
+</div>
 
 
-<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+
+
+
 <script>
 $(document).ready(
   $(function () {
@@ -210,14 +233,60 @@ $(document).ready(
         }
     });
     $('.addCartSmall').on('click', event=>{
-      alert($(event.target).attr("proid"));
+      var proID = $(event.target).attr("proid");
+      var formData = {
+          'getCS' : 1,
+          'proID' : proID,
+        };
+        $.ajax({
+            type        : 'POST', 
+            url         : '../controller/sizecolorModal.php', 
+            data        : formData, 
+          success:function(data){
+            $(".modal-body").text("");
+            $(".modal-body").append(data);
+            $(".addCart").attr('addID', proID)
+          },
+          error:function(data){
+        alert("Lỗi hệ thống, vui lòng thử lại sau");
+      }
+
+        })
+    })
+    $('.addCart').on('click', event=>{
+      var proID = $(event.target).attr("addid");
+      var data = {
+          'add' : '1',
+          'proID' : proID,
+          'accID' : '1',
+          'size'  : $("input[name='size_radio']:checked").val(),
+          'color' : $("input[name='color_radio']:checked").val()
+        };
+        $.ajax({
+            type        : 'POST', 
+            url         : '../controller/modifyCart.php', 
+            data        : data, 
+          success:function(data){
+            if (data.replace(/^\s+|\s+$/g, '') == "no_login"){
+              swal("Bạn cần đăng nhập để thực hiện chức năng này");
+            }
+            if (data.replace(/^\s+|\s+$/g, '') == "new"){
+              var cartItems = parseInt($(".cart a > div > div").text());
+              $(".cart a > div > div").text(cartItems +1) 
+            }
+          },
+          error:function(){
+        swal("Error")
+      }
+
+        })
     })
   })
 );
 
 
 </script>
-
+<script src="../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="../styles/bootstrap-4.1.2/popper.js"></script>
 <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
 <script src="../plugins/greensock/TweenMax.min.js"></script>

@@ -224,10 +224,10 @@ $('#addProduct').on('click', event=>{
                         type: 'post',
                         success: function (response) {
                             $('#imgModal').modal('hide');
-                            alert("success")
+                            swal("success")
                         },
                         error: function (response) {
-                            alert("fail")
+                            swal("fail")
                         }
                     });
                 });
@@ -248,11 +248,11 @@ $('#addProduct').on('click', event=>{
                         type: 'post',
                         success: function (response) {
                             $('#colorModal').modal('hide');
-                            alert("success")
+                            swal("success")
                             $('#imgModal').modal('show');
                         },
                         error: function (response) {
-                            alert("fail")
+                            swal("fail")
                         }
                     });
                 });

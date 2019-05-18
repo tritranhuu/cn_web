@@ -74,7 +74,7 @@
 						<div class="col">
 							<div class="footer_bar_content d-flex flex-md-row flex-column align-items-center justify-content-start">
 								<div class="copyright order-md-1 order-2">
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Group 21 | 20182.IT4409</div>
+Copyright &copy;2019 Group 21 | 20182.IT4409</div>
 								
 							</div>
 						</div>

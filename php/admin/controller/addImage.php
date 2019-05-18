@@ -9,7 +9,7 @@ if (isset($_FILES['img']) && !empty($_FILES['img'])) {
         $proID = getNewestProID();
     }
     $no_files = count($_FILES["img"]['name']);
-    for ($i = 0; $i < $no_files; $i++) {
+    for ($i = $no_files-1; $i >= 0; $i--) {
         if ($_FILES["img"]["error"][$i] > 0) {
             echo "Error: ".$_FILES["img"]["error"][$i]."<br>";
         } else {

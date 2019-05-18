@@ -6,7 +6,7 @@ include("../database/dbOrder.php");
 	session_start();
     $conn = connectDB();
     if(isset($_POST['addOrder'])){
-    	$accID = $_POST['accID'];
+    	$accID = $_SESSION['accID'];
     	$name = $_POST['name'];
     	$address = $_POST['address'];
     	$phone = $_POST['phone'];
