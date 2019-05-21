@@ -44,7 +44,7 @@ include("header.php");
             <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Thêm nhà phân phối
+                            Thêm tài khoản
                         </header>
                         <div class="panel-body">
                             <div class="position-center">
