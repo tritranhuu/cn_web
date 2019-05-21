@@ -161,7 +161,7 @@ header("Pragma: no-cache");
 ?>
 											<div><div class="product_image"><img src="../<?php echo $item['url'];?>" alt=""></div></div>
 											<div class="product_name_container">
-												<div class="product_name"><a href="product.php?proID=<?php echo $item['proID'];?>"><?php echo $item['proName'];?></a></div>
+												<div class="product_name"><a href="product.php?product=<?php echo $item['proID'];?>"><?php echo $item['proName'];?></a></div>
 												<div class="product_text"><?php echo $item['description'];?></div>
 											</div>
 										</div>

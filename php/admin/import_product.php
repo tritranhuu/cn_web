@@ -242,8 +242,6 @@ else{
 
 <script src="js/iCheck/jquery.icheck.js"></script>
 
-<script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
-
 <!--common script init for all pages-->
 <script src="js/scripts.js"></script>
 
