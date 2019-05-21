@@ -28,7 +28,7 @@
                                                 </div>  
                                             </div>  
                                             <div class="product_button product_cart text-center d-flex flex-column align-items-center justify-content-center addCartSmall" proID="<?php echo $proID;?>" data-toggle="modal" data-target="#sizecolorMPick">  
-                                                <div>   
+                                                <div>    
                                                     <div><img src="../images/cart.svg" class="svg" alt="" name = "cart" >    
                                                         <div>+</div>    
                                                     </div>  

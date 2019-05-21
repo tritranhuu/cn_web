@@ -16,7 +16,7 @@ include('../model/getInfoFromDb.php');
                 <td><?php echo $items[$i]['proID'];?></td>
                 <td><?php echo $items[$i]['proName'];?></td>
                 <td><?php echo $items[$i]['size'];?></td>
-                <td><img src="../../<?php echo $items[$i]['color'];?>"></td>
+                <td><img src="../../<?php echo $items[$i]['color'];?>" style="height: 20px; width: 20px"></td>
                 <td><?php echo $items[$i]['quantity'];?></td>
                 </tr>
                                         

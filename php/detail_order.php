@@ -27,7 +27,6 @@ header("Pragma: no-cache");
 <title>Chi tiết đơn hàng</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Little Closet template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
 <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -80,7 +79,7 @@ header("Pragma: no-cache");
                                     <td style="text-align: center; vertical-align: middle;"><img src="../<?php echo $items[$i]['url']; ?>" height=50 width=50></td>
                                     <td style="text-align: center; vertical-align: middle;"><a href="product.php?product=<?php echo $items[$i]['proID']?>"><?php echo $items[$i]['proName']; ?></a></td>
                                     <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['size']; ?></td>
-                                    <td style="text-align: center; vertical-align: middle;"><img src="../<?php echo $items[$i]['color']; ?>"></td>
+                                    <td style="text-align: center; vertical-align: middle;"><img src="../<?php echo $items[$i]['color']; ?>" style="height: 20px; width: 20px"></td>
                                     <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['price']; ?></td>
                                     <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['quantity']; ?></td>
                                     <td style="text-align: center; vertical-align: middle;"><?php echo $items[$i]['quantity']*$items[$i]['price']; $total+=$items[$i]['quantity']*$items[$i]['price'];?></td>

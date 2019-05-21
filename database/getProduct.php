@@ -144,7 +144,7 @@
     }
     function getCmtandRate($conn,$id){
         $items= array();
-        $query = 'select * from comment_product where proID=' .$id;
+        $query = 'select * from comment_product where proID='.$id.' order by created desc';
         $sql = mysqli_query($conn, $query);
         while($res = mysqli_fetch_array($sql)){
             $urlQuery = 'select * from account where accID='.$res['accID'].' limit 1';
@@ -180,7 +180,7 @@
 
     function getProductBySignature($conn, $sig){
         $items= array();
-        $query = "select * from product where proName like '%".$sig."%' or description like '%".$sig."%' or type like '%".$sig."%' order by created";
+        $query = "select * from product where proName like '%".$sig."%' or description like '%".$sig."%' or type like '%".$sig."%' order by RAND()";
         $sql = mysqli_query($conn, $query);
         while($res = mysqli_fetch_array($sql)){
             $urlQuery = 'select url from img where proID='.$res['proID'].' limit 1';

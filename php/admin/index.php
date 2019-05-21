@@ -57,7 +57,7 @@ include("header.php");
         <div class="mini-stat clearfix">
             <span class="mini-stat-icon pink"><i class="fa fa-money"></i></span>
             <div class="mini-stat-info">
-                <span><?php echo getIncome();?></span>
+                <span><?php echo number_format((int)getIncome() , 0, ',', '.');?>đ</span>
                 Tổng doanh thu
             </div>
         </div>

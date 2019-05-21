@@ -14,7 +14,7 @@ include("./controller/controllerData.php");
     <meta name="author" content="ThemeBucket">
     <link rel="shortcut icon" href="images/favicon.png">
 
-    <title>Mặt hàng</title>
+    <title>Tài Khoản</title>
 
     <!--Core CSS -->
     <link href="bs3/css/bootstrap.min.css" rel="stylesheet">

@@ -9,7 +9,7 @@ header("Pragma: no-cache");
 session_start();
 ?>
 <head>
-<title>Little Closet</title>
+<title>BKStyle</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +30,7 @@ include("../database/dbCart.php");
 ?>
 
 <?php require("header.php");?>
-<?php require("slide.php");?>
+<?php require("./viewFunction/slide.php");?>
 <?php
 
   require("../database/getProduct.php");
@@ -93,7 +93,7 @@ include("../database/dbCart.php");
                 <div class="box_content d-flex flex-row align-items-center justify-content-start">
                   <div class="box_left">
                     <div class="box_image">
-                      <a href="category.html">
+                      <a href="category.php?type=F&filertype=Đồ%20Ở%20Nhà&page=1">
                         <div class="background_image" style="background-image:url(../images/box_1_img.jpg)"></div>
                       </a>
                     </div>
@@ -110,7 +110,7 @@ include("../database/dbCart.php");
                 <div class="box_content d-flex flex-row align-items-center justify-content-start">
                   <div class="box_left">
                     <div class="box_image">
-                      <a href="category.html">
+                      <a href="http://127.0.0.1/littlecloset/php/category.php?type=F&filertype=%C3%81o%20kho%C3%A1c&page=1">
                         <div class="background_image" style="background-image:url(../images/box_2_img.jpg)"></div>
                       </a>
                     </div>
@@ -127,7 +127,7 @@ include("../database/dbCart.php");
                 <div class="box_content d-flex flex-row align-items-center justify-content-start">
                   <div class="box_left">
                     <div class="box_image">
-                      <a href="category.html">
+                      <a href="category.php?type=F&filertype=Áo%20chống%20nắng&page=1">
                         <div class="background_image" style="background-image:url(../images/box_3_img.jpg)"></div>
                       </a>
                     </div>

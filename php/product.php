@@ -26,7 +26,7 @@ $price = $pro['price'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Product</title>
+<title>Chi Tiết Mặt Hàng</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -108,7 +108,8 @@ $price = $pro['price'];
 										 $sum += $k['point'];
 										 $c++;
 									 }
-									 echo $sum/$c;
+									 $rate = $sum/$c;
+									 echo number_format((float)$rate, 2, '.', '');
 								}?> out of (<?php echo sizeof($cmtandrate)?>)</div>
 							
 								<div class="product_reviews_link" style="cursor: pointer" onclick="window.location.href='#review'">Reviews</div>

@@ -112,8 +112,6 @@ $account =  getAccByID($conn,$id);
                                             <option value=1>Có</option>';
                                             }
                                         ?>
-                                            <option value=1>Có</option>
-                                            <option value=0>Không</option>
                                         </select>
                                 </div>  
                         
